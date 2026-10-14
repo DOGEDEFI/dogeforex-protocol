@@ -2,19 +2,17 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
-import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-network-helpers";
 import "hardhat-deploy";
 import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
 
 import dotenv from "dotenv";
-import {SigningKey} from '@ethersproject/signing-key'
 dotenv.config();
 
-let pk: string | SigningKey | undefined = process.env.SEPOLIA_PK;
-let etherscanapikey: string = <string>process.env.SEPOLIA_API_KEY;
-let bnbTestnetApiKey: string = <string>process.env.BNBTESTNET_API_KEY;
+// Never commit keys. Copy .env.example to .env and fill in locally.
+const CHIKYU_RPC_URL = process.env.RPC_URL_CHIKYU ?? "https://rpc.testnet.dogeos.com";
+const CHIKYU_DEPLOYER_PK = process.env.CHIKYU_DEPLOYER_PK;
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -33,21 +31,19 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    bscMainnet:{
-      url: "https://bsc-dataseed.bnbchain.org/",
-      chainId: 56,
-      gas: 50_000,
-      gasPrice: "auto",
-      accounts: pk ? [pk] : [],
-      timeout: 50_000,
+    hardhat: {
+      chainId: 31337,
     },
-    bnbtestnet:{
-        url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-        chainId: 97,
-        gas: 50_000,
-        gasPrice: "auto",
-        accounts: pk ? [pk] : [],
-        timeout: 50_000,
+    localhost: {
+      url: "http://127.0.0.1:8545",
+      chainId: 31337,
+    },
+    chikyu: {
+      url: CHIKYU_RPC_URL,
+      chainId: 6281971,
+      gasPrice: "auto",
+      accounts: CHIKYU_DEPLOYER_PK ? [CHIKYU_DEPLOYER_PK] : [],
+      timeout: 900000,
     },
   },
   namedAccounts: {
@@ -56,10 +52,20 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
+    // Blockscout (DogeOS) exposes an Etherscan-compatible API and ignores the key; placeholder only.
     apiKey: {
-      bsc: etherscanapikey,
-      bscTestnet: etherscanapikey,
+      chikyu: "blockscout",
     },
+    customChains: [
+      {
+        network: "chikyu",
+        chainId: 6281971,
+        urls: {
+          apiURL: "https://blockscout.testnet.dogeos.com/api",
+          browserURL: "https://blockscout.testnet.dogeos.com",
+        },
+      },
+    ],
   },
   sourcify: {
     enabled: true,

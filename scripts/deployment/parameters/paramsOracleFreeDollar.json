@@ -1,8 +1,14 @@
 [
     {
-        "name": "OracleFreeDollar",
+        "name": "DogeForex",
         "chainId": 31337,
         "chainName" : "Local",
+        "minApplicationPeriod" : 900
+    },
+    {
+        "name": "DogeForex",
+        "chainId": 6281971,
+        "chainName" : "DogeOS Chikyu Testnet",
         "minApplicationPeriod" : 900
     },
     {

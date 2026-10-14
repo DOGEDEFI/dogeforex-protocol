@@ -1,0 +1,128 @@
+[
+  {
+    "code": "USD",
+    "tokenName": "DogeForex Dollar",
+    "tokenSymbol": "K9USD",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "EUR",
+    "tokenName": "DogeForex Euro",
+    "tokenSymbol": "K9EUR",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "JPY",
+    "tokenName": "DogeForex Yen",
+    "tokenSymbol": "K9JPY",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "GBP",
+    "tokenName": "DogeForex Pound",
+    "tokenSymbol": "K9GBP",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "AUD",
+    "tokenName": "DogeForex Aussie",
+    "tokenSymbol": "K9AUD",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "CNY",
+    "tokenName": "DogeForex Yuan",
+    "tokenSymbol": "K9CNY",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "BRL",
+    "tokenName": "DogeForex Real",
+    "tokenSymbol": "K9BRL",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  }
+]
