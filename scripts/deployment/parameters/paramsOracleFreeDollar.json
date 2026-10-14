@@ -1,0 +1,32 @@
+[
+    {
+        "name": "OracleFreeDollar",
+        "chainId": 31337,
+        "chainName" : "Local",
+        "minApplicationPeriod" : 900
+    },
+    {
+        "name": "OracleFreeDollar",
+        "chainId": 421614,
+        "chainName" : "Sepolia",
+        "minApplicationPeriod" : 900
+    },
+    {
+        "name": "OracleFreeDollar",
+        "chainId": 97,
+        "chainName" : "BNBTestnet",
+        "minApplicationPeriod" : 900
+    },
+    {
+        "name": "OracleFreeDollar",
+        "chainId": 56,
+        "chainName" : "BSCMainnet",
+        "minApplicationPeriod" : 1209600
+    },
+    {
+        "name": "OracleFreeDollar",
+        "chainId": 1,
+        "chainName" : "Arbitrum",
+        "minApplicationPeriod" : 1209600
+    }
+]

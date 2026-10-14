@@ -1,0 +1,50 @@
+[
+  {
+    "name": "MockVOLToken",
+    "type": "mock",
+    "chainName": "Sepolia",
+    "chainId": 421614,
+    "collateralTknAddr": "0xE42a406F25CE2a5b12b3C3Dc08e2444Ab0D3FBD6",
+    "minCollateral": 5,
+    "initialCollateral": 25,
+    "initialLimitOFD": 40000,
+    "feesPercent": 2,
+    "liqPriceOFD": 1000,
+    "reservePercent": 10,
+    "durationDays": 180,
+    "challengePeriodSeconds": 901,
+    "minApplicationPeriodSeconds": 900
+  },
+  {
+    "name": "MockVOLToken",
+    "type": "mock",
+    "chainName": "BNBTestnet",
+    "chainId": 97,
+    "collateralTknAddr": "0x55899A4Cd6D255DCcAA84d67E3A08043F2123d7E",
+    "minCollateral": 5,
+    "initialCollateral": 25,
+    "initialLimitOFD": 40000,
+    "feesPercent": 2,
+    "liqPriceOFD": 1000,
+    "reservePercent": 10,
+    "durationDays": 180,
+    "challengePeriodSeconds": 901,
+    "minApplicationPeriodSeconds": 900
+  },
+  {
+    "name": "MockVOLToken",
+    "type": "mock",
+    "chainName": "Local",
+    "chainId": 31337,
+    "minCollateral": 5,
+    "initialCollateral": 25,
+    "initialLimitOFD": 40000,
+    "feesPercent": 2,
+    "liqPriceOFD": 1000,
+    "reservePercent": 10,
+    "durationDays": 180,
+    "challengePeriodSeconds": 901,
+    "minApplicationPeriodSeconds": 900,
+    "collateralTknAddr": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  }
+]
