@@ -1,0 +1,357 @@
+{
+  "address": "0xCB359C7c6f6ce794b8E840D11BC5833954313Ccf",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "guardian_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidGuardian",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotGuardian",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TimelockPending",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousGuardian",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newGuardian",
+          "type": "address"
+        }
+      ],
+      "name": "GuardianRotated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "currentGuardian",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "pendingGuardian",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "availableAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "GuardianRotationScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "by",
+          "type": "address"
+        }
+      ],
+      "name": "Paused",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "by",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "availableAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "UnpauseScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "by",
+          "type": "address"
+        }
+      ],
+      "name": "Unpaused",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "TIMELOCK",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "guardian",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "guardianChangeAvailableAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "paused",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingGuardian",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rotateGuardian",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newGuardian",
+          "type": "address"
+        }
+      ],
+      "name": "scheduleGuardianRotation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "scheduleUnpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpause",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unpauseAvailableAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x8d36553e6f6ee843d03b6fa22aa70a5a707a6499dd51f117746ed37a235672b5",
+  "receipt": {
+    "to": null,
+    "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "contractAddress": "0xCB359C7c6f6ce794b8E840D11BC5833954313Ccf",
+    "transactionIndex": 17,
+    "gasUsed": "351412",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x7854545e0d52ad314414eec22590814cadacd60d6d2e4a183474af564ddda87c",
+    "transactionHash": "0x8d36553e6f6ee843d03b6fa22aa70a5a707a6499dd51f117746ed37a235672b5",
+    "logs": [],
+    "blockNumber": 8575289,
+    "cumulativeGasUsed": "1231083",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "28902af0121444a8011ed10399893f2f",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"guardian_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"InvalidGuardian\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotGuardian\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"TimelockPending\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousGuardian\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newGuardian\",\"type\":\"address\"}],\"name\":\"GuardianRotated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"currentGuardian\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"pendingGuardian\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"availableAt\",\"type\":\"uint256\"}],\"name\":\"GuardianRotationScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"by\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"by\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"availableAt\",\"type\":\"uint256\"}],\"name\":\"UnpauseScheduled\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"by\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"TIMELOCK\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"guardian\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"guardianChangeAvailableAt\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pendingGuardian\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rotateGuardian\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newGuardian\",\"type\":\"address\"}],\"name\":\"scheduleGuardianRotation\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"scheduleUnpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpauseAvailableAt\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Scope is deliberately narrow (see report/dogeos-tech-parts/02-deployment-architecture.md C.2/C.4):  - The guardian can PAUSE admissions instantly: while paused, `OracleFreeDollar.suggestMinter`,    `MintingHub.openPosition`, and `MintingHub.clone` revert. Transfers, minting on existing    positions, repayments, savings, challenges, and auctions are NEVER pausable.  - Unpausing and guardian rotation require enqueueing + waiting the 72h TIMELOCK. 72h is strictly    shorter than the 14-day minter application window and the 5-day position init period, so any    guardian misuse must surface within those windows while emergency recovery stays fast. The protocol contracts (token + hub) hold only the guardian's address and read `paused()`; all privileged logic lives here. If the guardian address is never set on the token, the gate is open and behavior is identical to upstream Frankencoin/OFD.\",\"kind\":\"dev\",\"methods\":{\"rotateGuardian()\":{\"details\":\"Callable by the current guardian (the key being rotated out executes its own handover, which is what makes the rotation reviewable on-chain before it takes effect).\"}},\"title\":\"GuardianTimelock\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"pause()\":{\"notice\":\"Instantly pause new admissions. Callable only by the guardian.\"},\"rotateGuardian()\":{\"notice\":\"Execute a previously scheduled guardian rotation after the timelock elapsed.\"},\"scheduleGuardianRotation(address)\":{\"notice\":\"Propose a new guardian (e.g. Safe rotation). Takes effect only after 72h.\"},\"scheduleUnpause()\":{\"notice\":\"Start the 72h countdown after which the gate may be reopened.\"},\"unpause()\":{\"notice\":\"Reopen admissions after the 72h timelock has elapsed.\"}},\"notice\":\"Holds the guardian key (the 3-of-5 Ops Safe) for the DogeForex admission gate.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/GuardianTimelock.sol\":\"GuardianTimelock\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/GuardianTimelock.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n/**\\n * @title GuardianTimelock\\n * @notice Holds the guardian key (the 3-of-5 Ops Safe) for the DogeForex admission gate.\\n * @dev Scope is deliberately narrow (see report/dogeos-tech-parts/02-deployment-architecture.md C.2/C.4):\\n *\\n *  - The guardian can PAUSE admissions instantly: while paused, `OracleFreeDollar.suggestMinter`,\\n *    `MintingHub.openPosition`, and `MintingHub.clone` revert. Transfers, minting on existing\\n *    positions, repayments, savings, challenges, and auctions are NEVER pausable.\\n *  - Unpausing and guardian rotation require enqueueing + waiting the 72h TIMELOCK. 72h is strictly\\n *    shorter than the 14-day minter application window and the 5-day position init period, so any\\n *    guardian misuse must surface within those windows while emergency recovery stays fast.\\n *\\n * The protocol contracts (token + hub) hold only the guardian's address and read `paused()`;\\n * all privileged logic lives here. If the guardian address is never set on the token, the gate\\n * is open and behavior is identical to upstream Frankencoin/OFD.\\n */\\ncontract GuardianTimelock {\\n    uint256 public constant TIMELOCK = 72 hours;\\n\\n    address public guardian; // the Ops Safe (3-of-5)\\n    bool public paused;\\n\\n    uint256 public unpauseAvailableAt; // earliest timestamp a scheduled unpause may execute\\n    address public pendingGuardian; // next guardian after the timelock elapses\\n    uint256 public guardianChangeAvailableAt; // earliest timestamp the rotation may execute\\n\\n    event Paused(address indexed by);\\n    event UnpauseScheduled(address indexed by, uint256 availableAt);\\n    event Unpaused(address indexed by);\\n    event GuardianRotationScheduled(address indexed currentGuardian, address indexed pendingGuardian, uint256 availableAt);\\n    event GuardianRotated(address indexed previousGuardian, address indexed newGuardian);\\n\\n    error NotGuardian();\\n    error TimelockPending();\\n    error InvalidGuardian();\\n\\n    modifier onlyGuardian() {\\n        if (msg.sender != guardian) revert NotGuardian();\\n        _;\\n    }\\n\\n    constructor(address guardian_) {\\n        if (guardian_ == address(0)) revert InvalidGuardian();\\n        guardian = guardian_;\\n    }\\n\\n    /**\\n     * @notice Instantly pause new admissions. Callable only by the guardian.\\n     */\\n    function pause() external onlyGuardian {\\n        paused = true;\\n        emit Paused(msg.sender);\\n    }\\n\\n    /**\\n     * @notice Start the 72h countdown after which the gate may be reopened.\\n     */\\n    function scheduleUnpause() external onlyGuardian {\\n        unpauseAvailableAt = block.timestamp + TIMELOCK;\\n        emit UnpauseScheduled(msg.sender, unpauseAvailableAt);\\n    }\\n\\n    /**\\n     * @notice Reopen admissions after the 72h timelock has elapsed.\\n     */\\n    function unpause() external onlyGuardian {\\n        if (unpauseAvailableAt == 0 || block.timestamp < unpauseAvailableAt) revert TimelockPending();\\n        paused = false;\\n        unpauseAvailableAt = 0;\\n        emit Unpaused(msg.sender);\\n    }\\n\\n    /**\\n     * @notice Propose a new guardian (e.g. Safe rotation). Takes effect only after 72h.\\n     */\\n    function scheduleGuardianRotation(address newGuardian) external onlyGuardian {\\n        if (newGuardian == address(0)) revert InvalidGuardian();\\n        pendingGuardian = newGuardian;\\n        guardianChangeAvailableAt = block.timestamp + TIMELOCK;\\n        emit GuardianRotationScheduled(guardian, newGuardian, guardianChangeAvailableAt);\\n    }\\n\\n    /**\\n     * @notice Execute a previously scheduled guardian rotation after the timelock elapsed.\\n     * @dev Callable by the current guardian (the key being rotated out executes its own handover,\\n     * which is what makes the rotation reviewable on-chain before it takes effect).\\n     */\\n    function rotateGuardian() external onlyGuardian {\\n        if (pendingGuardian == address(0) || block.timestamp < guardianChangeAvailableAt) revert TimelockPending();\\n        emit GuardianRotated(guardian, pendingGuardian);\\n        guardian = pendingGuardian;\\n        pendingGuardian = address(0);\\n        guardianChangeAvailableAt = 0;\\n    }\\n}\\n\",\"keccak256\":\"0xa9b7e2b4306715d802d234a844a37032aac882484e6ae0a275a61c3522156c52\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561000f575f80fd5b506040516105a23803806105a283398101604081905261002e91610079565b6001600160a01b0381166100555760405163a6c1146b60e01b815260040160405180910390fd5b5f80546001600160a01b0319166001600160a01b03929092169190911790556100a6565b5f60208284031215610089575f80fd5b81516001600160a01b038116811461009f575f80fd5b9392505050565b6104ef806100b35f395ff3fe608060405234801561000f575f80fd5b50600436106100a6575f3560e01c8063762c31ba1161006e578063762c31ba146101255780637aadef8b146101385780637e3edb7e146101425780638456cb591461015557806396fbd0f11461015d578063addd628114610166575f80fd5b806315a25b02146100aa5780633f4ba83a146100b4578063452a9320146100bc5780634dfa0aa1146100eb5780635c975abb14610102575b5f80fd5b6100b261016e565b005b6100b26101e1565b5f546100ce906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100f460015481565b6040519081526020016100e2565b5f5461011590600160a01b900460ff1681565b60405190151581526020016100e2565b6002546100ce906001600160a01b031681565b6100f46203f48081565b6100b2610150366004610467565b610274565b6100b2610339565b6100f460035481565b6100b261039f565b5f546001600160a01b03163314610198576040516377b6878160e11b815260040160405180910390fd5b6101a56203f48042610494565b600181905560405190815233907f92e6b30105b3e2d505e50fbf10f894e9c0610306c80df0222d46ff3e3a65f46d9060200160405180910390a2565b5f546001600160a01b0316331461020b576040516377b6878160e11b815260040160405180910390fd5b600154158061021b575060015442105b1561023957604051630644c30960e21b815260040160405180910390fd5b5f805460ff60a01b19168155600181905560405133917f5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa91a2565b5f546001600160a01b0316331461029e576040516377b6878160e11b815260040160405180910390fd5b6001600160a01b0381166102c55760405163a6c1146b60e01b815260040160405180910390fd5b600280546001600160a01b0319166001600160a01b0383161790556102ed6203f48042610494565b60038190555f546040519182526001600160a01b03838116929116907f642d45caf7481c9d49c3d03b95c53a9e3f5c1d1ea826adbd521e71e82b13b0039060200160405180910390a350565b5f546001600160a01b03163314610363576040516377b6878160e11b815260040160405180910390fd5b5f805460ff60a01b1916600160a01b17815560405133917f62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a25891a2565b5f546001600160a01b031633146103c9576040516377b6878160e11b815260040160405180910390fd5b6002546001600160a01b031615806103e2575060035442105b1561040057604051630644c30960e21b815260040160405180910390fd5b6002545f80546040516001600160a01b0393841693909116917f7fba7f8a7a82502c847b769e5203248e7e6b1e3daeec1f981afdb0227ddc534091a3600280545f80546001600160a01b03199081166001600160a01b038416178255909116909155600355565b5f60208284031215610477575f80fd5b81356001600160a01b038116811461048d575f80fd5b9392505050565b808201808211156104b357634e487b7160e01b5f52601160045260245ffd5b9291505056fea26469706673582212203393a93bde7f2d4d937e81beeeb70c2e27b7a1ab0cab7a310019dbcbd9760aac64736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561000f575f80fd5b50600436106100a6575f3560e01c8063762c31ba1161006e578063762c31ba146101255780637aadef8b146101385780637e3edb7e146101425780638456cb591461015557806396fbd0f11461015d578063addd628114610166575f80fd5b806315a25b02146100aa5780633f4ba83a146100b4578063452a9320146100bc5780634dfa0aa1146100eb5780635c975abb14610102575b5f80fd5b6100b261016e565b005b6100b26101e1565b5f546100ce906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b6100f460015481565b6040519081526020016100e2565b5f5461011590600160a01b900460ff1681565b60405190151581526020016100e2565b6002546100ce906001600160a01b031681565b6100f46203f48081565b6100b2610150366004610467565b610274565b6100b2610339565b6100f460035481565b6100b261039f565b5f546001600160a01b03163314610198576040516377b6878160e11b815260040160405180910390fd5b6101a56203f48042610494565b600181905560405190815233907f92e6b30105b3e2d505e50fbf10f894e9c0610306c80df0222d46ff3e3a65f46d9060200160405180910390a2565b5f546001600160a01b0316331461020b576040516377b6878160e11b815260040160405180910390fd5b600154158061021b575060015442105b1561023957604051630644c30960e21b815260040160405180910390fd5b5f805460ff60a01b19168155600181905560405133917f5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa91a2565b5f546001600160a01b0316331461029e576040516377b6878160e11b815260040160405180910390fd5b6001600160a01b0381166102c55760405163a6c1146b60e01b815260040160405180910390fd5b600280546001600160a01b0319166001600160a01b0383161790556102ed6203f48042610494565b60038190555f546040519182526001600160a01b03838116929116907f642d45caf7481c9d49c3d03b95c53a9e3f5c1d1ea826adbd521e71e82b13b0039060200160405180910390a350565b5f546001600160a01b03163314610363576040516377b6878160e11b815260040160405180910390fd5b5f805460ff60a01b1916600160a01b17815560405133917f62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a25891a2565b5f546001600160a01b031633146103c9576040516377b6878160e11b815260040160405180910390fd5b6002546001600160a01b031615806103e2575060035442105b1561040057604051630644c30960e21b815260040160405180910390fd5b6002545f80546040516001600160a01b0393841693909116917f7fba7f8a7a82502c847b769e5203248e7e6b1e3daeec1f981afdb0227ddc534091a3600280545f80546001600160a01b03199081166001600160a01b038416178255909116909155600355565b5f60208284031215610477575f80fd5b81356001600160a01b038116811461048d575f80fd5b9392505050565b808201808211156104b357634e487b7160e01b5f52601160045260245ffd5b9291505056fea26469706673582212203393a93bde7f2d4d937e81beeeb70c2e27b7a1ab0cab7a310019dbcbd9760aac64736f6c63430008140033",
+  "devdoc": {
+    "details": "Scope is deliberately narrow (see report/dogeos-tech-parts/02-deployment-architecture.md C.2/C.4):  - The guardian can PAUSE admissions instantly: while paused, `OracleFreeDollar.suggestMinter`,    `MintingHub.openPosition`, and `MintingHub.clone` revert. Transfers, minting on existing    positions, repayments, savings, challenges, and auctions are NEVER pausable.  - Unpausing and guardian rotation require enqueueing + waiting the 72h TIMELOCK. 72h is strictly    shorter than the 14-day minter application window and the 5-day position init period, so any    guardian misuse must surface within those windows while emergency recovery stays fast. The protocol contracts (token + hub) hold only the guardian's address and read `paused()`; all privileged logic lives here. If the guardian address is never set on the token, the gate is open and behavior is identical to upstream Frankencoin/OFD.",
+    "kind": "dev",
+    "methods": {
+      "rotateGuardian()": {
+        "details": "Callable by the current guardian (the key being rotated out executes its own handover, which is what makes the rotation reviewable on-chain before it takes effect)."
+      }
+    },
+    "title": "GuardianTimelock",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "pause()": {
+        "notice": "Instantly pause new admissions. Callable only by the guardian."
+      },
+      "rotateGuardian()": {
+        "notice": "Execute a previously scheduled guardian rotation after the timelock elapsed."
+      },
+      "scheduleGuardianRotation(address)": {
+        "notice": "Propose a new guardian (e.g. Safe rotation). Takes effect only after 72h."
+      },
+      "scheduleUnpause()": {
+        "notice": "Start the 72h countdown after which the gate may be reopened."
+      },
+      "unpause()": {
+        "notice": "Reopen admissions after the 72h timelock has elapsed."
+      }
+    },
+    "notice": "Holds the guardian key (the 3-of-5 Ops Safe) for the DogeForex admission gate.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1360,
+        "contract": "contracts/GuardianTimelock.sol:GuardianTimelock",
+        "label": "guardian",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 1362,
+        "contract": "contracts/GuardianTimelock.sol:GuardianTimelock",
+        "label": "paused",
+        "offset": 20,
+        "slot": "0",
+        "type": "t_bool"
+      },
+      {
+        "astId": 1364,
+        "contract": "contracts/GuardianTimelock.sol:GuardianTimelock",
+        "label": "unpauseAvailableAt",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 1366,
+        "contract": "contracts/GuardianTimelock.sol:GuardianTimelock",
+        "label": "pendingGuardian",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_address"
+      },
+      {
+        "astId": 1368,
+        "contract": "contracts/GuardianTimelock.sol:GuardianTimelock",
+        "label": "guardianChangeAvailableAt",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

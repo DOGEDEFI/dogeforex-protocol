@@ -1,0 +1,164 @@
+{
+  "schema": "dogeforex.registry/v1",
+  "generatedAt": "2026-10-14T12:28:07.693Z",
+  "source": "hardhat-deploy artifacts @ scripts/deployment/deployments/chikyu (constructor args from artifacts only)",
+  "network": {
+    "chainId": 6281971,
+    "chainName": "DogeOS Chikyū Testnet",
+    "rpc": [
+      "https://rpc.testnet.dogeos.com"
+    ],
+    "blockscout": "https://blockscout.testnet.dogeos.com"
+  },
+  "predeploys": {
+    "wDOGE": "0x5300000000000000000000000000000000000004",
+    "nativeDogeERC20": "0x530000000000000000000000000000000000000d09e"
+  },
+  "roles": {
+    "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+    "treasury": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+    "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+  },
+  "feePreflight": {
+    "date": "2026-10-14",
+    "baselineDogePerByte": 0.000071,
+    "quotedDogePerByte": 0.0001075,
+    "ratio": 1.514,
+    "gasPriceRatio": 1.0002,
+    "rule": "abort if quoted L1 fee > 2x 14 Oct baseline",
+    "verdict": "PASS"
+  },
+  "shared": {
+    "MOFX": {
+      "address": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+      "verified": true,
+      "deployTx": "0x1e20fdd3ecaf58660882fe3253222edc863a97c90c89fef596b5f4be18a4cbe7",
+      "name": "DogeForex Mock FX",
+      "symbol": "MOFX",
+      "note": "testnet-only mock FX collateral; 18 dec; 1 MOFX = $1 convention; deployer-gated mint"
+    }
+  },
+  "instance": {
+    "code": "USD",
+    "currency": "USD",
+    "minApplicationPeriod": 900,
+    "token": {
+      "name": "DogeOS Dollar",
+      "symbol": "K9USD",
+      "address": "0x7cd12A6C4CbcfE87af588d9c3FF8576aB4FBF5A8",
+      "verified": true,
+      "deployTx": "0x2a06fa8cf2e6b201808cf0eab927cc6c2269eac1a111bac3c238b72871e190bd",
+      "totalSupply": "500000000000000000000000"
+    },
+    "equity": {
+      "name": "DogeOS Dollar Pool Share",
+      "symbol": "K9USDPS",
+      "address": "0x61B9193ef708972D694f98DbBF2dA9ccfD614C4E",
+      "verified": true,
+      "deployTx": "0x2a06fa8cf2e6b201808cf0eab927cc6c2269eac1a111bac3c238b72871e190bd",
+      "note": "deployed inside token constructor (token deploy tx)",
+      "totalShares": "1000000000000000000000",
+      "price": "3000000000000000000"
+    },
+    "positionFactory": {
+      "address": "0x5207E378d4e6c1992b130a2D2420f52C274570ce",
+      "verified": true,
+      "deployTx": "0x42810ed20d4e287b6ab2d81f58f742313527e7979445b4f9d08d6dee55c746d6"
+    },
+    "positionRoller": {
+      "address": "0xA2c692320aC9881b23A1eCE077C60a0fbF239731",
+      "verified": true,
+      "deployTx": "0xb53b019681369bb91389006c674c02eeb0d6cbe6aa276d0819a69a0c2c3f4def"
+    },
+    "savings": {
+      "address": "0x80958D976149d1Dcf522682EB105aC3F7566ca05",
+      "verified": true,
+      "deployTx": "0xdc15ceab365266ad03bbcb56c32c705220d63e4e85ae895f02a3763cca0977ee",
+      "leadratePPM": 50000
+    },
+    "mintingHub": {
+      "address": "0x0bADA8D887573Cc47eBef4ff5BBE42942B580F9b",
+      "verified": true,
+      "deployTx": "0x39719ea17e208b025736ff218db426d1fddf43102db41382138dfd575b6e6dd8"
+    },
+    "genesisBootstrap": {
+      "address": "0xd95Cf14598d12E5AdA5035eec02d66302d84E019",
+      "verified": true,
+      "deployTx": "0x5d8a49e1b9cf0705cd94baa8b9a12cfdfa3d3385c6459885a379c99dd565b497",
+      "endTime": 1794399616,
+      "totalFloat": "500000000000000000000000",
+      "allocations": {
+        "poolSeed": {
+          "recipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+          "amount": "100000000000000000000000"
+        },
+        "equity": {
+          "recipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+          "amount": "250000000000000000000000"
+        },
+        "challengerBounty": {
+          "recipient": "0x82E625F5ACaFd9ea450278F782922E103b1E8589",
+          "amount": "50000000000000000000000"
+        },
+        "incentives": {
+          "recipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+          "amount": "100000000000000000000000"
+        }
+      },
+      "executeTx": "0xd8239805a0dce8d8657fb9b0e37948084bd01441aea46c2f01357b3c1c71675d"
+    },
+    "guardianTimelock": {
+      "address": "0xCB359C7c6f6ce794b8E840D11BC5833954313Ccf",
+      "verified": true,
+      "deployTx": "0x8d36553e6f6ee843d03b6fa22aa70a5a707a6499dd51f117746ed37a235672b5",
+      "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+      "timelockSeconds": 259200,
+      "setGuardianTx": "0xb85b65e17db681ba4ca4d2ea9687e5d57c2b6d52728612c84aa79fe8d0736893"
+    },
+    "position": {
+      "status": "pending-first-position",
+      "verified": false,
+      "note": "PositionFactory deploys full Position bytecode per position (no shared template); verify the first opened position in P2"
+    },
+    "deployment": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "deployBlock": 8575271,
+      "deployTxHashes": [
+        "0x2a06fa8cf2e6b201808cf0eab927cc6c2269eac1a111bac3c238b72871e190bd",
+        "0x42810ed20d4e287b6ab2d81f58f742313527e7979445b4f9d08d6dee55c746d6",
+        "0xb53b019681369bb91389006c674c02eeb0d6cbe6aa276d0819a69a0c2c3f4def",
+        "0xdc15ceab365266ad03bbcb56c32c705220d63e4e85ae895f02a3763cca0977ee",
+        "0x39719ea17e208b025736ff218db426d1fddf43102db41382138dfd575b6e6dd8",
+        "0x5d8a49e1b9cf0705cd94baa8b9a12cfdfa3d3385c6459885a379c99dd565b497",
+        "0x8d36553e6f6ee843d03b6fa22aa70a5a707a6499dd51f117746ed37a235672b5"
+      ],
+      "initializeTxs": {
+        "savings": "0x28778b267f75eb9f3e0c25b9fbcf578be96e2a3bc970d0f980c3982bc2181179",
+        "positionFactory": "0xed8792060bf4904c7ebfdabeac79ff0e43ea139be3b70fac698a3904ac7fc791",
+        "positionRoller": "0x24eebb27a59b948df5e48ffc9b94f23e363f511b9053fb2da1c9036453ada3d1",
+        "mintingHub": "0x8b7c7175179e173505ab6d4e3884d47020e1a0f9cb82a75a5ed169731ec6e57f",
+        "genesisBootstrapRegistration": "0xd0f2def8ab7d1a6668cfacb3dcea48fb602d5cc4c4f05227007ee27c3118a1f3"
+      },
+      "deployerNonceFinal": 17
+    },
+    "genesis": {
+      "leadratePPM": 50000,
+      "floatTotal": "500000000000000000000000",
+      "founderEquityTranche1": {
+        "fundingTxTreasuryToDeployer": "0x834f3c0243c696ea3ab9950dfd856fd0198efc782927adf269d3d93dc6cb60f0",
+        "approveTx": "0x88ebe90df4d2f137a4c8fcb54fe206c65d785fe68a91acf4398eeacd0622b375",
+        "investTx": "0x0b2f7c94bc0016aebd9bcec4cdf84bf0b0c2d5098ff9b8a053bcbe5738b52e17",
+        "depositAmount": "1000000000000000000000",
+        "sharesReceived": "1000000000000000000000",
+        "equityPriceAfter": "3000000000000000000",
+        "note": "first deposit mints flat 1000 shares; price()=3e18 is the cubic valuation (VALUATION_FACTOR=3), runbook's 1e18 assertion superseded by contract math"
+      }
+    }
+  },
+  "accounting": {
+    "deployerBalanceBeforeDoge": "10.0",
+    "deployerBalanceAfterDoge": "5.484702565198653637",
+    "deployerTotalGasSpentDoge": "4.515297"
+  }
+}
