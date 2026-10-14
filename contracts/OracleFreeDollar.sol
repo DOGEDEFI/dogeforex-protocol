@@ -5,6 +5,7 @@ import "./utils/ERC20PermitLight.sol";
 import "./Equity.sol";
 import "./interface/IReserve.sol";
 import "./interface/IOracleFreeDollar.sol";
+import "./interface/IGuardianTimelock.sol";
 
 /**
  * @title OracleFreeDollar
@@ -46,6 +47,16 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     address private immutable _deployer;
 
     /**
+     * @notice Admission gate (guardian). Address of a GuardianTimelock contract, or zero if no
+     * guardian was wired for this instance. While the GuardianTimelock is paused, suggesting new
+     * minters is blocked; everything else (transfers, minting on existing positions, challenges)
+     * always remains open. Zero address = default Frankencoin behavior, gate fully open.
+     * @dev Set once via setGuardian, callable only by the deployer, in the same trust window as
+     * the genesis initialize() calls.
+     */
+    address public guardian;
+
+    /**
      * @notice Map of minters to approval time stamps. If the time stamp is in the past, the minter contract is allowed
      * to mint OracleFreeDollars.
      */
@@ -60,16 +71,42 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     event MinterDenied(address indexed minter, string message);
     event Loss(address indexed reportingMinter, uint256 amount);
     event Profit(address indexed reportingMinter, uint256 amount);
+    event GuardianSet(address indexed guardian);
 
     error PeriodTooShort();
     error FeeTooLow();
     error AlreadyRegistered();
     error NotMinter();
     error TooLate();
+    error AdmissionPaused();
+    error GuardianAlreadySet();
+    error NotDeployer();
 
     modifier minterOnly() {
         if (!isMinter(msg.sender) && !isMinter(positions[msg.sender])) revert NotMinter();
         _;
+    }
+
+    /**
+     * @notice Admission gate: reverts while the guardian (GuardianTimelock) is paused. Applies to
+     * new-minter suggestions and new-position admission only; transfers, existing minters, and the
+     * challenge game are never affected.
+     */
+    modifier whenAdmissionOpen() {
+        address _guardian = guardian;
+        if (_guardian != address(0) && IGuardianTimelock(_guardian).paused()) revert AdmissionPaused();
+        _;
+    }
+
+    /**
+     * @notice Wire the guardian (GuardianTimelock) once. Only the deployer may call this, mirroring
+     * the initialize() trust window. If never called, the gate stays open forever.
+     */
+    function setGuardian(address _guardian) external {
+        if (msg.sender != _deployer) revert NotDeployer();
+        if (guardian != address(0)) revert GuardianAlreadySet();
+        guardian = _guardian;
+        emit GuardianSet(_guardian);
     }
 
     /**
@@ -121,7 +158,7 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
         uint256 _applicationPeriod,
         uint256 _applicationFee,
         string calldata _message
-    ) external override {
+    ) external override whenAdmissionOpen {
         if (_applicationPeriod < MIN_APPLICATION_PERIOD) revert PeriodTooShort();
         if (_applicationFee < MIN_FEE) revert FeeTooLow();
         if (minters[_minter] != 0) revert AlreadyRegistered();

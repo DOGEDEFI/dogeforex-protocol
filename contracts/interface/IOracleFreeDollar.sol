@@ -23,6 +23,12 @@ interface IOracleFreeDollar is IERC20 {
 
     function isMinter(address minter) external view returns (bool);
 
+    /**
+     * @notice Address of the GuardianTimelock admission gate contract, or zero if no guardian
+     * was wired for this instance. The MintingHub reads this to enforce the same gate.
+     */
+    function guardian() external view returns (address);
+
     function getPositionParent(address position) external view returns (address);
 
     function mint(address target, uint256 amount) external;

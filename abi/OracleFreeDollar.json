@@ -22,6 +22,11 @@
     },
     {
         "inputs": [],
+        "name": "AdmissionPaused",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "AlreadyRegistered",
         "type": "error"
     },
@@ -74,6 +79,16 @@
     },
     {
         "inputs": [],
+        "name": "GuardianAlreadySet",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotDeployer",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "NotMinter",
         "type": "error"
     },
@@ -110,6 +125,19 @@
             }
         ],
         "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "guardian",
+                "type": "address"
+            }
+        ],
+        "name": "GuardianSet",
         "type": "event"
     },
     {
@@ -612,6 +640,19 @@
         "type": "function"
     },
     {
+        "inputs": [],
+        "name": "guardian",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -844,6 +885,19 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_guardian",
+                "type": "address"
+            }
+        ],
+        "name": "setGuardian",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {

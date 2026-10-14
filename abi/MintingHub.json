@@ -27,6 +27,11 @@
     },
     {
         "inputs": [],
+        "name": "AdmissionPaused",
+        "type": "error"
+    },
+    {
+        "inputs": [],
         "name": "IncompatibleCollateral",
         "type": "error"
     },
@@ -253,6 +258,19 @@
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "admissionGuardianPaused",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
             }
         ],
         "stateMutability": "view",

@@ -7,6 +7,7 @@ import './interface/IOracleFreeDollar.sol';
 import './interface/IPosition.sol';
 import './interface/IPositionFactory.sol';
 import './interface/IReserve.sol';
+import './interface/IGuardianTimelock.sol';
 
 import './PositionRoller.sol';
 import './utils/Ownable.sol';
@@ -68,10 +69,34 @@ contract MintingHub {
 	error InvalidPos();
 	error IncompatibleCollateral();
 	error InsufficientCollateral();
+	error AdmissionPaused();
 
 	modifier validPos(address position) {
 		if (ofd.getPositionParent(position) != address(this)) revert InvalidPos();
 		_;
+	}
+
+	/**
+	 * @notice Admission gate: reverts while the guardian (GuardianTimelock) wired on the token is
+	 * paused. Applies to new-position admission (openPosition, clone) only. Challenges, bids,
+	 * repayments, withdrawals, savings, and plain transfers are NEVER pausable — the challenge
+	 * game and user funds never stop. Zero guardian address = gate open (upstream behavior).
+	 * @dev The guardian address lives on the token (single source of truth); the hub reads it via
+	 * ofd.guardian() so token and hub can never disagree about who the guardian is. The check runs
+	 * as an external-style view call (not inlined) to keep openPosition within the no-viaIR stack
+	 * limit — openPosition sits exactly at the stack ceiling in the upstream code.
+	 */
+	modifier whenAdmissionOpen() {
+		if (admissionGuardianPaused()) revert AdmissionPaused();
+		_;
+	}
+
+	/**
+	 * @notice True while the guardian has admissions paused. Also useful for frontends/bots.
+	 */
+	function admissionGuardianPaused() public view returns (bool) {
+		address _guardian = ofd.guardian();
+		return _guardian != address(0) && IGuardianTimelock(_guardian).paused();
 	}
 
 	constructor(address _ofd, address _leadrate, address _roller, address _factory) {
@@ -110,7 +135,7 @@ contract MintingHub {
 		uint24 _riskPremium,
 		uint256 _liqPrice,
 		uint24 _reservePPM
-	) public returns (address) {
+	) public whenAdmissionOpen returns (address) {
 		{
 			require(_riskPremium <= 1000000);
 			require(CHALLENGER_REWARD <= _reservePPM && _reservePPM <= 1000000);
@@ -148,7 +173,7 @@ contract MintingHub {
 		return address(pos);
 	}
 
-	function clone(address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public returns (address) {
+	function clone(address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public whenAdmissionOpen returns (address) {
 		return clone(msg.sender, parent, _initialCollateral, _initialMint, expiration);
 	}
 
@@ -156,7 +181,7 @@ contract MintingHub {
      * @notice Clones an existing position and immediately tries to mint the specified amount using the given collateral.
      * @dev This needs an allowance to be set on the collateral contract such that the minting hub can get the collateral.
      */
-	function clone(address owner, address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public validPos(parent) returns (address) {
+	function clone(address owner, address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public validPos(parent) whenAdmissionOpen returns (address) {
 		address pos = POSITION_FACTORY.clonePosition(parent);
 		IPosition child = IPosition(pos);
 		child.initialize(parent, expiration);
