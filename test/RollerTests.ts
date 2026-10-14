@@ -50,7 +50,7 @@ describe("Roller Tests", () => {
     [owner, alice, bob] = await ethers.getSigners();
 
     const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactory.deploy(5 * 86400);
+    ofd = await oracleFreeDollarFactory.deploy(5 * 86400, "OracleFreeDollar", "OFD");
 
     const equityAddr = await ofd.reserve();
     equity = await ethers.getContractAt("Equity", equityAddr);

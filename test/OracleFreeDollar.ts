@@ -19,7 +19,7 @@ describe("OracleFreeDollar", () => {
     // create contracts
     // 10 day application period
     const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+    ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
   });
 
   describe("Basic initialization", () => {
@@ -108,7 +108,7 @@ describe("OracleFreeDollar", () => {
   describe("Minting & Burning", () => {
     before(async () => {
       const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-      ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+      ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
       const xofdFactory = await ethers.getContractFactory("TestToken");
       mockXOFD = await xofdFactory.deploy("CryptoDollar", "XOFD", 18);
       const bridgeFactory = await ethers.getContractFactory("StablecoinBridge");
@@ -254,7 +254,7 @@ describe("OracleFreeDollar", () => {
   describe("view func", () => {
     before(async () => {
       const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-      ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+      ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
 
       const xofdFactory = await ethers.getContractFactory("TestToken");
       mockXOFD = await xofdFactory.deploy("CryptoDollar", "XOFD", 18);

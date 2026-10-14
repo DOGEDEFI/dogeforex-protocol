@@ -31,7 +31,7 @@ describe("Equity Tests", () => {
 
   beforeEach(async () => {
     const oracleFreeDollarFactoryFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactoryFactory.deploy(10 * 86400);
+    ofd = await oracleFreeDollarFactoryFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
 
     let supply = floatToDec18(1000_000);
     const bridgeFactory = await ethers.getContractFactory("StablecoinBridge");

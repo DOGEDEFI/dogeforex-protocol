@@ -12,7 +12,7 @@ import dotenv from "dotenv";
 import {SigningKey} from '@ethersproject/signing-key'
 dotenv.config();
 
-let pk: string | SigningKey = <string>process.env.SEPOLIA_PK;
+let pk: string | SigningKey | undefined = process.env.SEPOLIA_PK;
 let etherscanapikey: string = <string>process.env.SEPOLIA_API_KEY;
 let bnbTestnetApiKey: string = <string>process.env.BNBTESTNET_API_KEY;
 
@@ -20,6 +20,7 @@ const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.20",
     settings: {
+      evmVersion: "shanghai",
       optimizer: {
         enabled: true,
         runs: 200,
@@ -37,7 +38,7 @@ const config: HardhatUserConfig = {
       chainId: 56,
       gas: 50_000,
       gasPrice: "auto",
-      accounts: [pk],
+      accounts: pk ? [pk] : [],
       timeout: 50_000,
     },
     bnbtestnet:{
@@ -45,7 +46,7 @@ const config: HardhatUserConfig = {
         chainId: 97,
         gas: 50_000,
         gasPrice: "auto",
-        accounts: [pk],
+        accounts: pk ? [pk] : [],
         timeout: 50_000,
     },
   },

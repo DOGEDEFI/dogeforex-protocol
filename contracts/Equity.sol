@@ -89,16 +89,27 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     event Delegation(address indexed from, address indexed to); // indicates a delegation
     event Trade(address who, int amount, uint totPrice, uint newprice); // amount pos or neg for mint or redemption
 
-    constructor(IOracleFreeDollar ofd_) ERC20(18) {
+    /**
+     * @notice Currency display strings, derived from the token's name/symbol so a naming mistake
+     * can only happen in one place. "DogeForex Dollar"/"K9USD" become "DogeForex Dollar Pool Share"/"K9USDPS".
+     * @dev Regular storage, not immutable: solc 0.8.20 immutables must be value types (string is a
+     * reference type), so constructor-set storage is the compiling equivalent of the design.
+     */
+    string public TOKEN_NAME;
+    string public TOKEN_SYMBOL;
+
+    constructor(IOracleFreeDollar ofd_, string memory tokenName, string memory tokenSymbol) ERC20(18) {
         ofd = ofd_;
+        TOKEN_NAME = string.concat(tokenName, " Pool Share"); // 0.8.20 has string.concat
+        TOKEN_SYMBOL = string.concat(tokenSymbol, "PS"); // K9USD -> K9USDPS
     }
 
-    function name() external pure override returns (string memory) {
-        return "OracleFreeDollar Pool Share";
+    function name() external view override returns (string memory) {
+        return TOKEN_NAME;
     }
 
-    function symbol() external pure override returns (string memory) {
-        return "OFDPS";
+    function symbol() external view override returns (string memory) {
+        return TOKEN_SYMBOL;
     }
 
     /**

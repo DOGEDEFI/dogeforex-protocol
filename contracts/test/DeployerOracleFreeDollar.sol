@@ -18,7 +18,7 @@ contract DeployerOracleFreeDollar {
     event Log(address sender, string message);
 
     constructor(address _ofd) {
-        ofd = new OracleFreeDollar(1);
+        ofd = new OracleFreeDollar(1, "OracleFreeDollar", "OFD");
         factory = new PositionFactory();
         roller = new PositionRoller(address(ofd));
         leadrate = new Leadrate(ofd.reserve(), 20000);

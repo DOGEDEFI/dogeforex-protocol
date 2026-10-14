@@ -37,7 +37,7 @@ describe("Position Tests", () => {
     [owner, alice, bob, charles] = await ethers.getSigners();
     // create contracts
     const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+    ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
     equity = await ethers.getContractAt("Equity", await ofd.reserve());
 
     const positionFactoryFactory = await ethers.getContractFactory(

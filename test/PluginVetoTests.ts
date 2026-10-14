@@ -19,7 +19,7 @@ describe("Plugin Veto Tests", () => {
     [owner, alice] = await ethers.getSigners();
     // create contracts
     const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+    ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
 
     // mocktoken
     const xofdFactory = await ethers.getContractFactory("TestToken");

@@ -31,7 +31,7 @@ describe("Basic Tests", () => {
     // create contracts
     // 10 day application period
     const oracleFreeDollarFactory = await ethers.getContractFactory("OracleFreeDollar");
-    ofd = await oracleFreeDollarFactory.deploy(10 * 86400);
+    ofd = await oracleFreeDollarFactory.deploy(10 * 86400, "OracleFreeDollar", "OFD");
 
     const equityAddr = await ofd.reserve();
     equity = await ethers.getContractAt("Equity", equityAddr);

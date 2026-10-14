@@ -22,7 +22,7 @@ contract OFDPSWrapperTest is Test {
     error General(uint256 val);
 
     constructor() {
-        ofd = new OracleFreeDollar(0);
+        ofd = new OracleFreeDollar(0, "OracleFreeDollar", "OFD");
         ofdps = Equity(address(ofd.reserve()));
         wofdps = new OFDPSWrapper(ofdps);
         xofd = new TestToken("Base Dollar", "BUSD", uint8(18));

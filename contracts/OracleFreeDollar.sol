@@ -20,6 +20,15 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     uint256 public immutable MIN_APPLICATION_PERIOD; // for example 10 days
 
     /**
+     * @notice Currency display name and symbol, set once at deployment. DogeForex deploys seven
+     * instances (K9USD...K9BRL) from this one codebase; only these strings vary per instance.
+     * @dev Regular storage, not immutable: solc 0.8.20 immutables must be value types (string is
+     * a reference type), so constructor-set storage is the compiling equivalent of the design.
+     */
+    string public TOKEN_NAME;
+    string public TOKEN_SYMBOL;
+
+    /**
      * @notice The contract that holds the reserve.
      */
     IReserve public immutable override reserve;
@@ -66,19 +75,24 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     /**
      * @notice Initiates the OracleFreeDollar with the provided minimum application period for new plugins
      * in seconds, for example 10 days, i.e. 3600*24*10 = 864000
+     * @param _minApplicationPeriod Minimal application period for new minters, in seconds
+     * @param _name                 Currency display name, e.g. "DogeForex Dollar" (K9USD)
+     * @param _symbol               Currency symbol, e.g. "K9USD"
      */
-    constructor(uint256 _minApplicationPeriod) ERC20(18) {
+    constructor(uint256 _minApplicationPeriod, string memory _name, string memory _symbol) ERC20(18) {
         MIN_APPLICATION_PERIOD = _minApplicationPeriod;
         _deployer = msg.sender;
-        reserve = new Equity(this);
+        TOKEN_NAME = _name;
+        TOKEN_SYMBOL = _symbol;
+        reserve = new Equity(this, _name, _symbol);
     }
 
-    function name() external pure override returns (string memory) {
-        return "OracleFreeDollar";
+    function name() external view override returns (string memory) {
+        return TOKEN_NAME;
     }
 
-    function symbol() external pure override returns (string memory) {
-        return "OFD";
+    function symbol() external view override returns (string memory) {
+        return TOKEN_SYMBOL;
     }
 
     function initialize(address _minter, string calldata _message) external {
