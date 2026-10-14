@@ -1,15 +1,15 @@
 [
   {
     "code": "USD",
-    "tokenName": "DogeForex Dollar",
+    "tokenName": "DogeOS Dollar",
     "tokenSymbol": "K9USD",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
-      "poolSeedRecipient": null,
-      "equityRecipient": null,
-      "challengerBountyRecipient": null,
-      "incentivesRecipient": null,
+      "poolSeedRecipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+      "equityRecipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
+      "challengerBountyRecipient": "0x82E625F5ACaFd9ea450278F782922E103b1E8589",
+      "incentivesRecipient": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
       "poolSeedAmount": "100000000000000000000000",
       "equityAmount": "250000000000000000000000",
       "challengerBountyAmount": "50000000000000000000000",
