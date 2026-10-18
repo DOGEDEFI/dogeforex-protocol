@@ -1,0 +1,663 @@
+{
+  "address": "0x3E01D1C2180aACB765C58062630762Cb3855dEb8",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IOracleFreeDollar",
+          "name": "ofd_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint24",
+          "name": "initialRatePPM",
+          "type": "uint24"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "ChangeNotReady",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint40",
+          "name": "remainingSeconds",
+          "type": "uint40"
+        }
+      ],
+      "name": "FundsLocked",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ModuleDisabled",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoPendingChange",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "interest",
+          "type": "uint256"
+        }
+      ],
+      "name": "InterestCollected",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint24",
+          "name": "newRate",
+          "type": "uint24"
+        }
+      ],
+      "name": "RateChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "who",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint24",
+          "name": "nextRate",
+          "type": "uint24"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint40",
+          "name": "nextChange",
+          "type": "uint40"
+        }
+      ],
+      "name": "RateProposed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint192",
+          "name": "amount",
+          "type": "uint192"
+        }
+      ],
+      "name": "Saved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint192",
+          "name": "amount",
+          "type": "uint192"
+        }
+      ],
+      "name": "Withdrawn",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "INTEREST_DELAY",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "accountOwner",
+          "type": "address"
+        }
+      ],
+      "name": "accruedInterest",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "",
+          "type": "uint192"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "accountOwner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "accruedInterest",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "",
+          "type": "uint192"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint192",
+          "name": "targetAmount",
+          "type": "uint192"
+        }
+      ],
+      "name": "adjust",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "applyChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint192",
+              "name": "saved",
+              "type": "uint192"
+            },
+            {
+              "internalType": "uint64",
+              "name": "ticks",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct Savings.Account",
+          "name": "account",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint64",
+          "name": "ticks",
+          "type": "uint64"
+        }
+      ],
+      "name": "calculateInterest",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "",
+          "type": "uint192"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentRatePPM",
+      "outputs": [
+        {
+          "internalType": "uint24",
+          "name": "",
+          "type": "uint24"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentTicks",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "equity",
+      "outputs": [
+        {
+          "internalType": "contract IReserve",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextChange",
+      "outputs": [
+        {
+          "internalType": "uint40",
+          "name": "",
+          "type": "uint40"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextRatePPM",
+      "outputs": [
+        {
+          "internalType": "uint24",
+          "name": "",
+          "type": "uint24"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ofd",
+      "outputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint24",
+          "name": "newRatePPM_",
+          "type": "uint24"
+        },
+        {
+          "internalType": "address[]",
+          "name": "helpers",
+          "type": "address[]"
+        }
+      ],
+      "name": "proposeChange",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "refreshBalance",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "",
+          "type": "uint192"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "refreshMyBalance",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "",
+          "type": "uint192"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint192",
+          "name": "amount",
+          "type": "uint192"
+        }
+      ],
+      "name": "save",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint192",
+          "name": "amount",
+          "type": "uint192"
+        }
+      ],
+      "name": "save",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "savings",
+      "outputs": [
+        {
+          "internalType": "uint192",
+          "name": "saved",
+          "type": "uint192"
+        },
+        {
+          "internalType": "uint64",
+          "name": "ticks",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ticks",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        },
+        {
+          "internalType": "uint192",
+          "name": "amount",
+          "type": "uint192"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x1e2fb65461bf7079293e7246680ceedb02c63c4f393b011c3e88f49c98cecff0",
+  "receipt": {
+    "to": null,
+    "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "contractAddress": "0x3E01D1C2180aACB765C58062630762Cb3855dEb8",
+    "transactionIndex": 12,
+    "gasUsed": "1170601",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000010000040400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000",
+    "blockHash": "0x42d2c5513b1ced948ca50eb095ed5075ac4185d40e1b2ebae966232225f8a423",
+    "transactionHash": "0x1e2fb65461bf7079293e7246680ceedb02c63c4f393b011c3e88f49c98cecff0",
+    "logs": [
+      {
+        "transactionIndex": 12,
+        "blockNumber": 8699345,
+        "transactionHash": "0x1e2fb65461bf7079293e7246680ceedb02c63c4f393b011c3e88f49c98cecff0",
+        "address": "0x3E01D1C2180aACB765C58062630762Cb3855dEb8",
+        "topics": [
+          "0xd76dfbd4c35cffe2a846b6488bc677c511aa4337e1551f3a360427ac7a78de7b"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000000000000c350",
+        "logIndex": 15,
+        "blockHash": "0x42d2c5513b1ced948ca50eb095ed5075ac4185d40e1b2ebae966232225f8a423"
+      }
+    ],
+    "blockNumber": 8699345,
+    "cumulativeGasUsed": "1730683",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xa714CE79900acA2298e729f8caF126BE0FeC60c6",
+    50000
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "28902af0121444a8011ed10399893f2f",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IOracleFreeDollar\",\"name\":\"ofd_\",\"type\":\"address\"},{\"internalType\":\"uint24\",\"name\":\"initialRatePPM\",\"type\":\"uint24\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"ChangeNotReady\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"uint40\",\"name\":\"remainingSeconds\",\"type\":\"uint40\"}],\"name\":\"FundsLocked\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ModuleDisabled\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NoPendingChange\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"interest\",\"type\":\"uint256\"}],\"name\":\"InterestCollected\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint24\",\"name\":\"newRate\",\"type\":\"uint24\"}],\"name\":\"RateChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"who\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint24\",\"name\":\"nextRate\",\"type\":\"uint24\"},{\"indexed\":false,\"internalType\":\"uint40\",\"name\":\"nextChange\",\"type\":\"uint40\"}],\"name\":\"RateProposed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint192\",\"name\":\"amount\",\"type\":\"uint192\"}],\"name\":\"Saved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint192\",\"name\":\"amount\",\"type\":\"uint192\"}],\"name\":\"Withdrawn\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"INTEREST_DELAY\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"accountOwner\",\"type\":\"address\"}],\"name\":\"accruedInterest\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"\",\"type\":\"uint192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"accountOwner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"accruedInterest\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"\",\"type\":\"uint192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint192\",\"name\":\"targetAmount\",\"type\":\"uint192\"}],\"name\":\"adjust\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"applyChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint192\",\"name\":\"saved\",\"type\":\"uint192\"},{\"internalType\":\"uint64\",\"name\":\"ticks\",\"type\":\"uint64\"}],\"internalType\":\"struct Savings.Account\",\"name\":\"account\",\"type\":\"tuple\"},{\"internalType\":\"uint64\",\"name\":\"ticks\",\"type\":\"uint64\"}],\"name\":\"calculateInterest\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"\",\"type\":\"uint192\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRatePPM\",\"outputs\":[{\"internalType\":\"uint24\",\"name\":\"\",\"type\":\"uint24\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentTicks\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"equity\",\"outputs\":[{\"internalType\":\"contract IReserve\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextChange\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextRatePPM\",\"outputs\":[{\"internalType\":\"uint24\",\"name\":\"\",\"type\":\"uint24\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ofd\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint24\",\"name\":\"newRatePPM_\",\"type\":\"uint24\"},{\"internalType\":\"address[]\",\"name\":\"helpers\",\"type\":\"address[]\"}],\"name\":\"proposeChange\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"refreshBalance\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"\",\"type\":\"uint192\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refreshMyBalance\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"\",\"type\":\"uint192\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"uint192\",\"name\":\"amount\",\"type\":\"uint192\"}],\"name\":\"save\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint192\",\"name\":\"amount\",\"type\":\"uint192\"}],\"name\":\"save\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"savings\",\"outputs\":[{\"internalType\":\"uint192\",\"name\":\"saved\",\"type\":\"uint192\"},{\"internalType\":\"uint64\",\"name\":\"ticks\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"ticks\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"},{\"internalType\":\"uint192\",\"name\":\"amount\",\"type\":\"uint192\"}],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"Savings Module to enable savings based on a Leadrate (\\\"Leitzins\\\") module. As the interest rate changes, the speed at which 'ticks' are accumulated is adjusted. The ticks counter serves as the basis for calculating the interest due for the individual accounts. The saved OFD are subject to a lockup of up to 3 days and only start to yield an interest after the lockup ended. The purpose of this lockup is to discourage short-term holdings and to avoid paying interest to transactional accounts. Transactional accounts typically do not need an incentive to hold OracleFreeDollars.\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"applyChange()\":{\"notice\":\"Setting a previously proposed interest rate change into force.\"},\"currentTicks()\":{\"notice\":\"Total accumulated 'interest ticks' since this contract was deployed. One 'tick' is a ppm-second, so one months of 12% annual interest is   120000*30*24*3600 = 311040000000 ticks. Two months of 6% annual interest would result in the same number of ticks. For simplicity, this is linear, so there is no \\\"interest on interest\\\".\"},\"proposeChange(uint24,address[])\":{\"notice\":\"Proposes a new interest rate that will automatically be applied after seven days. To cancel a proposal, just overwrite it with a new one proposing the current rate.\"},\"refreshBalance(address)\":{\"notice\":\"Collects the accrued interest and adds it to the account. It can be beneficial to do so every now and then in order to start collecting interest on the accrued interest.\"},\"refreshMyBalance()\":{\"notice\":\"Shortcut for refreshBalance(msg.sender)\"},\"save(address,uint192)\":{\"notice\":\"Send 'amount' to the account of the provided owner. The funds sent to the account are locked for a while, depending on how much already is in there.\"},\"save(uint192)\":{\"notice\":\"Save 'amount'.\"},\"withdraw(address,uint192)\":{\"notice\":\"Withdraw up to 'amount' to the target address. When trying to withdraw more than available, all that is available is withdrawn. Returns the acutally transferred amount. Fails if the funds in the account have not been in the account for long enough.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Savings.sol\":\"Savings\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Leadrate.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport './interface/IERC20.sol';\\nimport './interface/IOracleFreeDollar.sol';\\nimport './interface/IReserve.sol';\\n\\n/**\\n * @title Leadrate (attempt at translating the nicely concise German term 'Leitzins')\\n *\\n * A module that can provide other modules with the lead interest rate for the system.\\n *\\n **/\\ncontract Leadrate {\\n\\n\\tIReserve public immutable equity;\\n\\n\\t// the following five variables are less than 256 bit so they should be stored\\n\\t// in the same slot, making them cheap to access together, right?\\n\\n\\tuint24 public currentRatePPM; // 24 bit allows rates of up to 1670% per year\\n\\tuint24 public nextRatePPM;\\n\\tuint40 public nextChange;\\n\\n\\tuint40 private anchorTime; // 40 bits for time in seconds spans up to 1000 human generations\\n\\tuint64 private ticksAnchor; // in bips * seconds, uint88 allows up to\\n\\n\\tevent RateProposed(address who, uint24 nextRate, uint40 nextChange);\\n\\tevent RateChanged(uint24 newRate);\\n\\n\\terror NoPendingChange();\\n\\terror ChangeNotReady();\\n\\n\\tconstructor(IReserve equity_, uint24 initialRatePPM) {\\n\\t\\tequity = equity_;\\n\\t\\tnextRatePPM = initialRatePPM;\\n\\t\\tcurrentRatePPM = initialRatePPM;\\n\\t\\tnextChange = uint40(block.timestamp);\\n\\t\\tanchorTime = nextChange;\\n\\t\\tticksAnchor = 0;\\n\\t\\temit RateChanged(initialRatePPM); // emit for init indexing, if wanted\\n\\t}\\n\\n\\t/**\\n     * Proposes a new interest rate that will automatically be applied after seven days.\\n     * To cancel a proposal, just overwrite it with a new one proposing the current rate.\\n     */\\n\\tfunction proposeChange(uint24 newRatePPM_, address[] calldata helpers) external {\\n\\t\\tequity.checkQualified(msg.sender, helpers);\\n\\t\\tnextRatePPM = newRatePPM_;\\n\\t\\tnextChange = uint40(block.timestamp + 7 days);\\n\\t\\temit RateProposed(msg.sender, nextRatePPM, nextChange);\\n\\t}\\n\\n\\t/**\\n     * Setting a previously proposed interest rate change into force.\\n     */\\n\\tfunction applyChange() external {\\n\\t\\tif (currentRatePPM == nextRatePPM) revert NoPendingChange();\\n\\t\\tuint40 timeNow = uint40(block.timestamp);\\n\\t\\tif (timeNow < nextChange) revert ChangeNotReady();\\n\\t\\tticksAnchor += (timeNow - anchorTime) * currentRatePPM;\\n\\t\\tanchorTime = timeNow;\\n\\t\\tcurrentRatePPM = nextRatePPM;\\n\\t\\temit RateChanged(currentRatePPM);\\n\\t}\\n\\n\\t/**\\n     * Total accumulated 'interest ticks' since this contract was deployed.\\n     * One 'tick' is a ppm-second, so one months of 12% annual interest is\\n     *   120000*30*24*3600 = 311040000000 ticks.\\n     * Two months of 6% annual interest would result in the same number of\\n     * ticks. For simplicity, this is linear, so there is no \\\"interest on interest\\\".\\n     */\\n\\tfunction currentTicks() public view returns (uint64) {\\n\\t\\treturn ticks(block.timestamp);\\n\\t}\\n\\n\\tfunction ticks(uint256 timestamp) public view returns (uint64) {\\n\\t\\treturn ticksAnchor + (uint64(timestamp) - anchorTime) * currentRatePPM;\\n\\t}\\n\\n}\\n\",\"keccak256\":\"0xa3210d55662ca7761f4982a8716306540d413f278c7da110a8b290f10a5a4843\",\"license\":\"MIT\"},\"contracts/Savings.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport './utils/ERC20.sol';\\nimport './interface/IOracleFreeDollar.sol';\\nimport './interface/IReserve.sol';\\nimport './Leadrate.sol';\\n\\n/**\\n * @title Savings\\n *\\n * Module to enable savings based on a Leadrate (\\\"Leitzins\\\") module.\\n *\\n * As the interest rate changes, the speed at which 'ticks' are accumulated is\\n * adjusted. The ticks counter serves as the basis for calculating the interest\\n * due for the individual accounts.\\n *\\n * The saved OFD are subject to a lockup of up to 3 days and only start to yield\\n * an interest after the lockup ended. The purpose of this lockup is to discourage\\n * short-term holdings and to avoid paying interest to transactional accounts.\\n * Transactional accounts typically do not need an incentive to hold OracleFreeDollars.\\n */\\ncontract Savings is Leadrate {\\n\\tuint64 public immutable INTEREST_DELAY = uint64(3 days);\\n\\n\\tIERC20 public immutable ofd;\\n\\n\\tmapping(address => Account) public savings;\\n\\n\\tstruct Account {\\n\\t\\tuint192 saved;\\n\\t\\tuint64 ticks;\\n\\t}\\n\\n\\tevent Saved(address indexed account , uint192 amount);\\n\\tevent InterestCollected(address indexed account, uint256 interest);\\n\\tevent Withdrawn(address indexed account, uint192 amount);\\n\\n\\terror FundsLocked(uint40 remainingSeconds);\\n\\n\\t// The module is considered disabled if the interest is zero or about to become zero within three days.\\n\\terror ModuleDisabled();\\n\\n\\tconstructor(IOracleFreeDollar ofd_, uint24 initialRatePPM) Leadrate(IReserve(ofd_.reserve()), initialRatePPM) {\\n\\t\\tofd = IERC20(ofd_);\\n\\t}\\n\\n\\t/**\\n     * Shortcut for refreshBalance(msg.sender)\\n     */\\n\\tfunction refreshMyBalance() public returns (uint192) {\\n\\t\\treturn refreshBalance(msg.sender);\\n\\t}\\n\\n\\t/**\\n     * Collects the accrued interest and adds it to the account.\\n     *\\n     * It can be beneficial to do so every now and then in order to start collecting\\n     * interest on the accrued interest.\\n     */\\n\\tfunction refreshBalance(address owner) public returns (uint192) {\\n\\t\\treturn refresh(owner).saved;\\n\\t}\\n\\n\\tfunction refresh(address accountOwner) internal returns (Account storage) {\\n\\t\\tAccount storage account = savings[accountOwner];\\n\\t\\tuint64 ticks = currentTicks();\\n\\t\\tif (ticks > account.ticks) {\\n\\t\\t\\tuint192 earnedInterest = calculateInterest(account, ticks);\\n\\t\\t\\tif (earnedInterest > 0) {\\n\\t\\t\\t\\t// collect interest as you go and trigger accounting event\\n\\t\\t\\t\\t(IOracleFreeDollar(address(ofd))).coverLoss(address(this), earnedInterest);\\n\\t\\t\\t\\taccount.saved += earnedInterest;\\n\\t\\t\\t\\temit InterestCollected(accountOwner, earnedInterest);\\n\\t\\t\\t}\\n\\t\\t\\taccount.ticks = ticks;\\n\\t\\t}\\n\\t\\treturn account;\\n\\t}\\n\\n\\tfunction accruedInterest(address accountOwner) public view returns (uint192) {\\n\\t\\treturn accruedInterest(accountOwner, block.timestamp);\\n\\t}\\n\\n\\tfunction accruedInterest(address accountOwner, uint256 timestamp) public view returns (uint192) {\\n\\t\\tAccount memory account = savings[accountOwner];\\n\\t\\treturn calculateInterest(account, ticks(timestamp));\\n\\t}\\n\\n\\tfunction calculateInterest(Account memory account, uint64 ticks) public view returns (uint192) {\\n\\t\\tif (ticks <= account.ticks || account.ticks == 0) {\\n\\t\\t\\treturn 0;\\n\\t\\t} else {\\n\\t\\t\\tuint192 earnedInterest = uint192((uint256(ticks - account.ticks) * account.saved) / 1000000 / 365 days);\\n\\t\\t\\tuint256 equity = IOracleFreeDollar(address(ofd)).equity();\\n\\t\\t\\tif (earnedInterest > equity) {\\n\\t\\t\\t\\treturn uint192(equity); // save conversion as equity is smaller than uint192 earnedInterest\\n\\t\\t\\t} else {\\n\\t\\t\\t\\treturn earnedInterest;\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n\\n\\t/**\\n     * Save 'amount'.\\n     */\\n\\tfunction save(uint192 amount) public {\\n\\t\\tsave(msg.sender, amount);\\n\\t}\\n\\n\\tfunction adjust(uint192 targetAmount) public {\\n\\t\\tAccount storage balance = refresh(msg.sender);\\n\\t\\tif (balance.saved < targetAmount) {\\n\\t\\t\\tsave(targetAmount - balance.saved);\\n\\t\\t} else if (balance.saved > targetAmount) {\\n\\t\\t\\twithdraw(msg.sender, balance.saved - targetAmount);\\n\\t\\t}\\n\\t}\\n\\n\\t/**\\n     * Send 'amount' to the account of the provided owner.\\n     * The funds sent to the account are locked for a while, depending on how much already is in there.\\n     */\\n\\tfunction save(address owner, uint192 amount) public {\\n\\t\\tif (currentRatePPM == 0) revert ModuleDisabled();\\n\\t\\tif (nextRatePPM == 0 && (nextChange <= block.timestamp + INTEREST_DELAY)) revert ModuleDisabled();\\n\\t\\tAccount storage balance = refresh(owner);\\n\\t\\tofd.transferFrom(msg.sender, address(this), amount);\\n\\t\\tuint64 ticks = currentTicks();\\n\\t\\tassert(balance.ticks >= ticks);\\n\\t\\tuint256 saved = balance.saved;\\n\\t\\tuint64 weightedAverage = uint64(\\n\\t\\t\\t(saved * (balance.ticks - ticks) + uint256(amount) * currentRatePPM * INTEREST_DELAY) / (saved + amount)\\n\\t\\t);\\n\\t\\tbalance.saved += amount;\\n\\t\\tbalance.ticks = ticks + weightedAverage;\\n\\t\\temit Saved(owner, amount);\\n\\t}\\n\\n\\t/**\\n     * Withdraw up to 'amount' to the target address.\\n     * When trying to withdraw more than available, all that is available is withdrawn.\\n     * Returns the acutally transferred amount.\\n     *\\n     * Fails if the funds in the account have not been in the account for long enough.\\n     */\\n\\tfunction withdraw(address target, uint192 amount) public returns (uint256) {\\n\\t\\tAccount storage account = refresh(msg.sender);\\n\\t\\tif (account.ticks > currentTicks()) {\\n\\t\\t\\trevert FundsLocked(uint40(account.ticks - currentTicks()) / currentRatePPM);\\n\\t\\t} else if (amount >= account.saved) {\\n\\t\\t\\tamount = account.saved;\\n\\t\\t\\tdelete savings[msg.sender];\\n\\t\\t} else {\\n\\t\\t\\taccount.saved -= amount;\\n\\t\\t}\\n\\t\\tofd.transfer(target, amount);\\n\\t\\temit Withdrawn(msg.sender, amount);\\n\\t\\treturn amount;\\n\\t}\\n}\\n\",\"keccak256\":\"0xfe185cacfde0149d2c955be531a84b6f596e48d8aa0a8aad7a1ba8d236712cf1\",\"license\":\"MIT\"},\"contracts/interface/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n/**\\n *\\n * Copyright (c) 2016-2019 zOS Global Limited\\n *\\n */\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC20 standard as defined in the EIP. Does not include\\n * the optional functions; to access them see `ERC20Detailed`.\\n */\\n\\ninterface IERC20 {\\n    function name() external view returns (string memory);\\n\\n    function symbol() external view returns (string memory);\\n\\n    function decimals() external view returns (uint8);\\n\\n    /**\\n     * @dev Returns the amount of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the amount of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves `amount` tokens from the caller's account to `recipient`.\\n     *\\n     * Returns always true. Throws error on failure.\\n     *\\n     * Emits a `Transfer` event.\\n     */\\n    function transfer(address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through `transferFrom`. This is\\n     * zero by default.\\n     *\\n     * This value can change when `approve` or `transferFrom` are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * > Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an `Approval` event.\\n     */\\n    function approve(address spender, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Moves `amount` tokens from `sender` to `recipient` using the\\n     * allowance mechanism. `amount` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns always true. Throws error on failure.\\n     *\\n     * Emits a `Transfer` event.\\n     */\\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to `approve`. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n}\\n\",\"keccak256\":\"0x45c30b37d05372b9c67b0008e20f4639185186fa8e8b73d8aa2b83556f9c594d\",\"license\":\"MIT\"},\"contracts/interface/IERC677Receiver.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ninterface IERC677Receiver {\\n\\n    function onTokenTransfer(address from, uint256 amount, bytes calldata data) external returns (bool);\\n\\n}\\n\",\"keccak256\":\"0x0c28d3192daf5bfdaf838c0938598ef49c98296fba36f05b4b03b804514e7706\",\"license\":\"MIT\"},\"contracts/interface/IOracleFreeDollar.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./IERC20.sol\\\";\\nimport \\\"./IReserve.sol\\\";\\n\\ninterface IOracleFreeDollar is IERC20 {\\n    function suggestMinter(address _minter, uint256 _applicationPeriod, uint256 _applicationFee, string calldata _message) external;\\n\\n    function registerPosition(address position) external;\\n\\n    function denyMinter(address minter, address[] calldata helpers, string calldata message) external;\\n\\n    function reserve() external view returns (IReserve);\\n\\n    function minterReserve() external view returns (uint256);\\n\\n    function calculateAssignedReserve(uint256 mintedAmount, uint32 _reservePPM) external view returns (uint256);\\n\\n    function calculateFreedAmount(uint256 amountExcludingReserve, uint32 reservePPM) external view returns (uint256);\\n\\n    function equity() external view returns (uint256);\\n\\n    function isMinter(address minter) external view returns (bool);\\n\\n    /**\\n     * @notice Address of the GuardianTimelock admission gate contract, or zero if no guardian\\n     * was wired for this instance. The MintingHub reads this to enforce the same gate.\\n     */\\n    function guardian() external view returns (address);\\n\\n    function getPositionParent(address position) external view returns (address);\\n\\n    function mint(address target, uint256 amount) external;\\n\\n    function mintWithReserve(address target, uint256 amount, uint32 reservePPM, uint32 feePPM) external;\\n\\n    function burnFrom(address target, uint256 amount) external;\\n\\n    function burnWithoutReserve(uint256 amountIncludingReserve, uint32 reservePPM) external;\\n\\n    function burnFromWithReserve(address payer, uint256 targetTotalBurnAmount, uint32 _reservePPM) external returns (uint256);\\n\\n    function burnWithReserve(uint256 amountExcludingReserve, uint32 reservePPM) external returns (uint256);\\n\\n    function coverLoss(address source, uint256 amount) external;\\n\\n    function collectProfits(address source, uint256 _amount) external;\\n}\\n\",\"keccak256\":\"0xa159ef9d38c6ee7a52962ff9fdf815d1fd28e066c4aea26b32042733b7be5b03\",\"license\":\"MIT\"},\"contracts/interface/IReserve.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./IERC20.sol\\\";\\n\\ninterface IReserve is IERC20 {\\n   function invest(uint256 amount, uint256 expected) external returns (uint256);\\n   function checkQualified(address sender, address[] calldata helpers) external view;\\n}\",\"keccak256\":\"0x3b46b47f54a43bf2da382a4e5cc70e72a1aeb7845c75d30a04809ecccf2019dc\",\"license\":\"MIT\"},\"contracts/utils/ERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// Copied and adjusted from OpenZeppelin\\n// Adjustments:\\n// - modifications to support ERC-677\\n// - removed require messages to save space\\n// - removed unnecessary require statements\\n// - removed GSN Context\\n// - upgraded to 0.8 to drop SafeMath\\n// - let name() and symbol() be implemented by subclass\\n// - infinite allowance support, with 2^255 and above considered infinite\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../interface/IERC20.sol\\\";\\nimport \\\"../interface/IERC677Receiver.sol\\\";\\n\\n/**\\n * @dev Implementation of the `IERC20` interface.\\n *\\n * This implementation is agnostic to the way tokens are created. This means\\n * that a supply mechanism has to be added in a derived contract using `_mint`.\\n * For a generic mechanism see `ERC20Mintable`.\\n *\\n * *For a detailed writeup see our guide [How to implement supply\\n * mechanisms](https://forum.zeppelin.solutions/t/how-to-implement-erc20-supply-mechanisms/226).*\\n *\\n * We have followed general OpenZeppelin guidelines: functions revert instead\\n * of returning `false` on failure. This behavior is nonetheless conventional\\n * and does not conflict with the expectations of ERC20 applications.\\n *\\n * Additionally, an `Approval` event is emitted on calls to `transferFrom`.\\n * This allows applications to reconstruct the allowance for all accounts just\\n * by listening to said events. Other implementations of the EIP may not emit\\n * these events, as it isn't required by the specification.\\n *\\n */\\n\\nabstract contract ERC20 is IERC20 {\\n    mapping(address account => uint256 balance) private _balances;\\n\\n    mapping(address account => mapping(address spender => uint256 allowance)) private _allowances;\\n\\n    uint256 internal constant INFINITY = (1 << 255);\\n\\n    uint256 private _totalSupply;\\n\\n    uint8 public immutable override decimals;\\n\\n    // Copied from https://github.com/OpenZeppelin/openzeppelin-contracts/pull/4139/files#diff-fa792f7d08644eebc519dac2c29b00a54afc4c6a76b9ef3bba56c8401fe674f6\\n    // Indicates an error related to the current balance of a sender. Used in transfers.\\n    error ERC20InsufficientBalance(address sender, uint256 balance, uint256 needed);\\n    // Indicates a failure with the spender\\u2019s allowance. Used in transfers.\\n    error ERC20InsufficientAllowance(address spender, uint256 allowance, uint256 needed);\\n\\n    constructor(uint8 _decimals) {\\n        decimals = _decimals;\\n    }\\n\\n    /**\\n     * @dev See `IERC20.totalSupply`.\\n     */\\n    function totalSupply() public view override returns (uint256) {\\n        return _totalSupply;\\n    }\\n\\n    /**\\n     * @dev See `IERC20.balanceOf`.\\n     */\\n    function balanceOf(address account) public view override returns (uint256) {\\n        return _balances[account];\\n    }\\n\\n    /**\\n     * @dev See `IERC20.transfer`.\\n     *\\n     * Requirements:\\n     *\\n     * - `recipient` cannot be the zero address.\\n     * - the caller must have a balance of at least `amount`.\\n     */\\n    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {\\n        _transfer(msg.sender, recipient, amount);\\n        return true;\\n    }\\n\\n    /**\\n     * @dev See `IERC20.allowance`.\\n     */\\n    function allowance(address owner, address spender) external view override returns (uint256) {\\n        return _allowance(owner, spender);\\n    }\\n\\n    function _allowance(address owner, address spender) internal view virtual returns (uint256) {\\n        return _allowances[owner][spender];\\n    }\\n\\n    /**\\n     * @dev See `IERC20.approve`.\\n     *\\n     * Requirements:\\n     *\\n     * - `spender` cannot be the zero address.\\n     */\\n    function approve(address spender, uint256 value) external override returns (bool) {\\n        _approve(msg.sender, spender, value);\\n        return true;\\n    }\\n\\n    /**\\n     * @dev See `IERC20.transferFrom`.\\n     *\\n     * Emits an `Approval` event indicating the updated allowance. This is not\\n     * required by the EIP. See the note at the beginning of `ERC20`;\\n     *\\n     * Requirements:\\n     * - `sender` and `recipient` cannot be the zero address.\\n     * - `sender` must have a balance of at least `value`.\\n     * - the caller must have allowance for `sender`'s tokens of at least\\n     * `amount`.\\n     */\\n    function transferFrom(address sender, address recipient, uint256 amount) external override returns (bool) {\\n        _transfer(sender, recipient, amount);\\n        _useAllowance(sender, msg.sender, amount);\\n        return true;\\n    }\\n\\n    function _useAllowance(address owner, address spender, uint256 amount) internal {\\n        uint256 currentAllowance = _allowance(owner, spender);\\n        if (currentAllowance < INFINITY) {\\n            // Only decrease the allowance if it was not set to 'infinite'\\n            // Documented in github.com/aktionariat/contracts/blob/master/doc/infiniteallowance.md\\n            if (currentAllowance < amount) revert ERC20InsufficientAllowance(owner, currentAllowance, amount);\\n            _approve(owner, spender, currentAllowance - amount);\\n        }\\n    }\\n\\n    /**\\n     * @dev Moves tokens `amount` from `sender` to `recipient`.\\n     *\\n     * This is internal function is equivalent to `transfer`, and can be used to\\n     * e.g. implement automatic token fees, slashing mechanisms, etc.\\n     *\\n     * Emits a `Transfer` event.\\n     *\\n     * Requirements:\\n     *\\n     * - `sender` cannot be the zero address.\\n     * - `recipient` cannot be the zero address.\\n     * - `sender` must have a balance of at least `amount`.\\n     */\\n    function _transfer(address sender, address recipient, uint256 amount) internal virtual {\\n        require(recipient != address(0));\\n\\n        _beforeTokenTransfer(sender, recipient, amount);\\n        if (_balances[sender] < amount) revert ERC20InsufficientBalance(sender, _balances[sender], amount);\\n        _balances[sender] -= amount;\\n        _balances[recipient] += amount;\\n        emit Transfer(sender, recipient, amount);\\n    }\\n\\n    /** @dev Creates `amount` tokens and assigns them to `account`, increasing\\n     * the total supply.\\n     *\\n     * Emits a `Transfer` event with `from` set to the zero address.\\n     *\\n     * Requirements\\n     *\\n     * - `to` cannot be the zero address.\\n     */\\n    function _mint(address recipient, uint256 amount) internal virtual {\\n        require(recipient != address(0));\\n\\n        _beforeTokenTransfer(address(0), recipient, amount);\\n\\n        _totalSupply += amount;\\n        _balances[recipient] += amount;\\n        emit Transfer(address(0), recipient, amount);\\n    }\\n\\n    /**\\n     * @dev Destroys `amount` tokens from `account`, reducing the\\n     * total supply.\\n     *\\n     * Emits a `Transfer` event with `to` set to the zero address.\\n     */\\n    function _burn(address account, uint256 amount) internal virtual {\\n        _beforeTokenTransfer(account, address(0), amount);\\n\\n        _totalSupply -= amount;\\n        _balances[account] -= amount;\\n        emit Transfer(account, address(0), amount);\\n    }\\n\\n    /**\\n     * @dev Sets `amount` as the allowance of `spender` over the `owner`s tokens.\\n     *\\n     * This is internal function is equivalent to `approve`, and can be used to\\n     * e.g. set automatic allowances for certain subsystems, etc.\\n     *\\n     * Emits an `Approval` event.\\n     */\\n    function _approve(address owner, address spender, uint256 value) internal {\\n        _allowances[owner][spender] = value;\\n        emit Approval(owner, spender, value);\\n    }\\n\\n    /**\\n     * @dev Hook that is called before any transfer of tokens. This includes\\n     * minting and burning.\\n     *\\n     * Calling conditions:\\n     *\\n     * - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens\\n     * will be to transferred to `to`.\\n     * - when `from` is zero, `amount` tokens will be minted for `to`.\\n     * - when `to` is zero, `amount` of ``from``'s tokens will be burned.\\n     * - `from` and `to` are never both zero.\\n     *\\n     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].\\n     */\\n    function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual {}\\n}\\n\",\"keccak256\":\"0xff0b86b0b91dad77933e491ea0e11ee11a3be7caa4e5d0e449b66dca1f4c77c9\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60e06040526203f48060a05234801562000017575f80fd5b50604051620015eb380380620015eb8339810160408190526200003a916200018c565b816001600160a01b031663cd3293de6040518163ffffffff1660e01b8152600401602060405180830381865afa15801562000077573d5f803e3d5ffd5b505050506040513d601f19601f820116820180604052508101906200009d9190620001cf565b6001600160a01b0381166080525f8054600160801b600160c01b03196b010000000000000000000000660100000000000064ffffffffff42811682026affffffffff000000ffffff1962ffffff8a1663010000008102919091166001600160581b031990971696909617861717918204169190910291909116600160581b600160c01b0319919091161790915560405190815282907fd76dfbd4c35cffe2a846b6488bc677c511aa4337e1551f3a360427ac7a78de7b9060200160405180910390a15050506001600160a01b031660c052620001f4565b6001600160a01b038116811462000189575f80fd5b50565b5f80604083850312156200019e575f80fd5b8251620001ab8162000174565b602084015190925062ffffff81168114620001c4575f80fd5b809150509250929050565b5f60208284031215620001e0575f80fd5b8151620001ed8162000174565b9392505050565b60805160a05160c05161139b620002505f395f8181610363015281816104cc015281816108f201528181610b770152610e4f01525f818161020301528181610ae90152610c4201525f81816102a3015261059f015261139b5ff3fe608060405234801561000f575f80fd5b5060043610610127575f3560e01c806385bd12d1116100a9578063b77cd1c71161006e578063b77cd1c714610325578063bdc6515214610338578063c19836101461034b578063f61d52e61461035e578063fd449c1414610385575f80fd5b806385bd12d11461029657806391a0ac6a1461029e578063a696399d146102dd578063b079f163146102f0578063b6f83c17146102f8575f80fd5b80634df61d82116100ef5780634df61d82146101fe5780634e65037e1461023d578063534cb30d1461024557806377267ec3146102585780637915ce2014610283575f80fd5b806306a7b3761461012b5780631791dc5e146101525780631de252e4146101735780631f7cdd5f146101885780632e4b20ab146101e9575b5f80fd5b5f546101399062ffffff1681565b60405162ffffff90911681526020015b60405180910390f35b610165610160366004610f97565b610398565b604051908152602001610149565b610186610181366004610fc8565b610588565b005b6101c261019636600461104f565b60016020525f90815260409020546001600160c01b03811690600160c01b90046001600160401b031682565b604080516001600160c01b0390931683526001600160401b03909116602083015201610149565b5f54610139906301000000900462ffffff1681565b6102257f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160401b039091168152602001610149565b6101866106aa565b61022561025336600461106f565b61080f565b61026b61026636600461104f565b610857565b6040516001600160c01b039091168152602001610149565b61026b61029136600461109c565b610862565b61026b61099c565b6102c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610149565b61026b6102eb366004611117565b6109ab565b610225610a06565b5f5461030f90600160301b900464ffffffffff1681565b60405164ffffffffff9091168152602001610149565b61026b61033336600461104f565b610a10565b61018661034636600461113f565b610a2a565b610186610359366004610f97565b610a9f565b6102c57f000000000000000000000000000000000000000000000000000000000000000081565b61018661039336600461113f565b610d94565b5f806103a333610da1565b90506103ad610a06565b81546001600160401b03918216600160c01b9091049091161115610427575f5462ffffff166103da610a06565b82546103f69190600160c01b90046001600160401b031661116c565b61040091906111a0565b604051630ad679f360e41b815264ffffffffff909116600482015260240160405180910390fd5b80546001600160c01b039081169084161061045d578054335f908152600160205260408120556001600160c01b0316925061049e565b8054839082905f906104799084906001600160c01b03166111c3565b92506101000a8154816001600160c01b0302191690836001600160c01b031602179055505b60405163a9059cbb60e01b81526001600160a01b0385811660048301526001600160c01b03851660248301527f0000000000000000000000000000000000000000000000000000000000000000169063a9059cbb906044016020604051808303815f875af1158015610512573d5f803e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061053691906111e3565b506040516001600160c01b038416815233907f47cf194f5e559cca0413017d38814a7843cc6f3052bc43c8085938774ae581519060200160405180910390a250506001600160c01b0381165b92915050565b60405163352e3a8360e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000169063352e3a83906105d890339086908690600401611202565b5f6040518083038186803b1580156105ee575f80fd5b505afa158015610600573d5f803e3d5ffd5b50505f805465ffffff0000001916630100000062ffffff8816021790555061062d90504262093a8061125b565b5f80546affffffffff0000000000001916600160301b64ffffffffff93841681029190911791829055604080513381526301000000840462ffffff16602082015291909204909216908201527e4964f2e48bd8a460fb41883098593956d335f36fdded4ca9cbac9252d72b2f9060600160405180910390a1505050565b5f5462ffffff6301000000820481169116036106d95760405163147fde5f60e31b815260040160405180910390fd5b5f54429064ffffffffff600160301b9091048116908216101561070f576040516301b3782160e21b815260040160405180910390fd5b5f5462ffffff81169061073090600160581b900464ffffffffff168361126e565b61073a919061128c565b64ffffffffff165f60108282829054906101000a90046001600160401b031661076391906112ad565b82546101009290920a6001600160401b03818102199093169190921691909102179055505f8054630100000064ffffffffff60581b198216600160581b64ffffffffff8616029081179190910462ffffff166fffffffffff0000000000000000ffffff1990921662ffffff19919091161781179091556040519081527fd76dfbd4c35cffe2a846b6488bc677c511aa4337e1551f3a360427ac7a78de7b9060200160405180910390a150565b5f805462ffffff81169061083190600160581b900464ffffffffff168461116c565b61083b91906112cd565b5f546105829190600160801b90046001600160401b03166112ad565b5f61058282426109ab565b5f82602001516001600160401b0316826001600160401b0316111580610893575060208301516001600160401b0316155b1561089f57505f610582565b5f6301e13380620f4240855f01516001600160c01b03168660200151866108c6919061116c565b6001600160401b03166108d991906112f0565b6108e39190611307565b6108ed9190611307565b90505f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03166391a0ac6a6040518163ffffffff1660e01b8152600401602060405180830381865afa15801561094c573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610970919061131a565b905080826001600160c01b0316111561098c5791506105829050565b509050610582565b505092915050565b5f6109a633610a10565b905090565b6001600160a01b0382165f9081526001602090815260408083208151808301909252546001600160c01b0381168252600160c01b90046001600160401b0316918101919091526109fe816102918561080f565b949350505050565b5f6109a64261080f565b5f610a1a82610da1565b546001600160c01b031692915050565b5f610a3433610da1565b80549091506001600160c01b0380841691161015610a69578054610a6590610393906001600160c01b0316846111c3565b5050565b80546001600160c01b0380841691161115610a65578054610a9a9033906101609085906001600160c01b03166111c3565b505050565b5f805462ffffff169003610ac657604051630dbfe5fd60e31b815260040160405180910390fd5b5f546301000000900462ffffff16158015610b225750610b0f6001600160401b037f0000000000000000000000000000000000000000000000000000000000000000164261125b565b5f54600160301b900464ffffffffff1611155b15610b4057604051630dbfe5fd60e31b815260040160405180910390fd5b5f610b4a83610da1565b6040516323b872dd60e01b81523360048201523060248201526001600160c01b03841660448201529091507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af1158015610bc5573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610be991906111e3565b505f610bf3610a06565b82549091506001600160401b03808316600160c01b909204161015610c1a57610c1a611331565b81546001600160c01b03908116905f90610c369086168361125b565b5f546001600160401b037f00000000000000000000000000000000000000000000000000000000000000001690610c7b9062ffffff166001600160c01b0389166112f0565b610c8591906112f0565b8554610ca2908690600160c01b90046001600160401b031661116c565b610cb5906001600160401b0316856112f0565b610cbf919061125b565b610cc99190611307565b8454909150859085905f90610ce89084906001600160c01b0316611345565b92506101000a8154816001600160c01b0302191690836001600160c01b031602179055508083610d1891906112ad565b84546001600160401b0391909116600160c01b026001600160c01b039091161784556040516001600160a01b038716907ff195ce54b48d5147da31c1fc525c8828b8836088b505a329e5de2b35da6731e290610d849088906001600160c01b0391909116815260200190565b60405180910390a2505050505050565b610d9e3382610a9f565b50565b6001600160a01b0381165f90815260016020526040812081610dc1610a06565b82549091506001600160401b03600160c01b90910481169082161115610f5f576040805180820190915282546001600160c01b0381168252600160c01b90046001600160401b031660208201525f90610e1a9083610862565b90506001600160c01b03811615610f3f57604051631a3f4bd360e31b81523060048201526001600160c01b03821660248201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063d1fa5e98906044015f604051808303815f87803b158015610e98575f80fd5b505af1158015610eaa573d5f803e3d5ffd5b505084548392508591505f90610eca9084906001600160c01b0316611345565b92506101000a8154816001600160c01b0302191690836001600160c01b03160217905550846001600160a01b03167fed3bc1b58411ea8e764b3ef8fa6b654877bc1e796a5a1a2373dfc8f1c0e0ea4882604051610f3691906001600160c01b0391909116815260200190565b60405180910390a25b5081546001600160c01b0316600160c01b6001600160401b038316021782555b5092915050565b80356001600160a01b0381168114610f7c575f80fd5b919050565b80356001600160c01b0381168114610f7c575f80fd5b5f8060408385031215610fa8575f80fd5b610fb183610f66565b9150610fbf60208401610f81565b90509250929050565b5f805f60408486031215610fda575f80fd5b833562ffffff81168114610fec575f80fd5b925060208401356001600160401b0380821115611007575f80fd5b818601915086601f83011261101a575f80fd5b813581811115611028575f80fd5b8760208260051b850101111561103c575f80fd5b6020830194508093505050509250925092565b5f6020828403121561105f575f80fd5b61106882610f66565b9392505050565b5f6020828403121561107f575f80fd5b5035919050565b80356001600160401b0381168114610f7c575f80fd5b5f8082840360608112156110ae575f80fd5b60408112156110bb575f80fd5b50604051604081018181106001600160401b03821117156110ea57634e487b7160e01b5f52604160045260245ffd5b6040526110f684610f81565b815261110460208501611086565b60208201529150610fbf60408401611086565b5f8060408385031215611128575f80fd5b61113183610f66565b946020939093013593505050565b5f6020828403121561114f575f80fd5b61106882610f81565b634e487b7160e01b5f52601160045260245ffd5b6001600160401b03828116828216039080821115610f5f57610f5f611158565b634e487b7160e01b5f52601260045260245ffd5b5f64ffffffffff808416806111b7576111b761118c565b92169190910492915050565b6001600160c01b03828116828216039080821115610f5f57610f5f611158565b5f602082840312156111f3575f80fd5b81518015158114611068575f80fd5b6001600160a01b038481168252604060208084018290529083018490525f91859160608501845b8781101561124e578361123b86610f66565b1682529382019390820190600101611229565b5098975050505050505050565b8082018082111561058257610582611158565b64ffffffffff828116828216039080821115610f5f57610f5f611158565b64ffffffffff81811683821602808216919082811461099457610994611158565b6001600160401b03818116838216019080821115610f5f57610f5f611158565b6001600160401b0381811683821602808216919082811461099457610994611158565b808202811582820484141761058257610582611158565b5f826113155761131561118c565b500490565b5f6020828403121561132a575f80fd5b5051919050565b634e487b7160e01b5f52600160045260245ffd5b6001600160c01b03818116838216019080821115610f5f57610f5f61115856fea264697066735822122061a901fe2fe00bd70b36dfe76472a5c2bccc412613d20233e99683065372860964736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561000f575f80fd5b5060043610610127575f3560e01c806385bd12d1116100a9578063b77cd1c71161006e578063b77cd1c714610325578063bdc6515214610338578063c19836101461034b578063f61d52e61461035e578063fd449c1414610385575f80fd5b806385bd12d11461029657806391a0ac6a1461029e578063a696399d146102dd578063b079f163146102f0578063b6f83c17146102f8575f80fd5b80634df61d82116100ef5780634df61d82146101fe5780634e65037e1461023d578063534cb30d1461024557806377267ec3146102585780637915ce2014610283575f80fd5b806306a7b3761461012b5780631791dc5e146101525780631de252e4146101735780631f7cdd5f146101885780632e4b20ab146101e9575b5f80fd5b5f546101399062ffffff1681565b60405162ffffff90911681526020015b60405180910390f35b610165610160366004610f97565b610398565b604051908152602001610149565b610186610181366004610fc8565b610588565b005b6101c261019636600461104f565b60016020525f90815260409020546001600160c01b03811690600160c01b90046001600160401b031682565b604080516001600160c01b0390931683526001600160401b03909116602083015201610149565b5f54610139906301000000900462ffffff1681565b6102257f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160401b039091168152602001610149565b6101866106aa565b61022561025336600461106f565b61080f565b61026b61026636600461104f565b610857565b6040516001600160c01b039091168152602001610149565b61026b61029136600461109c565b610862565b61026b61099c565b6102c57f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b039091168152602001610149565b61026b6102eb366004611117565b6109ab565b610225610a06565b5f5461030f90600160301b900464ffffffffff1681565b60405164ffffffffff9091168152602001610149565b61026b61033336600461104f565b610a10565b61018661034636600461113f565b610a2a565b610186610359366004610f97565b610a9f565b6102c57f000000000000000000000000000000000000000000000000000000000000000081565b61018661039336600461113f565b610d94565b5f806103a333610da1565b90506103ad610a06565b81546001600160401b03918216600160c01b9091049091161115610427575f5462ffffff166103da610a06565b82546103f69190600160c01b90046001600160401b031661116c565b61040091906111a0565b604051630ad679f360e41b815264ffffffffff909116600482015260240160405180910390fd5b80546001600160c01b039081169084161061045d578054335f908152600160205260408120556001600160c01b0316925061049e565b8054839082905f906104799084906001600160c01b03166111c3565b92506101000a8154816001600160c01b0302191690836001600160c01b031602179055505b60405163a9059cbb60e01b81526001600160a01b0385811660048301526001600160c01b03851660248301527f0000000000000000000000000000000000000000000000000000000000000000169063a9059cbb906044016020604051808303815f875af1158015610512573d5f803e3d5ffd5b505050506040513d601f19601f8201168201806040525081019061053691906111e3565b506040516001600160c01b038416815233907f47cf194f5e559cca0413017d38814a7843cc6f3052bc43c8085938774ae581519060200160405180910390a250506001600160c01b0381165b92915050565b60405163352e3a8360e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000169063352e3a83906105d890339086908690600401611202565b5f6040518083038186803b1580156105ee575f80fd5b505afa158015610600573d5f803e3d5ffd5b50505f805465ffffff0000001916630100000062ffffff8816021790555061062d90504262093a8061125b565b5f80546affffffffff0000000000001916600160301b64ffffffffff93841681029190911791829055604080513381526301000000840462ffffff16602082015291909204909216908201527e4964f2e48bd8a460fb41883098593956d335f36fdded4ca9cbac9252d72b2f9060600160405180910390a1505050565b5f5462ffffff6301000000820481169116036106d95760405163147fde5f60e31b815260040160405180910390fd5b5f54429064ffffffffff600160301b9091048116908216101561070f576040516301b3782160e21b815260040160405180910390fd5b5f5462ffffff81169061073090600160581b900464ffffffffff168361126e565b61073a919061128c565b64ffffffffff165f60108282829054906101000a90046001600160401b031661076391906112ad565b82546101009290920a6001600160401b03818102199093169190921691909102179055505f8054630100000064ffffffffff60581b198216600160581b64ffffffffff8616029081179190910462ffffff166fffffffffff0000000000000000ffffff1990921662ffffff19919091161781179091556040519081527fd76dfbd4c35cffe2a846b6488bc677c511aa4337e1551f3a360427ac7a78de7b9060200160405180910390a150565b5f805462ffffff81169061083190600160581b900464ffffffffff168461116c565b61083b91906112cd565b5f546105829190600160801b90046001600160401b03166112ad565b5f61058282426109ab565b5f82602001516001600160401b0316826001600160401b0316111580610893575060208301516001600160401b0316155b1561089f57505f610582565b5f6301e13380620f4240855f01516001600160c01b03168660200151866108c6919061116c565b6001600160401b03166108d991906112f0565b6108e39190611307565b6108ed9190611307565b90505f7f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03166391a0ac6a6040518163ffffffff1660e01b8152600401602060405180830381865afa15801561094c573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610970919061131a565b905080826001600160c01b0316111561098c5791506105829050565b509050610582565b505092915050565b5f6109a633610a10565b905090565b6001600160a01b0382165f9081526001602090815260408083208151808301909252546001600160c01b0381168252600160c01b90046001600160401b0316918101919091526109fe816102918561080f565b949350505050565b5f6109a64261080f565b5f610a1a82610da1565b546001600160c01b031692915050565b5f610a3433610da1565b80549091506001600160c01b0380841691161015610a69578054610a6590610393906001600160c01b0316846111c3565b5050565b80546001600160c01b0380841691161115610a65578054610a9a9033906101609085906001600160c01b03166111c3565b505050565b5f805462ffffff169003610ac657604051630dbfe5fd60e31b815260040160405180910390fd5b5f546301000000900462ffffff16158015610b225750610b0f6001600160401b037f0000000000000000000000000000000000000000000000000000000000000000164261125b565b5f54600160301b900464ffffffffff1611155b15610b4057604051630dbfe5fd60e31b815260040160405180910390fd5b5f610b4a83610da1565b6040516323b872dd60e01b81523360048201523060248201526001600160c01b03841660448201529091507f00000000000000000000000000000000000000000000000000000000000000006001600160a01b0316906323b872dd906064016020604051808303815f875af1158015610bc5573d5f803e3d5ffd5b505050506040513d601f19601f82011682018060405250810190610be991906111e3565b505f610bf3610a06565b82549091506001600160401b03808316600160c01b909204161015610c1a57610c1a611331565b81546001600160c01b03908116905f90610c369086168361125b565b5f546001600160401b037f00000000000000000000000000000000000000000000000000000000000000001690610c7b9062ffffff166001600160c01b0389166112f0565b610c8591906112f0565b8554610ca2908690600160c01b90046001600160401b031661116c565b610cb5906001600160401b0316856112f0565b610cbf919061125b565b610cc99190611307565b8454909150859085905f90610ce89084906001600160c01b0316611345565b92506101000a8154816001600160c01b0302191690836001600160c01b031602179055508083610d1891906112ad565b84546001600160401b0391909116600160c01b026001600160c01b039091161784556040516001600160a01b038716907ff195ce54b48d5147da31c1fc525c8828b8836088b505a329e5de2b35da6731e290610d849088906001600160c01b0391909116815260200190565b60405180910390a2505050505050565b610d9e3382610a9f565b50565b6001600160a01b0381165f90815260016020526040812081610dc1610a06565b82549091506001600160401b03600160c01b90910481169082161115610f5f576040805180820190915282546001600160c01b0381168252600160c01b90046001600160401b031660208201525f90610e1a9083610862565b90506001600160c01b03811615610f3f57604051631a3f4bd360e31b81523060048201526001600160c01b03821660248201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03169063d1fa5e98906044015f604051808303815f87803b158015610e98575f80fd5b505af1158015610eaa573d5f803e3d5ffd5b505084548392508591505f90610eca9084906001600160c01b0316611345565b92506101000a8154816001600160c01b0302191690836001600160c01b03160217905550846001600160a01b03167fed3bc1b58411ea8e764b3ef8fa6b654877bc1e796a5a1a2373dfc8f1c0e0ea4882604051610f3691906001600160c01b0391909116815260200190565b60405180910390a25b5081546001600160c01b0316600160c01b6001600160401b038316021782555b5092915050565b80356001600160a01b0381168114610f7c575f80fd5b919050565b80356001600160c01b0381168114610f7c575f80fd5b5f8060408385031215610fa8575f80fd5b610fb183610f66565b9150610fbf60208401610f81565b90509250929050565b5f805f60408486031215610fda575f80fd5b833562ffffff81168114610fec575f80fd5b925060208401356001600160401b0380821115611007575f80fd5b818601915086601f83011261101a575f80fd5b813581811115611028575f80fd5b8760208260051b850101111561103c575f80fd5b6020830194508093505050509250925092565b5f6020828403121561105f575f80fd5b61106882610f66565b9392505050565b5f6020828403121561107f575f80fd5b5035919050565b80356001600160401b0381168114610f7c575f80fd5b5f8082840360608112156110ae575f80fd5b60408112156110bb575f80fd5b50604051604081018181106001600160401b03821117156110ea57634e487b7160e01b5f52604160045260245ffd5b6040526110f684610f81565b815261110460208501611086565b60208201529150610fbf60408401611086565b5f8060408385031215611128575f80fd5b61113183610f66565b946020939093013593505050565b5f6020828403121561114f575f80fd5b61106882610f81565b634e487b7160e01b5f52601160045260245ffd5b6001600160401b03828116828216039080821115610f5f57610f5f611158565b634e487b7160e01b5f52601260045260245ffd5b5f64ffffffffff808416806111b7576111b761118c565b92169190910492915050565b6001600160c01b03828116828216039080821115610f5f57610f5f611158565b5f602082840312156111f3575f80fd5b81518015158114611068575f80fd5b6001600160a01b038481168252604060208084018290529083018490525f91859160608501845b8781101561124e578361123b86610f66565b1682529382019390820190600101611229565b5098975050505050505050565b8082018082111561058257610582611158565b64ffffffffff828116828216039080821115610f5f57610f5f611158565b64ffffffffff81811683821602808216919082811461099457610994611158565b6001600160401b03818116838216019080821115610f5f57610f5f611158565b6001600160401b0381811683821602808216919082811461099457610994611158565b808202811582820484141761058257610582611158565b5f826113155761131561118c565b500490565b5f6020828403121561132a575f80fd5b5051919050565b634e487b7160e01b5f52600160045260245ffd5b6001600160c01b03818116838216019080821115610f5f57610f5f61115856fea264697066735822122061a901fe2fe00bd70b36dfe76472a5c2bccc412613d20233e99683065372860964736f6c63430008140033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "Savings Module to enable savings based on a Leadrate (\"Leitzins\") module. As the interest rate changes, the speed at which 'ticks' are accumulated is adjusted. The ticks counter serves as the basis for calculating the interest due for the individual accounts. The saved OFD are subject to a lockup of up to 3 days and only start to yield an interest after the lockup ended. The purpose of this lockup is to discourage short-term holdings and to avoid paying interest to transactional accounts. Transactional accounts typically do not need an incentive to hold OracleFreeDollars.",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "applyChange()": {
+        "notice": "Setting a previously proposed interest rate change into force."
+      },
+      "currentTicks()": {
+        "notice": "Total accumulated 'interest ticks' since this contract was deployed. One 'tick' is a ppm-second, so one months of 12% annual interest is   120000*30*24*3600 = 311040000000 ticks. Two months of 6% annual interest would result in the same number of ticks. For simplicity, this is linear, so there is no \"interest on interest\"."
+      },
+      "proposeChange(uint24,address[])": {
+        "notice": "Proposes a new interest rate that will automatically be applied after seven days. To cancel a proposal, just overwrite it with a new one proposing the current rate."
+      },
+      "refreshBalance(address)": {
+        "notice": "Collects the accrued interest and adds it to the account. It can be beneficial to do so every now and then in order to start collecting interest on the accrued interest."
+      },
+      "refreshMyBalance()": {
+        "notice": "Shortcut for refreshBalance(msg.sender)"
+      },
+      "save(address,uint192)": {
+        "notice": "Send 'amount' to the account of the provided owner. The funds sent to the account are locked for a while, depending on how much already is in there."
+      },
+      "save(uint192)": {
+        "notice": "Save 'amount'."
+      },
+      "withdraw(address,uint192)": {
+        "notice": "Withdraw up to 'amount' to the target address. When trying to withdraw more than available, all that is available is withdrawn. Returns the acutally transferred amount. Fails if the funds in the account have not been in the account for long enough."
+      }
+    },
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1592,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "currentRatePPM",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint24"
+      },
+      {
+        "astId": 1594,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "nextRatePPM",
+        "offset": 3,
+        "slot": "0",
+        "type": "t_uint24"
+      },
+      {
+        "astId": 1596,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "nextChange",
+        "offset": 6,
+        "slot": "0",
+        "type": "t_uint40"
+      },
+      {
+        "astId": 1598,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "anchorTime",
+        "offset": 11,
+        "slot": "0",
+        "type": "t_uint40"
+      },
+      {
+        "astId": 1600,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "ticksAnchor",
+        "offset": 16,
+        "slot": "0",
+        "type": "t_uint64"
+      },
+      {
+        "astId": 6374,
+        "contract": "contracts/Savings.sol:Savings",
+        "label": "savings",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_struct(Account)6379_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_address,t_struct(Account)6379_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct Savings.Account)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Account)6379_storage"
+      },
+      "t_struct(Account)6379_storage": {
+        "encoding": "inplace",
+        "label": "struct Savings.Account",
+        "members": [
+          {
+            "astId": 6376,
+            "contract": "contracts/Savings.sol:Savings",
+            "label": "saved",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint192"
+          },
+          {
+            "astId": 6378,
+            "contract": "contracts/Savings.sol:Savings",
+            "label": "ticks",
+            "offset": 24,
+            "slot": "0",
+            "type": "t_uint64"
+          }
+        ],
+        "numberOfBytes": "32"
+      },
+      "t_uint192": {
+        "encoding": "inplace",
+        "label": "uint192",
+        "numberOfBytes": "24"
+      },
+      "t_uint24": {
+        "encoding": "inplace",
+        "label": "uint24",
+        "numberOfBytes": "3"
+      },
+      "t_uint40": {
+        "encoding": "inplace",
+        "label": "uint40",
+        "numberOfBytes": "5"
+      },
+      "t_uint64": {
+        "encoding": "inplace",
+        "label": "uint64",
+        "numberOfBytes": "8"
+      }
+    }
+  }
+}
