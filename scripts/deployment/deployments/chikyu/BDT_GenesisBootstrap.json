@@ -1,0 +1,364 @@
+{
+  "address": "0xB80fB4eeD59b5a5B406d470995Cd223F8a3ca5E7",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract IOracleFreeDollar",
+          "name": "ofd_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endTime_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "poolSeedRecipient_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "equityRecipient_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "challengerBountyRecipient_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "incentivesRecipient_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolSeedAmount_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "equityAmount_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "challengerBountyAmount_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "incentivesAmount_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "AlreadyExecuted",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "SaleExpired",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "executor",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "poolSeedRecipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "poolSeedAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "equityRecipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "equityAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "challengerBountyRecipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "challengerBountyAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "incentivesRecipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "incentivesAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "BootstrapExecuted",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "challengerBountyAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "challengerBountyRecipient",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "endTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "equityAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "equityRecipient",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "execute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "executed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "incentivesAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "incentivesRecipient",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ofd",
+      "outputs": [
+        {
+          "internalType": "contract IOracleFreeDollar",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "poolSeedAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "poolSeedRecipient",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalFloat",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x85f738f21fe4f3b3e61c162e46d7f485f42fa9e2b0aff4aae1d2d3dc8c9212b1",
+  "receipt": {
+    "to": null,
+    "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "contractAddress": "0xB80fB4eeD59b5a5B406d470995Cd223F8a3ca5E7",
+    "transactionIndex": 8,
+    "gasUsed": "487351",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x75c8d6a09850fb555dab00580943cb801cbb26c74d64137c922f507ee5fc4d69",
+    "transactionHash": "0x85f738f21fe4f3b3e61c162e46d7f485f42fa9e2b0aff4aae1d2d3dc8c9212b1",
+    "logs": [],
+    "blockNumber": 8700150,
+    "cumulativeGasUsed": "1207463",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xa714CE79900acA2298e729f8caF126BE0FeC60c6",
+    1794774293,
+    "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "100000000000000000000000",
+    "250000000000000000000000",
+    "50000000000000000000000",
+    "100000000000000000000000"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "28902af0121444a8011ed10399893f2f",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IOracleFreeDollar\",\"name\":\"ofd_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"endTime_\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"poolSeedRecipient_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"equityRecipient_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"challengerBountyRecipient_\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"incentivesRecipient_\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"poolSeedAmount_\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"equityAmount_\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"challengerBountyAmount_\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"incentivesAmount_\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"AlreadyExecuted\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"SaleExpired\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"executor\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"poolSeedRecipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"poolSeedAmount\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"equityRecipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"equityAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"challengerBountyRecipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"challengerBountyAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"incentivesRecipient\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"incentivesAmount\",\"type\":\"uint256\"}],\"name\":\"BootstrapExecuted\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"challengerBountyAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"challengerBountyRecipient\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"endTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"equityAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"equityRecipient\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"execute\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"executed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"incentivesAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"incentivesRecipient\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ofd\",\"outputs\":[{\"internalType\":\"contract IOracleFreeDollar\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolSeedAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolSeedRecipient\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalFloat\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Why this exists (the bootstrap problem): the MintingHub charges OPENING_FEE = 1,000 units in currency to open the first position, `suggestMinter` costs >= 1,000 units, and the first Equity deposit needs >= 1,000 units \\u2014 but at genesis supply is 0 and nobody owns any units (Frankencoin/OFD solved this with a source-stablecoin bridge registered at genesis; DogeOS has no dollar rail, so the bridge role is played by this allocation minter instead). Registered as a minter through the token's deployer-gated `initialize()` at genesis (the unavoidable bootstrap act \\u2014 at supply 0 no veto is possible). Minter registrations are permanent (`denyMinter` reverts TooLate once active), so safety comes from inertness by construction: `execute()` mints the fixed genesis float exactly once and can never mint again. The float split (default 500k units per instance, see report/dogeos-tech-parts/03-collateral- monetary.md \\u00a73.2): pool seed (Barkswap pool), equity (treasury tranche-1 investment), challenger bounty, incentives. Recipients and amounts are immutable constructor parameters, so the only trust assumption is the deployer who registers the contract \\u2014 the same trust domain as the genesis `initialize()` calls for Savings/PositionFactory/PositionRoller/MintingHub. If `execute()` never runs before `endTime`, the float is forfeited forever: with supply 0 the 1,000-unit fees can never be paid, so no other minter can ever be suggested. This makes endTime a hard deadline wired into the instance's genesis calendar.\",\"kind\":\"dev\",\"methods\":{},\"title\":\"GenesisBootstrapSale\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"execute()\":{\"notice\":\"Mint the genesis float once. Callable by anyone: recipients and amounts are immutable, so the caller has no influence over the outcome.\"}},\"notice\":\"One-shot genesis minter for a DogeForex currency instance (K9USD...K9BRL).\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/GenesisBootstrapSale.sol\":\"GenesisBootstrapSale\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/GenesisBootstrapSale.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport './interface/IOracleFreeDollar.sol';\\n\\n/**\\n * @title GenesisBootstrapSale\\n * @notice One-shot genesis minter for a DogeForex currency instance (K9USD...K9BRL).\\n *\\n * @dev Why this exists (the bootstrap problem): the MintingHub charges OPENING_FEE = 1,000 units\\n * in currency to open the first position, `suggestMinter` costs >= 1,000 units, and the first\\n * Equity deposit needs >= 1,000 units \\u2014 but at genesis supply is 0 and nobody owns any units\\n * (Frankencoin/OFD solved this with a source-stablecoin bridge registered at genesis; DogeOS has\\n * no dollar rail, so the bridge role is played by this allocation minter instead).\\n *\\n * Registered as a minter through the token's deployer-gated `initialize()` at genesis (the\\n * unavoidable bootstrap act \\u2014 at supply 0 no veto is possible). Minter registrations are\\n * permanent (`denyMinter` reverts TooLate once active), so safety comes from inertness by\\n * construction: `execute()` mints the fixed genesis float exactly once and can never mint again.\\n *\\n * The float split (default 500k units per instance, see report/dogeos-tech-parts/03-collateral-\\n * monetary.md \\u00a73.2): pool seed (Barkswap pool), equity (treasury tranche-1 investment), challenger\\n * bounty, incentives. Recipients and amounts are immutable constructor parameters, so the only\\n * trust assumption is the deployer who registers the contract \\u2014 the same trust domain as the\\n * genesis `initialize()` calls for Savings/PositionFactory/PositionRoller/MintingHub.\\n *\\n * If `execute()` never runs before `endTime`, the float is forfeited forever: with supply 0 the\\n * 1,000-unit fees can never be paid, so no other minter can ever be suggested. This makes\\n * endTime a hard deadline wired into the instance's genesis calendar.\\n */\\ncontract GenesisBootstrapSale {\\n    IOracleFreeDollar public immutable ofd;\\n    uint256 public immutable endTime;\\n\\n    address public immutable poolSeedRecipient;\\n    address public immutable equityRecipient;\\n    address public immutable challengerBountyRecipient;\\n    address public immutable incentivesRecipient;\\n\\n    uint256 public immutable poolSeedAmount; // e.g. 100_000e18\\n    uint256 public immutable equityAmount; // e.g. 250_000e18\\n    uint256 public immutable challengerBountyAmount; // e.g. 50_000e18\\n    uint256 public immutable incentivesAmount; // e.g. 100_000e18\\n    uint256 public immutable totalFloat; // sum of the four allocations\\n\\n    bool public executed;\\n\\n    event BootstrapExecuted(\\n        address indexed executor,\\n        address indexed poolSeedRecipient,\\n        uint256 poolSeedAmount,\\n        address indexed equityRecipient,\\n        uint256 equityAmount,\\n        address challengerBountyRecipient,\\n        uint256 challengerBountyAmount,\\n        address incentivesRecipient,\\n        uint256 incentivesAmount\\n    );\\n\\n    error AlreadyExecuted();\\n    error SaleExpired();\\n\\n    constructor(\\n        IOracleFreeDollar ofd_,\\n        uint256 endTime_,\\n        address poolSeedRecipient_,\\n        address equityRecipient_,\\n        address challengerBountyRecipient_,\\n        address incentivesRecipient_,\\n        uint256 poolSeedAmount_,\\n        uint256 equityAmount_,\\n        uint256 challengerBountyAmount_,\\n        uint256 incentivesAmount_\\n    ) {\\n        ofd = ofd_;\\n        endTime = endTime_;\\n        poolSeedRecipient = poolSeedRecipient_;\\n        equityRecipient = equityRecipient_;\\n        challengerBountyRecipient = challengerBountyRecipient_;\\n        incentivesRecipient = incentivesRecipient_;\\n        poolSeedAmount = poolSeedAmount_;\\n        equityAmount = equityAmount_;\\n        challengerBountyAmount = challengerBountyAmount_;\\n        incentivesAmount = incentivesAmount_;\\n        totalFloat = poolSeedAmount_ + equityAmount_ + challengerBountyAmount_ + incentivesAmount_;\\n    }\\n\\n    /**\\n     * @notice Mint the genesis float once. Callable by anyone: recipients and amounts are\\n     * immutable, so the caller has no influence over the outcome.\\n     */\\n    function execute() external {\\n        if (executed) revert AlreadyExecuted();\\n        if (block.timestamp > endTime) revert SaleExpired();\\n        executed = true;\\n        ofd.mint(poolSeedRecipient, poolSeedAmount);\\n        ofd.mint(equityRecipient, equityAmount);\\n        ofd.mint(challengerBountyRecipient, challengerBountyAmount);\\n        ofd.mint(incentivesRecipient, incentivesAmount);\\n        emit BootstrapExecuted(\\n            msg.sender,\\n            poolSeedRecipient,\\n            poolSeedAmount,\\n            equityRecipient,\\n            equityAmount,\\n            challengerBountyRecipient,\\n            challengerBountyAmount,\\n            incentivesRecipient,\\n            incentivesAmount\\n        );\\n    }\\n}\\n\",\"keccak256\":\"0x1efe6a6185ed8274e2b06f1de005235c017ed523e7de511dbd16d04eba85a725\",\"license\":\"MIT\"},\"contracts/interface/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n/**\\n *\\n * Copyright (c) 2016-2019 zOS Global Limited\\n *\\n */\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC20 standard as defined in the EIP. Does not include\\n * the optional functions; to access them see `ERC20Detailed`.\\n */\\n\\ninterface IERC20 {\\n    function name() external view returns (string memory);\\n\\n    function symbol() external view returns (string memory);\\n\\n    function decimals() external view returns (uint8);\\n\\n    /**\\n     * @dev Returns the amount of tokens in existence.\\n     */\\n    function totalSupply() external view returns (uint256);\\n\\n    /**\\n     * @dev Returns the amount of tokens owned by `account`.\\n     */\\n    function balanceOf(address account) external view returns (uint256);\\n\\n    /**\\n     * @dev Moves `amount` tokens from the caller's account to `recipient`.\\n     *\\n     * Returns always true. Throws error on failure.\\n     *\\n     * Emits a `Transfer` event.\\n     */\\n    function transfer(address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Returns the remaining number of tokens that `spender` will be\\n     * allowed to spend on behalf of `owner` through `transferFrom`. This is\\n     * zero by default.\\n     *\\n     * This value can change when `approve` or `transferFrom` are called.\\n     */\\n    function allowance(address owner, address spender) external view returns (uint256);\\n\\n    /**\\n     * @dev Sets `amount` as the allowance of `spender` over the caller's tokens.\\n     *\\n     * Returns a boolean value indicating whether the operation succeeded.\\n     *\\n     * > Beware that changing an allowance with this method brings the risk\\n     * that someone may use both the old and the new allowance by unfortunate\\n     * transaction ordering. One possible solution to mitigate this race\\n     * condition is to first reduce the spender's allowance to 0 and set the\\n     * desired value afterwards:\\n     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729\\n     *\\n     * Emits an `Approval` event.\\n     */\\n    function approve(address spender, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Moves `amount` tokens from `sender` to `recipient` using the\\n     * allowance mechanism. `amount` is then deducted from the caller's\\n     * allowance.\\n     *\\n     * Returns always true. Throws error on failure.\\n     *\\n     * Emits a `Transfer` event.\\n     */\\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\\n\\n    /**\\n     * @dev Emitted when `value` tokens are moved from one account (`from`) to\\n     * another (`to`).\\n     *\\n     * Note that `value` may be zero.\\n     */\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\n\\n    /**\\n     * @dev Emitted when the allowance of a `spender` for an `owner` is set by\\n     * a call to `approve`. `value` is the new allowance.\\n     */\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\n}\\n\",\"keccak256\":\"0x45c30b37d05372b9c67b0008e20f4639185186fa8e8b73d8aa2b83556f9c594d\",\"license\":\"MIT\"},\"contracts/interface/IOracleFreeDollar.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./IERC20.sol\\\";\\nimport \\\"./IReserve.sol\\\";\\n\\ninterface IOracleFreeDollar is IERC20 {\\n    function suggestMinter(address _minter, uint256 _applicationPeriod, uint256 _applicationFee, string calldata _message) external;\\n\\n    function registerPosition(address position) external;\\n\\n    function denyMinter(address minter, address[] calldata helpers, string calldata message) external;\\n\\n    function reserve() external view returns (IReserve);\\n\\n    function minterReserve() external view returns (uint256);\\n\\n    function calculateAssignedReserve(uint256 mintedAmount, uint32 _reservePPM) external view returns (uint256);\\n\\n    function calculateFreedAmount(uint256 amountExcludingReserve, uint32 reservePPM) external view returns (uint256);\\n\\n    function equity() external view returns (uint256);\\n\\n    function isMinter(address minter) external view returns (bool);\\n\\n    /**\\n     * @notice Address of the GuardianTimelock admission gate contract, or zero if no guardian\\n     * was wired for this instance. The MintingHub reads this to enforce the same gate.\\n     */\\n    function guardian() external view returns (address);\\n\\n    function getPositionParent(address position) external view returns (address);\\n\\n    function mint(address target, uint256 amount) external;\\n\\n    function mintWithReserve(address target, uint256 amount, uint32 reservePPM, uint32 feePPM) external;\\n\\n    function burnFrom(address target, uint256 amount) external;\\n\\n    function burnWithoutReserve(uint256 amountIncludingReserve, uint32 reservePPM) external;\\n\\n    function burnFromWithReserve(address payer, uint256 targetTotalBurnAmount, uint32 _reservePPM) external returns (uint256);\\n\\n    function burnWithReserve(uint256 amountExcludingReserve, uint32 reservePPM) external returns (uint256);\\n\\n    function coverLoss(address source, uint256 amount) external;\\n\\n    function collectProfits(address source, uint256 _amount) external;\\n}\\n\",\"keccak256\":\"0xa159ef9d38c6ee7a52962ff9fdf815d1fd28e066c4aea26b32042733b7be5b03\",\"license\":\"MIT\"},\"contracts/interface/IReserve.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./IERC20.sol\\\";\\n\\ninterface IReserve is IERC20 {\\n   function invest(uint256 amount, uint256 expected) external returns (uint256);\\n   function checkQualified(address sender, address[] calldata helpers) external view;\\n}\",\"keccak256\":\"0x3b46b47f54a43bf2da382a4e5cc70e72a1aeb7845c75d30a04809ecccf2019dc\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x6101e0604052348015610010575f80fd5b50604051610a5c380380610a5c83398101604081905261002f916100be565b6001600160a01b03808b1660805260a08a905288811660c05287811660e052868116610100528516610120526101408490526101608390526101808290526101a0819052808261007f858761015f565b610089919061015f565b610093919061015f565b6101c0525061018498505050505050505050565b6001600160a01b03811681146100bb575f80fd5b50565b5f805f805f805f805f806101408b8d0312156100d8575f80fd5b8a516100e3816100a7565b60208c015160408d0151919b5099506100fb816100a7565b60608c015190985061010c816100a7565b60808c015190975061011d816100a7565b60a08c015190965061012e816100a7565b8095505060c08b0151935060e08b015192506101008b015191506101208b015190509295989b9194979a5092959850565b8082018082111561017e57634e487b7160e01b5f52601160045260245ffd5b92915050565b60805160a05160c05160e05161010051610120516101405161016051610180516101a0516101c0516107cd61028f5f395f6101e801525f8181610284015281816105ae01526106f801525f81816101c1015281816104f201526106aa01525f818161020f01528181610436015261065401525f81816102360152818161037c015261063101525f818160d40152818161058601526106d001525f8181610169015281816104ca015261067a01525f818161019a0152818161040e015261072001525f818161025d01528181610354015261074501525f818161011801526102f201525f81816102ab015281816103a20152818161045c0152818161051801526105d401526107cd5ff3fe608060405234801561000f575f80fd5b50600436106100cb575f3560e01c806381148645116100885780638d2efb8e116100635780638d2efb8e14610231578063c35189e814610258578063e786ce891461027f578063f61d52e6146102a6575f80fd5b806381148645146101bc578063841219e5146101e357806386fa7ef11461020a575f80fd5b806315ac86f3146100cf5780633197cbb61461011357806331a38c89146101485780633b9f6d4214610164578063614619541461018b5780637134a1c114610195575b5f80fd5b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b60405190815260200161010a565b5f546101549060ff1681565b604051901515815260200161010a565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b6101936102cd565b005b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b5f5460ff16156102f057604051630dc1019760e01b815260040160405180910390fd5b7f000000000000000000000000000000000000000000000000000000000000000042111561033157604051639acb37a360e01b815260040160405180910390fd5b5f805460ff191660011790556040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f000000000000000000000000000000000000000000000000000000000000000016906340c10f19906044015f604051808303815f87803b1580156103e3575f80fd5b505af11580156103f5573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b15801561049f575f80fd5b505af11580156104b1573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b15801561055b575f80fd5b505af115801561056d573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b158015610617575f80fd5b505af1158015610629573d5f803e3d5ffd5b5050604080517f000000000000000000000000000000000000000000000000000000000000000081527f000000000000000000000000000000000000000000000000000000000000000060208201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03908116828401527f000000000000000000000000000000000000000000000000000000000000000060608301527f0000000000000000000000000000000000000000000000000000000000000000811660808301527f000000000000000000000000000000000000000000000000000000000000000060a083015291517f0000000000000000000000000000000000000000000000000000000000000000831694507f0000000000000000000000000000000000000000000000000000000000000000909216925033917fe5cb84a6eee9d843aa52ae442110e66bc869999aea9959ca553619ba916229e59181900360c00190a456fea264697066735822122091a79e20c8ee034c80c8afee489d7f79983eeddd5dc8ae25f532a310e4b66f6b64736f6c63430008140033",
+  "deployedBytecode": "0x608060405234801561000f575f80fd5b50600436106100cb575f3560e01c806381148645116100885780638d2efb8e116100635780638d2efb8e14610231578063c35189e814610258578063e786ce891461027f578063f61d52e6146102a6575f80fd5b806381148645146101bc578063841219e5146101e357806386fa7ef11461020a575f80fd5b806315ac86f3146100cf5780633197cbb61461011357806331a38c89146101485780633b9f6d4214610164578063614619541461018b5780637134a1c114610195575b5f80fd5b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b0390911681526020015b60405180910390f35b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b60405190815260200161010a565b5f546101549060ff1681565b604051901515815260200161010a565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b6101936102cd565b005b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b61013a7f000000000000000000000000000000000000000000000000000000000000000081565b6100f67f000000000000000000000000000000000000000000000000000000000000000081565b5f5460ff16156102f057604051630dc1019760e01b815260040160405180910390fd5b7f000000000000000000000000000000000000000000000000000000000000000042111561033157604051639acb37a360e01b815260040160405180910390fd5b5f805460ff191660011790556040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f000000000000000000000000000000000000000000000000000000000000000016906340c10f19906044015f604051808303815f87803b1580156103e3575f80fd5b505af11580156103f5573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b15801561049f575f80fd5b505af11580156104b1573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b15801561055b575f80fd5b505af115801561056d573d5f803e3d5ffd5b50506040516340c10f1960e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301527f000000000000000000000000000000000000000000000000000000000000000060248301527f00000000000000000000000000000000000000000000000000000000000000001692506340c10f1991506044015f604051808303815f87803b158015610617575f80fd5b505af1158015610629573d5f803e3d5ffd5b5050604080517f000000000000000000000000000000000000000000000000000000000000000081527f000000000000000000000000000000000000000000000000000000000000000060208201527f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03908116828401527f000000000000000000000000000000000000000000000000000000000000000060608301527f0000000000000000000000000000000000000000000000000000000000000000811660808301527f000000000000000000000000000000000000000000000000000000000000000060a083015291517f0000000000000000000000000000000000000000000000000000000000000000831694507f0000000000000000000000000000000000000000000000000000000000000000909216925033917fe5cb84a6eee9d843aa52ae442110e66bc869999aea9959ca553619ba916229e59181900360c00190a456fea264697066735822122091a79e20c8ee034c80c8afee489d7f79983eeddd5dc8ae25f532a310e4b66f6b64736f6c63430008140033",
+  "devdoc": {
+    "details": "Why this exists (the bootstrap problem): the MintingHub charges OPENING_FEE = 1,000 units in currency to open the first position, `suggestMinter` costs >= 1,000 units, and the first Equity deposit needs >= 1,000 units — but at genesis supply is 0 and nobody owns any units (Frankencoin/OFD solved this with a source-stablecoin bridge registered at genesis; DogeOS has no dollar rail, so the bridge role is played by this allocation minter instead). Registered as a minter through the token's deployer-gated `initialize()` at genesis (the unavoidable bootstrap act — at supply 0 no veto is possible). Minter registrations are permanent (`denyMinter` reverts TooLate once active), so safety comes from inertness by construction: `execute()` mints the fixed genesis float exactly once and can never mint again. The float split (default 500k units per instance, see report/dogeos-tech-parts/03-collateral- monetary.md §3.2): pool seed (Barkswap pool), equity (treasury tranche-1 investment), challenger bounty, incentives. Recipients and amounts are immutable constructor parameters, so the only trust assumption is the deployer who registers the contract — the same trust domain as the genesis `initialize()` calls for Savings/PositionFactory/PositionRoller/MintingHub. If `execute()` never runs before `endTime`, the float is forfeited forever: with supply 0 the 1,000-unit fees can never be paid, so no other minter can ever be suggested. This makes endTime a hard deadline wired into the instance's genesis calendar.",
+    "kind": "dev",
+    "methods": {},
+    "title": "GenesisBootstrapSale",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "execute()": {
+        "notice": "Mint the genesis float once. Callable by anyone: recipients and amounts are immutable, so the caller has no influence over the outcome."
+      }
+    },
+    "notice": "One-shot genesis minter for a DogeForex currency instance (K9USD...K9BRL).",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1189,
+        "contract": "contracts/GenesisBootstrapSale.sol:GenesisBootstrapSale",
+        "label": "executed",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_bool"
+      }
+    ],
+    "types": {
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}
