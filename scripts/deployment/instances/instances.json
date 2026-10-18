@@ -124,5 +124,77 @@
       "incentivesAmount": "100000000000000000000000",
       "durationDays": 28
     }
+  },
+  {
+    "code": "PKR",
+    "tokenName": "DogeForex Pakistani Rupee",
+    "tokenSymbol": "K9PKR",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "BDT",
+    "tokenName": "DogeForex Taka",
+    "tokenSymbol": "K9BDT",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "INR",
+    "tokenName": "DogeForex Indian Rupee",
+    "tokenSymbol": "K9INR",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
+  },
+  {
+    "code": "NGN",
+    "tokenName": "DogeForex Naira",
+    "tokenSymbol": "K9NGN",
+    "leadratePPM": 50000,
+    "guardian": null,
+    "bootstrap": {
+      "poolSeedRecipient": null,
+      "equityRecipient": null,
+      "challengerBountyRecipient": null,
+      "incentivesRecipient": null,
+      "poolSeedAmount": "100000000000000000000000",
+      "equityAmount": "250000000000000000000000",
+      "challengerBountyAmount": "50000000000000000000000",
+      "incentivesAmount": "100000000000000000000000",
+      "durationDays": 28
+    }
   }
 ]
