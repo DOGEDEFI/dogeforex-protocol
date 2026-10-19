@@ -73,8 +73,8 @@
       "note": "INR+NGN core + 4x bootstrap + 4x genesis equity at normalized fees"
     }
   },
-  "updatedAt": "2026-10-19T09:40:40Z",
-  "updatedBy": "P3: guardian wiring (10 instances) + MOFX ref pool seeding (10 instances)",
+  "updatedAt": "2026-10-19T13:29:41Z",
+  "updatedBy": "P2b execution: 5 deferred K9USD position mints + minterReserve verification",
   "dex": {
     "engine": "Barkswap (Algebra, ve(3,3))",
     "factory": "0xF3961157f56C983316657f0267B4C04460beE43f",
@@ -179,11 +179,11 @@
         "setGuardianTx": "0xb85b65e17db681ba4ca4d2ea9687e5d57c2b6d52728612c84aa79fe8d0736893"
       },
       "position": {
-        "status": "opened-5-minting-deferred",
+        "status": "minted-P2b",
         "owner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0",
         "verified": false,
-        "note": "minting locked during initPeriod deny window (Position.sol cooldown=start; mint reverts Hot() 0x700a083c). P2b mints at mintableAt. Verification of a Position instance deferred to P2b.",
-        "mintingDeferred": true,
+        "note": "P2b executed 2026-10-19T13:28Z: all five mints confirmed on-chain; minterReserve verified",
+        "mintingDeferred": false,
         "positions": [
           {
             "name": "P1-conservative",
@@ -192,8 +192,8 @@
             "initialCollateral": "6000.0",
             "liqPrice": "1.0",
             "prospectiveMint": "3500.0",
-            "minted": "0.0",
-            "mintTx": null,
+            "minted": "3500.0",
+            "mintTx": "0xbed468dfab56024810f44f07dada4606ee26139237a26cdeb31c1d12929d36da",
             "crPercent": 171.43,
             "mintableAt": "2026-10-19T13:08:03.000Z",
             "openTx": "0x45b6f3bd2f205f8da9e3a973fada664168e3f8dd7e8de49be4b14e6c03d516d8",
@@ -207,8 +207,8 @@
             "initialCollateral": "3600.0",
             "liqPrice": "1.0",
             "prospectiveMint": "3100.0",
-            "minted": "0.0",
-            "mintTx": null,
+            "minted": "3100.0",
+            "mintTx": "0x5cf459b9358f0afaf348cc5c62b1a71d6d6c8c0e7b562b3217a86c6f6866e860",
             "crPercent": 116.13,
             "mintableAt": "2026-10-19T13:13:48.000Z",
             "openTx": "0x69c26f02b0a51e0019ec43a766b8881d921f4cf2badbf4c957c90f32e162b1f6",
@@ -222,8 +222,8 @@
             "initialCollateral": "3600.0",
             "liqPrice": "0.98",
             "prospectiveMint": "3399.0",
-            "minted": "0.0",
-            "mintTx": null,
+            "minted": "3399.0",
+            "mintTx": "0xe0e9b2b8a59355542ec7f13cd4711841cee95ac029158f28d3b8b49e0d7d7729",
             "crPercent": 103.8,
             "mintableAt": "2026-10-19T13:13:57.000Z",
             "openTx": "0x2ebd4fbd1d08fb236b6c6bcd270e69048c7bc3e5dd79d846654490e8d7a58337",
@@ -237,8 +237,8 @@
             "initialCollateral": "4.0",
             "liqPrice": "1000.0",
             "prospectiveMint": "2666.0",
-            "minted": "0.0",
-            "mintTx": null,
+            "minted": "2666.0",
+            "mintTx": "0x13ae91366c8a0db9709693e2bfef7c328f4fb51c93484a8301470cf637a1ca23",
             "crPercent": 150.04,
             "mintableAt": "2026-10-19T13:14:21.000Z",
             "openTx": "0xf1bc7f25afc9b67027622387b55cab209b1956ab028e7624841812439c8778fc",
@@ -252,8 +252,8 @@
             "initialCollateral": "100.0",
             "liqPrice": "70.0",
             "prospectiveMint": "4666.0",
-            "minted": "0.0",
-            "mintTx": null,
+            "minted": "4666.0",
+            "mintTx": "0x417392e036a4e338c0e0e39290b30a4cd8ae4bf8c8d81945368038247b04a3f9",
             "crPercent": 150.02,
             "mintableAt": "2026-10-19T13:14:36.000Z",
             "openTx": "0xfbfbaa6ed06871a59e6099d84f248dbb20d5ae8730aef5f97ed4083bb3e2f25b",
@@ -263,8 +263,8 @@
         ],
         "minterReserve": {
           "before": "0.0",
-          "after": "0.0",
-          "note": "reserve accrues on mint (mintWithReserve) \u2014 expected 0 while all mints deferred"
+          "after": "2646.35",
+          "check": "expected = sum(minted * reserveContributionPPM): 3500*.20+3100*.10+3399*.05+2666*.20+4666*.20 = 2646.35 \u2014 EXACT MATCH"
         }
       },
       "deployment": {
@@ -399,6 +399,38 @@
           "customWdoge": "0",
           "canonicalWdoge": "0"
         }
+      },
+      "p2b": {
+        "executedAt": "2026-10-19T13:29:41Z",
+        "results": {
+          "P1-conservative": {
+            "mintTx": "0xbed468dfab56024810f44f07dada4606ee26139237a26cdeb31c1d12929d36da",
+            "minted": "3500.0",
+            "avail": "4000.0"
+          },
+          "P2-degen": {
+            "mintTx": "0x5cf459b9358f0afaf348cc5c62b1a71d6d6c8c0e7b562b3217a86c6f6866e860",
+            "minted": "3100.0",
+            "avail": "3500.0"
+          },
+          "P3-arena-bait": {
+            "mintTx": "0xe0e9b2b8a59355542ec7f13cd4711841cee95ac029158f28d3b8b49e0d7d7729",
+            "minted": "3399.0",
+            "avail": "3600.0"
+          },
+          "wDOGE-conservative": {
+            "mintTx": "0x13ae91366c8a0db9709693e2bfef7c328f4fb51c93484a8301470cf637a1ca23",
+            "minted": "2666.0",
+            "avail": "3500.0"
+          },
+          "WUFF-150": {
+            "mintTx": "0x417392e036a4e338c0e0e39290b30a4cd8ae4bf8c8d81945368038247b04a3f9",
+            "minted": "4666.0",
+            "avail": "4700.0"
+          }
+        },
+        "minterReserveAfter": "2646.35",
+        "executedBy": "one-shot cron 01M59P0WV8A8P0AG6KD0J1B7MZ (P2b auto-run)"
       }
     },
     "EUR": {
