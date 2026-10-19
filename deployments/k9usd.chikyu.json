@@ -61,7 +61,9 @@
       "closingBalanceDoge": "40.026463303",
       "gasSpentDoge": "11.028334",
       "perInstanceDoge": "2.18 (deploy) + ~0.05 (execute/approve/invest)",
-      "note": "6 instances deployed (EUR pilot measured 2.127), genesis bootstrap executed x6, tranche-1 equity x6"
+      "note": "6 instances deployed (EUR pilot measured 2.127), genesis bootstrap executed x6, tranche-1 equity x6",
+      "poolsNote": "10 MOFX ref pools seeded (LP 2232-2241 -> treasury); guardian timelocks x10 deployed+verified",
+      "closingBalanceAfterPoolsDoge": "132.529040615"
     },
     "p4": {
       "date": "2026-10-18",
@@ -71,8 +73,8 @@
       "note": "INR+NGN core + 4x bootstrap + 4x genesis equity at normalized fees"
     }
   },
-  "updatedAt": "2026-10-18T20:27:39Z",
-  "updatedBy": "P4 execution: PKR/BDT/INR/NGN deploy + genesis (fee-watch auto-resume)",
+  "updatedAt": "2026-10-19T09:40:40Z",
+  "updatedBy": "P3: guardian wiring (10 instances) + MOFX ref pool seeding (10 instances)",
   "dex": {
     "engine": "Barkswap (Algebra, ve(3,3))",
     "factory": "0xF3961157f56C983316657f0267B4C04460beE43f",
@@ -469,7 +471,13 @@
         },
         "executeTx": "0x94423fa7366f145ce545c5604608eb73a9b5dbd95c03d4042b60bbde58f02e7f"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0xeA968095C2828A7ed16D0336fE626653C4BAB27c",
+        "verified": true,
+        "deployTx": "0x751bcc1d43c02921c818fc9ca631857020b4248a953db70418a36e4a9a596705",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -501,6 +509,33 @@
           "genesisBootstrap": "0xaeb5d5d40ef29b8a71fa89e26abfa64ac7a20113dd61c9066a9d31ef47c1311f"
         },
         "deployerNonceFinal": 28
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/EUR",
+          "pool": "0x3a2A2c1DB67311425CB24FC043FFBc9f6F2f895d",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0x8a3d30187EA82e55F114Ace84FfdB1a503b61517",
+          "lpTokenId": "2232",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9eur": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x70bdc79513a5571ac3680047546b51d25ce572f9e63877f09ebbf973f9362926",
+          "initializeTx": "0x733548a235e7d5629f9f39b9ea3a0b08eaffff6a6bef6e58fa61f0deaac3b8c2",
+          "mintTx": "0x10958a1b487e1aeafb30d75098bf9f9aafee1a4672b35ccec6be1b0b8c995921",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "JPY": {
@@ -573,7 +608,13 @@
         },
         "executeTx": "0x371a4e45d877f75eac3a4087f9bd31bb5eb9ec01ef5c271932a9d920493b45f5"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x39A9D1043B205084F6cfE048E71Acb3AF5609183",
+        "verified": true,
+        "deployTx": "0x810301369fd9c934d8b2b6d2c5578d27ba56de020b54874c4baac8702fe4215e",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -605,6 +646,33 @@
           "genesisBootstrap": "0x959fdf45a6a63d583d34ce7f4b32781023d2da6f25bbb8e7e1f5f0bf9276c208"
         },
         "deployerNonceFinal": 39
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/JPY",
+          "pool": "0xA2aEFdD241c6F0F632Da1e87d87E238402896ADE",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0x66C4488e55CB19B12b5ebf1126223346EA3bc499",
+          "lpTokenId": "2233",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9jpy": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x46b8211287d0050f04fc134b63fb2253505eecd24030fa7cd0104946d897f261",
+          "initializeTx": "0x7eebe2a0e1f18d45d3edd3ff47ed3f60bb41b69a9e48d0f5a9be9d62e5e5f618",
+          "mintTx": "0xbb95e4aab253bcc25ce355ff39555a5007725fc97a1e5b952e5e07519f456733",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "GBP": {
@@ -677,7 +745,13 @@
         },
         "executeTx": "0xfece70b92a383bf2926ea3fbeccdc7fc972a3e851084a734e4f0cfecda681326"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0xbE7411ADfc6be9E30D8335E1e635D80a004b72dE",
+        "verified": true,
+        "deployTx": "0x138a0af24e419fcf787924e569ab0433b97951f187c1ba8e5961b03fceebc741",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -709,6 +783,33 @@
           "genesisBootstrap": "0xb2561d62d740b5660a95e9d79ba98be1387f7b1599e78e0ee15a9fd0c65f84a5"
         },
         "deployerNonceFinal": 48
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/GBP",
+          "pool": "0x62471E2b418F8A77eD462Ce28cdB37EDEC876f48",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0x6EDE7345fCD567B6c111bBb95B808027fcCD8Fe6",
+          "lpTokenId": "2234",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9gbp": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x5577a2cbdbf1a9372db31630468cf21cf232edb5ab0913325c50196e208b125a",
+          "initializeTx": "0x5518a60c4ad05fb8c8b2c0e26012d1b97ef8cce6237a27a4ceb875a282b9b82d",
+          "mintTx": "0x44c6248d2c27cb45bf9638b99fb920a835f1150e7209b717e07f9e21838725ca",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "AUD": {
@@ -781,7 +882,13 @@
         },
         "executeTx": "0xdd84cf6ad8b35abb902b9c33411db169c01ec3eed6d637b4b3d01de9b0e20c95"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x6eC018d3B51F1B1f9bA2769B1D9ab8dD52c4B2F9",
+        "verified": true,
+        "deployTx": "0x606576b0a59eaa31be1224a106d2494a079de7bc0981e4575ba3975655cbfa2a",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -813,6 +920,33 @@
           "genesisBootstrap": "0xce27dd147eea9b07ba355655492f7677159af55b44cc836bc841398cf36df189"
         },
         "deployerNonceFinal": 57
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/AUD",
+          "pool": "0xBA61ce7128406d2FDc22e1008a9011aA5C268dDf",
+          "token0": "0x2c1e0F1b165b3cf6152fB10EEfd5f36839a303bC",
+          "token1": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "lpTokenId": "2235",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9aud": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0xc4e23da6c5e679da5b05f265762aae4c2c625568099100747dfbc96f7b60e301",
+          "initializeTx": "0x60db29e8da87734e7cf29527c9305fb9dbd9804344bfcd586ed8ea25c5937222",
+          "mintTx": "0xd28c0ac100cac25ba2f5599f67f8b415bde02e40e6dc4a0aa6bd6a56b2c24d05",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "CNY": {
@@ -885,7 +1019,13 @@
         },
         "executeTx": "0x33a443ccb0b9ebf589c3a797e12f1214cff5b1f75cb44af6b3c9e6118dffae0b"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x61f95194BF19E5a1037055A51063B0F0b918456f",
+        "verified": true,
+        "deployTx": "0x8e6b4b870577d747fc5bfc8d725c0e5e128fd1b1fe2af2b5b03688ceb4e7b36c",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -917,6 +1057,33 @@
           "genesisBootstrap": "0xeffccd49635852285c94efda8df94746147c8a8dac26cb3ba7883420e934896a"
         },
         "deployerNonceFinal": 66
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/CNY",
+          "pool": "0x83e2530ddFb4d8c672a0629b6aDFf6B3bB06A5a9",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0x86B40076a1c375200D9AC7f9ab7477dDA970Ee6E",
+          "lpTokenId": "2236",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9cny": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x12b1ddbbf8e11ccbc804b05f8710f600207ff572367a262418a3dca8adc4a83c",
+          "initializeTx": "0xc9ad63a6c3cfdea25527526416381194f51bc111f663e7ab91bda41208f88e60",
+          "mintTx": "0x91648750c48d35f8b8b656f7f5a7935b1be7e4443b0434d4c32ee24d9028c9cf",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "BRL": {
@@ -989,7 +1156,13 @@
         },
         "executeTx": "0xd67983805734f8c1d7d96e0df0fc95da48dc302192736b28d064deb9922648dc"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x408DD1Aa7C4f07B7954EfDEC5825E2b354Ed67d3",
+        "verified": true,
+        "deployTx": "0xc3eec397be597c0abb575c82736b80b019c7c9ce47a53cffbd585164fc7ee1c2",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -1021,6 +1194,33 @@
           "genesisBootstrap": "0x5f09ccdfa6194b56494f655d9968103e89f0bede26c4d0e60dcd5bb1e8e4817c"
         },
         "deployerNonceFinal": 75
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/BRL",
+          "pool": "0xf7d5240fB612a664D4d0F5a33941CedA777Cd301",
+          "token0": "0x196134777200eF20EFa99C79615BcEE02BA7d63A",
+          "token1": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "lpTokenId": "2237",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9brl": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0xf85d8ea26b783f4366c98955425bebbc007189acd2d5675c65ca27172d64e315",
+          "initializeTx": "0xc2da206959e5d19beddf3d33729f1a28ea0366cda1a6ad51293aef505788a169",
+          "mintTx": "0xeade19a4ad8e6bfebd6a668ce6dd7b4a75745922097d132e4d0ddafa85c5dd22",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "PKR": {
@@ -1093,7 +1293,13 @@
         },
         "executeTx": "0xb2464752b24f98ae59729e23ed8d82f4ee019bd6b5c9e19c55d34fea1bb68c69"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x5e501a756E9f81624ece5e052968b8CDb3c815Cf",
+        "verified": true,
+        "deployTx": "0xf8da1f0a35db483719dc4552a8f89a41ca34384c6df105368723b855edd647a7",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -1125,6 +1331,33 @@
           "genesisBootstrap": "0xb48597be31b0ca1a72d293f3dc0a9402457bb1178cc23a517e3e448375c5b02c"
         },
         "deployerNonceFinal": 118
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/PKR",
+          "pool": "0xAEB2F38d4d0962c28Ed5773890c5b13F6065C093",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0x9A1b29BD4927DEaF4DB491970A5c4a442fdB4B4A",
+          "lpTokenId": "2238",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9pkr": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x6403d7577db9c41205d340be84bf86d388add8b803ee86df50cf9f6336c7b660",
+          "initializeTx": "0x0ee4042f819ce71ffa8b4bc6a7ac22c02ca466ff057159c621e121d3fe811294",
+          "mintTx": "0x2b348432fa9b6e5486a0ac0e03fc828f1f93fa63ccb17c521a7cc35d659c6de9",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "BDT": {
@@ -1197,7 +1430,13 @@
         },
         "executeTx": "0x6ce85df917e2b9fa94849fd8e5c94944b1deb62248deaa545ce6c89c4a7e1312"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0xE315127d41Ca866CEa0552515156EF9e906156CE",
+        "verified": true,
+        "deployTx": "0x5331ba38bc768f9f29ac574f6c08c85f38ff1de551272a80263cdd250bb49542",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -1229,6 +1468,33 @@
           "genesisBootstrap": "0x67539e125de261db0c4a501f2568b86f283f474290e43d0c1630746cb7db89b3"
         },
         "deployerNonceFinal": 127
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/BDT",
+          "pool": "0xacFF48FAe4642f26eC436e990de34B32D7e59ad8",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0xa714CE79900acA2298e729f8caF126BE0FeC60c6",
+          "lpTokenId": "2239",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9bdt": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0xb54edacb1b1db136a408f6e528bd3840826f8e762258d593982a60be7c8786ae",
+          "initializeTx": "0x3d5a48adab7b131155a9589e60a8256c1fc67c65f07402af18dfcd11a1253c42",
+          "mintTx": "0x7f1e87c4b39db5f504941c8141470284c7b1eaf32bd438b516f844f6f3996b5d",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "INR": {
@@ -1301,7 +1567,13 @@
         },
         "executeTx": "0x42e95016276e079fdd1316343057f5d66e1452aff0e22a1e6f04ac1476c47ac8"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x83b554fbb5d41783bFC34EF5641cc4C232c4D879",
+        "verified": true,
+        "deployTx": "0x0032ed32680ad8ed6504f3e9e7492427dd3799e6f24dc04b5fc3fb485091e2ef",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -1333,6 +1605,33 @@
           "genesisBootstrap": "0x1c0ea27c381cc34aff29f233d6a5c49d3bddc851d4dc5864ceca5b707ae8ba6c"
         },
         "deployerNonceFinal": 136
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/INR",
+          "pool": "0x377b0932D51d08731251bDb5E02A72411b205F1F",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0xB319B76C44F89fCB255bfA95877CCbD4595d49e4",
+          "lpTokenId": "2240",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9inr": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0xd60a89e50c9144176d75873f3c14e19aced910511c6aed3ec443255c93ffac11",
+          "initializeTx": "0xb91ac50382e6a46c6055e18222e82a86f03229fcd0253dcb8fd1bcf548b57844",
+          "mintTx": "0x239354dee9c8c03ca56c35f737d7ecfa99ee6866cc134a58777df398de93fb90",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     },
     "NGN": {
@@ -1405,7 +1704,13 @@
         },
         "executeTx": "0xbbc0570ec092e837c2642165ea0ccfba71295dd72cdcf6a46b08650c0e60e9b3"
       },
-      "guardianTimelock": null,
+      "guardianTimelock": {
+        "address": "0x75f9f21ECF12bbAcA726a5D0F554126b1ffF8B91",
+        "verified": true,
+        "deployTx": "0xd88bc0756c8cfdc4c919c5ec7f249f6171ba1753c01d7bc3ca1f6cf85d3c9b5a",
+        "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+        "timelockSeconds": 259200
+      },
       "genesis": {
         "leadratePPM": 50000,
         "founderEquityTranche1": {
@@ -1437,6 +1742,33 @@
           "genesisBootstrap": "0x21f68d331c4396f2163e00150755f0065c1e953aedf76110bb92f3d085f7deb6"
         },
         "deployerNonceFinal": 145
+      },
+      "liquidity": {
+        "mofxReferencePool": {
+          "pair": "MOFX/NGN",
+          "pool": "0x9d5217E69D09CD963ba17017c2B3ad09e947c6A7",
+          "token0": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+          "token1": "0xdB6d2149Db7694f1F66744314bE70E1266873886",
+          "lpTokenId": "2241",
+          "liquidity": "166925124854849724567379",
+          "sizes": {
+            "mofx": "500.0",
+            "k9ngn": "500.0"
+          },
+          "band": "\u00b11% around par",
+          "ticks": [
+            -60,
+            60
+          ],
+          "tickSpacing": 60,
+          "impliedMofxPerK9": 1,
+          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "createTx": "0x4ad467ea5f8a1336f79ca76f37f70702f80dd9ea7f2ef039224b4ecf6edbb376",
+          "initializeTx": "0x393c9a8645514a62ba4b66c1e5b4fc11b40b101c53a80a5b7c1167e124148b1c",
+          "mintTx": "0xa7046ed7ffb61a510be011048095e426efa77ee7bb5be4ffd34b3e8212a64254",
+          "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
+        },
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
       }
     }
   }

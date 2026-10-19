@@ -22,7 +22,7 @@
     "tokenName": "DogeForex Euro",
     "tokenSymbol": "K9EUR",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -40,7 +40,7 @@
     "tokenName": "DogeForex Yen",
     "tokenSymbol": "K9JPY",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -58,7 +58,7 @@
     "tokenName": "DogeForex Pound",
     "tokenSymbol": "K9GBP",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -76,7 +76,7 @@
     "tokenName": "DogeForex Aussie",
     "tokenSymbol": "K9AUD",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -94,7 +94,7 @@
     "tokenName": "DogeForex Yuan",
     "tokenSymbol": "K9CNY",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -112,7 +112,7 @@
     "tokenName": "DogeForex Real",
     "tokenSymbol": "K9BRL",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -130,7 +130,7 @@
     "tokenName": "DogeForex Pakistani Rupee",
     "tokenSymbol": "K9PKR",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -148,7 +148,7 @@
     "tokenName": "DogeForex Taka",
     "tokenSymbol": "K9BDT",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -166,7 +166,7 @@
     "tokenName": "DogeForex Indian Rupee",
     "tokenSymbol": "K9INR",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
@@ -184,7 +184,7 @@
     "tokenName": "DogeForex Naira",
     "tokenSymbol": "K9NGN",
     "leadratePPM": 50000,
-    "guardian": null,
+    "guardian": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
     "bootstrap": {
       "poolSeedRecipient": null,
       "equityRecipient": null,
