@@ -73,8 +73,8 @@
       "note": "INR+NGN core + 4x bootstrap + 4x genesis equity at normalized fees"
     }
   },
-  "updatedAt": "2026-10-19T13:29:41Z",
-  "updatedBy": "P2b execution: 5 deferred K9USD position mints + minterReserve verification",
+  "updatedAt": "2026-10-19T13:34:03Z",
+  "updatedBy": "P2b execution + rehearsal positions opened on 10 instances",
   "dex": {
     "engine": "Barkswap (Algebra, ve(3,3))",
     "factory": "0xF3961157f56C983316657f0267B4C04460beE43f",
@@ -568,6 +568,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x67297bd6C42fD7da99Dc63afE52e2fAB5F150cFb",
+        "openTx": "0xfc766a3615181d4bde858ca6f9f5ebfa959a82ab0df15cb0abf0f7e55d2a9b7b",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:30:38.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "JPY": {
@@ -705,6 +718,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x201B4f8804885A711b17b2D87B8b5f993C6DDE85",
+        "openTx": "0x6fe1d0836a861d3d511b8d2ae69f7bd28887f1a989559a5d5469c3ddf3111569",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:30:53.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "GBP": {
@@ -842,6 +868,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x426e7DB305DB312389de26dcBeA5625B3d7eC43F",
+        "openTx": "0x602d10bc402cb20ec4c1243d293d9363c09bc7721d0f31be9884cd9d7f861628",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:31:08.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "AUD": {
@@ -979,6 +1018,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x4E50a674fbE8db96bDb0CBEe9193b84C4aD758e3",
+        "openTx": "0x2480c36ab1eca47b4c54da1e00becefcf3a68c346d0a033aafa8428424a87810",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:31:23.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "CNY": {
@@ -1116,6 +1168,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x4D4F619a0d59d42fA2291d93cBF46659b93b8797",
+        "openTx": "0xa81bd854d20f26b7b54be9a2cc3af7529000c16975a64f03762f24836f1e564b",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:31:38.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "BRL": {
@@ -1253,6 +1318,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x0B47A96357Cb377CfC391fA0A9367eA542F67bf4",
+        "openTx": "0x7f956c775a9758c6e7a0d1bdaecf2bbb19d05fcca47da37051b38fca3a111897",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:31:50.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "PKR": {
@@ -1390,6 +1468,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0xDb8727F9666c5244407F4745dd41047f2B1A84a0",
+        "openTx": "0xf6170a3a9eed756a6acd7625f3e08f9fc11dcfef23c14d0fd8ea19c32ad79ac2",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:32:05.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "BDT": {
@@ -1527,6 +1618,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x18C505731139d7974Dc776Ed49c617e50FB96031",
+        "openTx": "0x17a0e7d6b56d95aea268c4efb54d0033dd206c0af9313fcf677236317d7f22ee",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:32:20.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "INR": {
@@ -1664,6 +1768,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0x6DfA7b439b77b021e27D7e24640B7815A1C89914",
+        "openTx": "0x17e7f9d690ab9da6b09440d22adeec2d701bdb4fa52df2cfb53e14d97bdd6465",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:32:32.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     },
     "NGN": {
@@ -1801,6 +1918,19 @@
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
         "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+      },
+      "rehearsalPosition": {
+        "position": "0xC0619923fd65deCB6e6171A3EAd517d1dEFc0A70",
+        "openTx": "0x19b5fc359b533cc0f0b8746f0641dd827bb1a9037548b735fb2c11d3c036b673",
+        "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "collateral": "MOFX 6000",
+        "minCollateral": "4000",
+        "liqPrice": "1.0",
+        "prospectiveMint": "3500",
+        "initPeriodDays": 5,
+        "mintableAt": "2026-10-24T13:32:47.000Z",
+        "challengePeriodDays": 1,
+        "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
       }
     }
   }
