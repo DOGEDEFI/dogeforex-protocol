@@ -30,7 +30,7 @@ confined to the two token contracts:
 - Note: solc 0.8.20 immutables must be value types, so the name/symbol fields are constructor-set
   storage rather than `immutable` (compiling equivalent of the design).
 
-License: GPL-3.0 (inherited from Frankencoin via OFD).
+License: MIT (see LICENSE; Frankencoin/OracleFreeDollar provenance in NOTICE.md — per-file SPDX headers apply).
 
 ## Architecture notes
 
