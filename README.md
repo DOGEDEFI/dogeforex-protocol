@@ -1,10 +1,10 @@
 # DogeForex Protocol
 
-DogeForex is a multi-currency protocol issuing **7 collateralized FOREX stablecoin instances —
-K9USD, K9EUR, K9JPY, K9GBP, K9AUD, K9CNY, K9BRL** — on **DogeOS** (Chikyū testnet, chainId **6281971**),
+DogeForex is a multi-currency protocol issuing **11 collateralized FOREX stablecoin instances —
+K9USD, K9EUR, K9JPY, K9GBP, K9AUD, K9CNY, K9BRL, K9PKR, K9BDT, K9INR, K9NGN** — on **DogeOS** (Chikyū testnet, chainId **6281971**),
 from ONE parameterized Frankencoin-fork codebase. Every instance is a full, isolated
 Frankencoin-style system: token + equity pool shares + minting hub + positions + savings/leadrate.
-The seven instances share one audited bytecode set; only constructor arguments (name, symbol,
+The eleven instances share one audited bytecode set; only constructor arguments (name, symbol,
 leadrate, bootstrap recipients) differ.
 
 **K9USD (DogeForex Dollar) is the first instance** — deploy, Gate-3 rehearsal, and liquidity all
