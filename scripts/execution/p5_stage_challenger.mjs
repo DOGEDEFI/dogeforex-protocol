@@ -34,7 +34,7 @@ const SIZES = {
   mofxFloor: ethers.parseUnits('25000', 18), // mint only if challenger MOFX < this
   mofxAllowanceMin: ethers.parseUnits('25000', 18), // skip MOFX approve at/above this
   k9BidAllowance: ethers.parseUnits('1000', 18), // Oct-25 bid headroom per instance
-  challengeSize: ethers.parseUnits('100', 18), // mirrors the Oct-24 cron call
+  challengeSize: ethers.parseUnits('4000', 18), // MUST be >= position minCollateral (4000 MOFX) — 100e18 reverts ChallengeTooSmall (Position.sol:524)
   challengeMinPrice: ethers.parseUnits('0.95', 18), // 0.95e18: clears the 1.0e18 position price check (MintingHub.sol:214); 100e18 would revert UnexpectedPrice
   minChallengerDoge: ethers.parseEther('0.5'), // pre-flight affordability floor
 };

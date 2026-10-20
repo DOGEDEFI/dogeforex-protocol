@@ -102,7 +102,9 @@ async function send(wallet, contract, method, args, label) {
   const rc = await tx.wait(1);
   const fee = Number(fmtE(await totalFee(rc)));
   const bytes = tx.data.length / 2 - 1;
-  const expected = 0.011 + feeRate * (bytes - 110);
+  // Runbook fee form: l1Fee ~ rate × (calldataBytes + 170). The old (bytes - 110)
+  // model goes NEGATIVE on tiny calldata (e.g. pause() = 4B) and halts wrongly.
+  const expected = feeRate * (bytes + 170);
   if (fee > 3 * expected) throw new Error(`${label}: fee ${fee} > 3x expected ${expected.toFixed(4)} — halt`);
   log(`  ${label}: ok tx=${rc.hash.slice(0, 14)}.. totalFee=${fee.toFixed(4)}`);
   return rc;
