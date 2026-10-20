@@ -3,7 +3,7 @@
 // never blocks mint/challenge/transfers; unpause goes through the 72h timelock.
 // Runbook: guardian key signs; fee-preflight abort on regime shift; state file resumes.
 // Usage: node scripts/execution/p4_guardian_rehearsal.mjs
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ethers } from 'ethers';
@@ -18,10 +18,36 @@ const BASELINE_RATE = 0.000071; // DOGE/B, runbook baseline
 const CODE = 'EUR';
 
 const state = existsSync(STATE_FILE) ? JSON.parse(readFileSync(STATE_FILE, 'utf8')) : { stages: {} };
-const save = () => writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
+// OPS-03(a): atomic state write — tmp file + rename, so a kill mid-save can't truncate the JSON
+// (a truncated state file killed every subsequent retry at startup on JSON.parse).
+const save = () => {
+  const tmp = STATE_FILE + '.tmp';
+  writeFileSync(tmp, JSON.stringify(state, null, 2));
+  renameSync(tmp, STATE_FILE);
+};
 const done = (k) => state.stages[k]?.done === true;
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 const fmtE = (v) => ethers.formatEther(v);
+
+// OPS-03(b): pid lock around the whole run — the cron retries every 15 min and an RPC slower
+// than the interval would otherwise double-send pause()/scheduleUnpause(). A live holder means
+// another iteration is already running: exit 0 and leave its lock alone.
+const LOCK_FILE = STATE_FILE + '.lock';
+const pidAlive = (pid) => { try { process.kill(pid, 0); return true; } catch { return false; } };
+if (existsSync(LOCK_FILE)) {
+  const holder = Number(readFileSync(LOCK_FILE, 'utf8').trim());
+  if (Number.isInteger(holder) && holder > 0 && pidAlive(holder)) {
+    log('lock held by live pid', holder, '— another loop iteration is running; exit 0');
+    process.exit(0);
+  }
+  log('stale lock from dead pid', holder, '— taking over');
+}
+writeFileSync(LOCK_FILE, String(process.pid));
+const releaseLock = () => {
+  try {
+    if (existsSync(LOCK_FILE) && readFileSync(LOCK_FILE, 'utf8').trim() === String(process.pid)) unlinkSync(LOCK_FILE);
+  } catch { /* best effort */ }
+};
 
 const provider = new ethers.JsonRpcProvider(RPC);
 const guardian = new ethers.Wallet(KEYS.roles.guardian.privateKey, provider);
@@ -183,8 +209,18 @@ try {
     return { tx: rc.hash, unpauseAvailableAt: avail, unpauseAvailableAtIso: new Date(avail * 1000).toISOString() };
   });
 
-  log('DONE. Follow-up required after timelock: timelock.unpause() from guardian.');
+  // OPS-03(c): persist the 72h follow-up in the state file (replaces the old bare console.log):
+  // an operator reads the exact executable timestamp from stages.scheduleUnpause.result.
+  const schedRes = state.stages.scheduleUnpause?.result;
+  if (schedRes && schedRes.followUp !== 'timelock.unpause()') {
+    state.stages.scheduleUnpause.result = { ...schedRes, followUp: 'timelock.unpause()', notBefore: schedRes.unpauseAvailableAt };
+    save();
+  }
+  const followUp = state.stages.scheduleUnpause?.result;
+  if (followUp?.followUp) log('DONE. Follow-up recorded in state:', followUp.followUp, 'from guardian, not before', new Date(followUp.notBefore * 1000).toISOString());
 } catch (e) {
   console.error('FATAL', e);
-  process.exit(1);
+  process.exitCode = 1;
+} finally {
+  releaseLock();
 }
