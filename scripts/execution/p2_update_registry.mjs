@@ -6,12 +6,17 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const REG = root + '/deployments/k9usd.chikyu.json';
 const reg = JSON.parse(readFileSync(REG, 'utf8'));
+// OPS-04 loud guard: this script still writes the stale v1 layout (reg.instance singular) and
+// clobbers reg.dex. The committed registry is schema v2 (reg.instances, per-currency) — the exact
+// file a re-run would corrupt — so refuse to run against any registry carrying the v2 marker.
+if (reg.schema === 'dogeforex.registry/v2' || (typeof reg.instances === 'object' && reg.instances !== null))
+  throw new Error('registry schema v2 required; this script is stale, do not run');
 const st = JSON.parse(readFileSync('/Users/tonicaradonna/.dogeforex/p2-state.json', 'utf8'));
 const R = st.summary.results;
 
 const CR = { 'P1-conservative': 171.43, 'P2-degen': 116.13, 'P3-arena-bait': 103.8, 'wDOGE-conservative': 150.04, 'WUFF-150': 150.02 };
 
-reg.updatedAt = '2026-10-14T13:20:00Z';
+reg.updatedAt = new Date().toISOString();
 reg.updatedBy = 'P2 execution (scripts/execution/p2_seed_positions.mjs)';
 
 reg.shared.MOFX.treasuryMintP2 = { tx: R.mofxMint.tx, amount: '13700000000000000000000', note: '13,200 position collateral (P1 6,000 / P2 3,600 / P3 3,600) + 500 ref-pool leg' };
