@@ -64,6 +64,16 @@ const done = (k) => state.stages[k]?.done === true;
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 const fmtE = (v) => ethers.formatEther(v);
 
+// Total fee incl. L1 data fee: ethers' parsed receipt drops the chain-specific
+// l1Fee field, so re-fetch the raw receipt (OPS-02: v1 read receipt.fee = L2
+// execution fee only and passed at 0.00x baseline — WRONG; same fix as p3/p4).
+async function totalFee(rc) {
+  const raw = await provider.send('eth_getTransactionReceipt', [rc.hash]);
+  const l2 = BigInt(raw.gasUsed) * BigInt(raw.effectiveGasPrice);
+  const l1 = raw.l1Fee ? BigInt(raw.l1Fee) : 0n;
+  return l1 + l2;
+}
+
 function isqrt(y) {
   if (y < 0n) throw new Error('isqrt neg');
   let x = y, z = (y + 1n) / 2n;
@@ -83,9 +93,9 @@ async function feePreflight() {
   const tx = await t.transfer(w.deployer.address, 0n);
   const rc = await tx.wait(1);
   const bytes = (tx.data.length - 2) / 2;
-  const rate = Number(fmtE(rc.fee)) / bytes;
+  const rate = Number(fmtE(await totalFee(rc))) / bytes;
   const ratio = rate / 0.000071;
-  log(`  probe: ${bytes} calldata bytes, fee ${fmtE(rc.fee)} DOGE => ${rate.toFixed(6)} DOGE/B (ratio ${ratio.toFixed(2)}x baseline)`);
+  log(`  probe: ${bytes} calldata bytes, total fee ${fmtE(await totalFee(rc))} DOGE => ${rate.toFixed(6)} DOGE/B (ratio ${ratio.toFixed(2)}x baseline)`);
   if (ratio > 2) throw new Error(`FEE REGIME SHIFT: ${ratio.toFixed(2)}x baseline > 2x — abort per runbook §1.1`);
   state.stages.feePreflight = { done: true, rate, tx: tx.hash };
   save();
@@ -98,9 +108,9 @@ async function guarded(wallet, contract, method, args, opts, label, expectFeeByt
   const rc = await tx.wait(1);
   const bytes = tx.data.length / 2 - 1;
   const expected = 0.011 + feeRate * ((expectFeeBytes ?? bytes) - 110);
-  const fee = Number(fmtE(rc.fee));
-  if (fee > 3 * expected) throw new Error(`${label}: fee ${fee} > 3x expected ${expected.toFixed(4)} — halt`);
-  log(`  ${label}: ok tx=${rc.hash} fee=${fee.toFixed(4)}`);
+  const fee = Number(fmtE(await totalFee(rc)));
+  if (fee > 3 * expected) throw new Error(`${label}: total fee ${fee} > 3x expected ${expected.toFixed(4)} — halt`);
+  log(`  ${label}: ok tx=${rc.hash} totalFee=${fee.toFixed(4)}`);
   return rc;
 }
 
@@ -152,7 +162,7 @@ try {
   await stage('fundTreasury', async () => {
     const tx = await w.deployer.sendTransaction({ to: w.treasury.address, value: SIZES.deployerToTreasuryDoge });
     const rc = await tx.wait(1);
-    log('  deployer->treasury 2.5 tDOGE tx=', rc.hash, 'fee=', fmtE(rc.fee));
+    log('  deployer->treasury 2.5 tDOGE tx=', rc.hash, 'totalFee=', fmtE(await totalFee(rc)));
     return { tx: rc.hash, treasuryDoge: fmtE(await provider.getBalance(w.treasury.address)) };
   });
 
