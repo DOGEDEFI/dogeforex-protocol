@@ -6,7 +6,7 @@
 //   b) challenger approves each instance's K9XXX token for 1,000e18 against its MintingHub (skip if
 //      allowance >= 1,000e18) — the Oct-25 bid() pulls the bid in K9XXX from the bidder via transferFrom
 //      (MintingHub.sol:256); challenger will hold 3,500 minted on Oct-24, so 1,000e18 headroom suffices
-//   c) per-instance staticCall simulation of hub.challenge(position, 100e18, 100e18) FROM the challenger;
+//   c) per-instance staticCall simulation of hub.challenge(position, 100e18, 95e16) FROM the challenger;
 //      the revert selector (or ok) is recorded per instance as proof the simulation path reaches the hub
 // Staged + resumable (state in ~/.dogeforex/challenger-staging.json), pid-locked, fee preflight aborts
 // on a >2x-baseline regime shift, per-tx 3x TOTAL-fee guard — same patterns as p4_guardian_rehearsal.mjs.
@@ -35,7 +35,7 @@ const SIZES = {
   mofxAllowanceMin: ethers.parseUnits('25000', 18), // skip MOFX approve at/above this
   k9BidAllowance: ethers.parseUnits('1000', 18), // Oct-25 bid headroom per instance
   challengeSize: ethers.parseUnits('100', 18), // mirrors the Oct-24 cron call
-  challengeMinPrice: ethers.parseUnits('100', 18), // mirrors the Oct-24 cron call
+  challengeMinPrice: ethers.parseUnits('0.95', 18), // 0.95e18: clears the 1.0e18 position price check (MintingHub.sol:214); 100e18 would revert UnexpectedPrice
   minChallengerDoge: ethers.parseEther('0.5'), // pre-flight affordability floor
 };
 
@@ -202,10 +202,11 @@ try {
   }
 
   // (c) per-instance challenge simulation from the challenger wallet — record revert-or-ok.
-  // NOTE: record-only, never assert a specific selector: the recorded selector per instance is the
-  // proof that the simulation path reaches the hub. Pre-mint, hub.challenge(position, 100e18, 100e18)
-  // reverts before state changes (price check MintingHub.sol:214 precedes the transferFrom at :215),
-  // so a revert here is expected until the Oct-24 run.
+  // NOTE: record-only, never assert a specific selector. Args match the Oct-24 cron exactly:
+  // hub.challenge(position, 100e18, 0.95e18) — minimumPrice 0.95e18 clears the position price
+  // check (MintingHub.sol:214, position price = 1.0e18; a 100e18 minimum reverts UnexpectedPrice).
+  // Pre-staging, the simulation should revert at the MOFX transferFrom (MintingHub.sol:215) —
+  // i.e. funding is the only remaining blocker, which stages a+b remove.
   await stage('challengeSimulation', async () => {
     const r = {};
     for (const code of CODES) {
