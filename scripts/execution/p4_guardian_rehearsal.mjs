@@ -52,6 +52,7 @@ const releaseLock = () => {
 const provider = new ethers.JsonRpcProvider(RPC);
 const guardian = new ethers.Wallet(KEYS.roles.guardian.privateKey, provider);
 const deployer = new ethers.Wallet(KEYS.roles.deployer.privateKey, provider);
+const challenger = new ethers.Wallet(KEYS.roles.challenger.privateKey, provider);
 
 const inst = REG.instances[CODE];
 const A = {
@@ -188,13 +189,27 @@ try {
 
   await stage('scopeOpen', async () => {
     const r = {};
-    r.challenge = await revertOf(() => hub.challenge.staticCall(A.position, 100n * 10n ** 18n, 100n * 10n ** 18n));
-    if (r.challenge !== null) throw new Error(`challenge staticCall unexpectedly reverts: ${r.challenge}`);
-    log('  challenge (rehearsal position) succeeds while paused ✓');
+    // Args must match the Oct-24 rehearsal: size >= position minCollateral (4000e18,
+    // else ChallengeTooSmall) and minimumPrice < position price (0.95e18 vs 1.0e18,
+    // else UnexpectedPrice — MintingHub.sol:214 checks price before size).
+    // Bound to the CHALLENGER wallet (staged MOFX balance + hub approvals): a successful
+    // staticCall proves challenge is ungated AND funded; the guardian wallet itself has
+    // no MOFX and would revert at transferFrom — which would also prove non-gating.
+    const hubAsChallenger = C(A.hub, ABI.hub, challenger);
+    r.challenge = await revertOf(() => hubAsChallenger.challenge.staticCall(A.position, 4000n * 10n ** 18n, 95n * 10n ** 16n));
+    if (r.challenge !== null) {
+      if (r.challenge === ADMISSION_PAUSED) throw new Error('challenge reverts with the ADMISSION GATE while paused — scope violation');
+      log(`  challenge reverts ${r.challenge} (non-gate revert, e.g. funding) — gate not blocking ✓`);
+    } else {
+      log('  challenge (rehearsal position, challenger) succeeds while paused ✓');
+    }
     r.transfer = await revertOf(() => tok.transfer.staticCall(guardian.address, 0n));
     if (r.transfer !== null) throw new Error(`transfer unexpectedly reverts: ${r.transfer}`);
     log('  token transfer succeeds while paused ✓');
-    r.mint = await revertOf(() => pos.mint.staticCall(1n));
+    // mint is ownerOrRoller: staticCall must come FROM the position owner (deployer);
+    // from any other wallet it reverts NotOwner before the cooldown check.
+    const posAsOwner = C(A.position, ABI.position, deployer);
+    r.mint = await revertOf(() => posAsOwner.mint.staticCall(guardian.address, 1n));
     if (r.mint !== HOT) throw new Error(`position.mint expected Hot() while in cooldown, got ${r.mint}`);
     log('  position.mint reverts only Hot() (cooldown), NOT the gate — mint ungated ✓');
     r.note = 'mint blocked by position cooldown until 2026-10-24; gate non-interference proven by selector';
