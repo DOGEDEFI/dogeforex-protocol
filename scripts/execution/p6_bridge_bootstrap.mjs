@@ -211,29 +211,38 @@ try {
   log('instances:', CODES.join(', '));
 
   await stage('preState', async () => {
-    const r = { lpDoge: fmtE(await provider.getBalance(lp.address)), treasuryK9: {}, gaps: [] };
+    const r = { lpDoge: fmtE(await provider.getBalance(lp.address)), treasuryK9: {}, feeGaps: [], unreadable: [] };
     if (ethers.parseEther(r.lpDoge) < SIZES.lpDogeFloor) throw new Error(`lp DOGE ${r.lpDoge} < floor — fund lp first`);
     for (const code of CODES) {
       const { token, stable, bridge } = instOf(code);
       const k9 = await C(token, ABI.token).balanceOf(treasury.address);
       r.treasuryK9[code] = fmtE(k9);
-      if (k9 < SIZES.minTreasuryK9) r.gaps.push(`${code} treasury K9 ${fmtE(k9)} < ${fmtE(SIZES.minTreasuryK9)} (suggestMinter fee unpayable)`);
+      if (k9 < SIZES.minTreasuryK9) r.feeGaps.push(code); // recorded, not fatal: the bootstrap problem, empirically
       const bridgeCheck = await revertInfo(() => C(bridge, ABI.bridge).minted());
-      if (bridgeCheck) r.gaps.push(`${code} bridge unreadable: ${bridgeCheck.msg}`);
+      if (bridgeCheck) r.unreadable.push(`${code}: ${bridgeCheck.msg}`);
     }
-    if (r.gaps.length) throw new Error('preState gaps:\n  ' + r.gaps.join('\n  '));
+    if (r.unreadable.length) throw new Error('unreadable bridges:\n  ' + r.unreadable.join('\n  '));
+    if (r.feeGaps.length) log(`  fee-gap instances (treasury < ${fmtE(SIZES.minTreasuryK9)} K9, suggest fee unpayable): ${r.feeGaps.join(', ')}`);
     return r;
   });
 
   await feePreflight(deployer);
 
-  // --- 1) organic minter application (deferred, not failed, if the admission gate is paused)
+  // --- 1) organic minter application (deferred, not failed, if the admission gate is paused
+  //        or the treasury cannot yet pay the 1,000-unit fee — the bootstrap problem, empirically)
   for (const code of CODES) {
     const { token, bridge } = instOf(code);
     const key = `suggest_${code}`;
     if (done(key)) { log('SKIP (done):', key); continue; }
     log('STAGE:', key);
     const tok = C(token, ABI.token, treasury);
+    const k9Bal = await C(token, ABI.token).balanceOf(treasury.address);
+    if (k9Bal < SIZES.minTreasuryK9) {
+      state.stages[key] = { done: false, deferred: 'fee-gap', note: 'treasury lacks the 1,000-unit suggest fee — acquire K9 organically, then re-run' };
+      save();
+      log(`  ${code}: treasury K9 ${fmtE(k9Bal)} < fee — DEFERRED (bootstrap problem, empirically)`);
+      continue;
+    }
     const probe = await revertInfo(() => tok.suggestMinter.staticCall(bridge, SIZES.appPeriod, SIZES.suggestFee, `G1 test${code} bridge — Frankencoin-start simulation`));
     if (probe) {
       if (probe.msg.includes('AdmissionPaused')) {
