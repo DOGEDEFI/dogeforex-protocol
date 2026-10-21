@@ -4,7 +4,7 @@
   "source": "hardhat-deploy artifacts @ scripts/deployment/deployments/chikyu (constructor args from artifacts only)",
   "network": {
     "chainId": 6281971,
-    "chainName": "DogeOS Chiky\u016b Testnet",
+    "chainName": "DogeOS Chikyū Testnet",
     "rpc": [
       "https://rpc.testnet.dogeos.com"
     ],
@@ -22,8 +22,8 @@
   },
   "feePreflight": {
     "date": "2026-10-18",
-    "baselineDogePerByte": 7.1e-05,
-    "quotedDogePerByte": 5.4e-05,
+    "baselineDogePerByte": 0.000071,
+    "quotedDogePerByte": 0.000054,
     "ratio": 0.76,
     "rule": "abort if quoted L1 fee > 2x 14 Oct baseline (1.42e-4)",
     "verdict": "PASS",
@@ -71,6 +71,11 @@
       "closingBalanceDoge": "2.391230891",
       "gasSpentDoge": "4.180769",
       "note": "INR+NGN core + 4x bootstrap + 4x genesis equity at normalized fees"
+    },
+    "p6": {
+      "date": "2026-10-21",
+      "note": "G1 Frankencoin-start bridge simulation: 11 TestStable + 11 StablecoinBridge deployed; USD completed the full organic path (suggest fee 1000, 900 s window, lp+treasury lock/mint 1:1, lp redeem, testUSD/K9USD pool at par). 10 instances deferred: EUR admission-paused (until Oct-24 unpause), 9 fee-gap (treasury holds 0 K9XXX — the bootstrap problem, empirically). lp wallet 0x152dF87752eB8aB885a3e9F4feC268e184641877. Re-run p6 after Oct-25 to complete.",
+      "stateFile": "~/.dogeforex/bridge-bootstrap.json"
     }
   },
   "updatedAt": "2026-10-19T13:34:03Z",
@@ -86,14 +91,14 @@
     "wdogeNote": "runbook assumption 3 locked: pool legs use the wDOGE with Barkswap liquidity (custom, = router WNativeToken); collateral wraps use the canonical predeploy"
   },
   "deviations": [
-    "star pool sized 5 wDOGE / 0.425 K9USD (task: scale down ~4\u20136 wDOGE from runbook 30/353). Runbook \u00a73.3 K9USD side (353) encodes wDOGE/0.085 \u21d2 $11.76 per wDOGE (138\u00d7 \u00a70.4 rate); seeded at market 0.085 K9USD per wDOGE per \u00a73.4 check, PASS",
-    "pool legs on custom wDOGE 0xF6BD\u202678aE (Barkswap WNativeToken) per runbook assumption 3; canonical predeploy only for position collateral",
-    "P3 minCollateral 3,600 (runbook 3,500 reverts: hub floor minCollateral\u00d7liqPrice \u2265 3500e36 fails at liq 0.98e18)",
-    "P1 minCollateral 4,000 (runbook 5,000 reverts Position.sol:330 price bound liqPrice\u00d7minCollateral \u2264 mintingMaximum); P2 mintingMaximum 3,500 (runbook 3,200 below hub floor)",
-    "all position mints deferred to mintableAt\u22482026-10-19T13:1xZ: minting reverts Hot() during the 5-day initPeriod deny window (runbook \"mint at T0\" is contract-incompatible); minterReserve verification likewise deferred to P2b",
-    "wDOGE position liqPrice 1,000 K9USD/wDOGE (\u224811,765\u00d7 spot): market-priced wDOGE collateral infeasible on treasury float (hub floor \u2265297 wDOGE) per runbook finding 2; opened as real-canonical-wDOGE code-path rehearsal, \u2265150% CR at mint",
-    "WUFF position liqPrice 70 K9USD/WUFF per runbook \u00a74.2 intentional-sacrifice range (market 4,300\u00d7 lower would need >1B WUFF)",
-    "treasury tDOGE briefly 1.345 after fee burn (L1 regime ~12\u00d7 baseline, preflight methodology bug); restored to 2.345 via 1.0 tDOGE deployer top-up",
+    "star pool sized 5 wDOGE / 0.425 K9USD (task: scale down ~4–6 wDOGE from runbook 30/353). Runbook §3.3 K9USD side (353) encodes wDOGE/0.085 ⇒ $11.76 per wDOGE (138× §0.4 rate); seeded at market 0.085 K9USD per wDOGE per §3.4 check, PASS",
+    "pool legs on custom wDOGE 0xF6BD…78aE (Barkswap WNativeToken) per runbook assumption 3; canonical predeploy only for position collateral",
+    "P3 minCollateral 3,600 (runbook 3,500 reverts: hub floor minCollateral×liqPrice ≥ 3500e36 fails at liq 0.98e18)",
+    "P1 minCollateral 4,000 (runbook 5,000 reverts Position.sol:330 price bound liqPrice×minCollateral ≤ mintingMaximum); P2 mintingMaximum 3,500 (runbook 3,200 below hub floor)",
+    "all position mints deferred to mintableAt≈2026-10-19T13:1xZ: minting reverts Hot() during the 5-day initPeriod deny window (runbook \"mint at T0\" is contract-incompatible); minterReserve verification likewise deferred to P2b",
+    "wDOGE position liqPrice 1,000 K9USD/wDOGE (≈11,765× spot): market-priced wDOGE collateral infeasible on treasury float (hub floor ≥297 wDOGE) per runbook finding 2; opened as real-canonical-wDOGE code-path rehearsal, ≥150% CR at mint",
+    "WUFF position liqPrice 70 K9USD/WUFF per runbook §4.2 intentional-sacrifice range (market 4,300× lower would need >1B WUFF)",
+    "treasury tDOGE briefly 1.345 after fee burn (L1 regime ~12× baseline, preflight methodology bug); restored to 2.345 via 1.0 tDOGE deployer top-up",
     "EUR..BRL: bootstrap recipients all null in instances.json -> defaulted to deployer per deploy script (testnet convenience)",
     "EUR..BRL: guardian null -> GuardianTimelock not deployed; admission gate fully open (Frankencoin-default behavior)",
     "master wallet (0x3f1a..) holds no spendable key in keys.json (HD-derived, mnemonic elsewhere); funding used treasury + bot wallets instead",
@@ -264,7 +269,7 @@
         "minterReserve": {
           "before": "0.0",
           "after": "2646.35",
-          "check": "expected = sum(minted * reserveContributionPPM): 3500*.20+3100*.10+3399*.05+2666*.20+4666*.20 = 2646.35 \u2014 EXACT MATCH"
+          "check": "expected = sum(minted * reserveContributionPPM): 3500*.20+3100*.10+3399*.05+2666*.20+4666*.20 = 2646.35 — EXACT MATCH"
         }
       },
       "deployment": {
@@ -308,7 +313,7 @@
           "deviationPct": 0,
           "priceAfter": "46643963977662426195",
           "totalSharesAfter": "1607.92509049867943",
-          "note": "\u00b11% assert vs calculateShares preview \u2014 PASS (0.000%); preview read at equity=6,000 (1,000 tranche1 + 5\u00d71,000 opening fees)"
+          "note": "±1% assert vs calculateShares preview — PASS (0.000%); preview read at equity=6,000 (1,000 tranche1 + 5×1,000 opening fees)"
         }
       },
       "liquidity": {
@@ -327,7 +332,7 @@
           "globalStatePrice": "271750355492741790810760317537",
           "impliedK9usdPerWdoge": 0.085,
           "targetRate": 0.085,
-          "check": "globalState quote within 20% of \u00a70.4 rate \u2014 PASS (0.085, lesson \u00a73.4: never derive price from reserves)",
+          "check": "globalState quote within 20% of §0.4 rate — PASS (0.085, lesson §3.4: never derive price from reserves)",
           "createTx": "0xff08cb9c297f7bd97bcf64577c0588ae951890babe0a233c8be4be5b1a7b530a",
           "initializeTx": "0xebec4fa638704284897d11f54267f467770e74b4263b3653885a6539a5110a69",
           "mintTx": "0x909238ef609e78f42526040196efd7dd0d66b14dfac48c8b837eece467f55eb0",
@@ -344,7 +349,7 @@
             "mofx": "500.0",
             "k9usd": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
@@ -352,7 +357,7 @@
           "tickSpacing": 60,
           "globalStatePrice": "79228162514264337593543950336",
           "impliedMofxPerK9usd": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x045155e53f98347548753e2f98ad4a1d0c4ac1bd4a3c3987327e1ff91f9baccf",
           "initializeTx": "0x635a1902f66afad90380ecdd544d0ce4de30ff857dd3af888b7d9c12a2b66073",
           "mintTx": "0x3edc0cb4018d6bf9e92deef9225675c03fa3024a80072a9f1795a700dfa88b8c",
@@ -372,7 +377,7 @@
           },
           "mofxMintTx": "0xb9bf93e0976d980ee82ebb6b2d00e297e4abc579624f3a9fafe7d4ea45150424",
           "wuffSourcingTx": "0x40fab2a4349307a5c5ba3699a3371c2a1cc74ba9a2de893a809bdde9a2aac160",
-          "wuffSource": "noise-fleet deployer (sixr-doge-noise wallet pool #0 0xB3b792aF28412722348D95EC19266805dd5B71f6) \u2192 treasury 50,000 WUFF",
+          "wuffSource": "noise-fleet deployer (sixr-doge-noise wallet pool #0 0xB3b792aF28412722348D95EC19266805dd5B71f6) → treasury 50,000 WUFF",
           "wrapCustomTx": "0xfdfff6cb9670714df86f75ce6efa9f69922afedfa7c3edc4e31b082519d905da",
           "wrapCanonTx": "0xe6560cd1604f552516229bdd56b970efe233cc85f934fb408993bc38e7591c45"
         },
@@ -384,10 +389,10 @@
           "denybot": "2.0",
           "watcher": "1.0"
         },
-        "botBalancesNote": "S-19 (light): all bot wallets \u22651 tDOGE \u2014 recorded, no action",
+        "botBalancesNote": "S-19 (light): all bot wallets ≥1 tDOGE — recorded, no action",
         "feeRegime": {
-          "finding": "L1 data fee dominates and has a large per-tx fixed component: observed 0.04\u20130.09 DOGE/tx total (small txs \u22488e-4 DOGE/B, ~12\u00d7 the 14 Oct 7.1e-5/B baseline; large txs \u22487e-5/B)",
-          "preflightBug": "P2 preflight v1 read receipt.fee only (L2 execution fee, excludes L1 data fee) and passed at 0.00x baseline \u2014 WRONG. v2 must quote total fee (Blockscout fee.value or L1 oracle) vs the 2\u00d7 abort rule",
+          "finding": "L1 data fee dominates and has a large per-tx fixed component: observed 0.04–0.09 DOGE/tx total (small txs ≈8e-4 DOGE/B, ~12× the 14 Oct 7.1e-5/B baseline; large txs ≈7e-5/B)",
+          "preflightBug": "P2 preflight v1 read receipt.fee only (L2 execution fee, excludes L1 data fee) and passed at 0.00x baseline — WRONG. v2 must quote total fee (Blockscout fee.value or L1 oracle) vs the 2× abort rule",
           "totalGasSpentDoge": "1.28",
           "action": "preflight-fee methodology fix required before P3; consider batching txs"
         },
@@ -431,6 +436,29 @@
         },
         "minterReserveAfter": "2646.35",
         "executedBy": "one-shot cron 01M59P0WV8A8P0AG6KD0J1B7MZ (P2b auto-run)"
+      },
+      "testStable": {
+        "address": "0xf8c3C3e4a5DB150A7ecf0B12b4854a20c8F5528A",
+        "name": "DogeOS Test USD",
+        "symbol": "testUSD",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x8285d72635222fD631f40A10A0347f6a15a14d35",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false,
+        "minter": true,
+        "suggestTx": "0xcbd717ad5b127b7a59fe9492de270a6daed2bebfb6db88404d95ae04ba7b05b3",
+        "simPool": {
+          "pair": "testUSD/USD",
+          "pool": "0xDa9175C0e395214dA0373b33ddC998f1912A4838",
+          "lpTokenId": "2552",
+          "lpOwner": "0x152dF87752eB8aB885a3e9F4feC268e184641877",
+          "impliedTestStablePerK9": 1
+        }
       }
     },
     "EUR": {
@@ -486,19 +514,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0x94423fa7366f145ce545c5604608eb73a9b5dbd95c03d4042b60bbde58f02e7f"
@@ -554,20 +582,20 @@
             "mofx": "500.0",
             "k9eur": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x70bdc79513a5571ac3680047546b51d25ce572f9e63877f09ebbf973f9362926",
           "initializeTx": "0x733548a235e7d5629f9f39b9ea3a0b08eaffff6a6bef6e58fa61f0deaac3b8c2",
           "mintTx": "0x10958a1b487e1aeafb30d75098bf9f9aafee1a4672b35ccec6be1b0b8c995921",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x67297bd6C42fD7da99Dc63afE52e2fAB5F150cFb",
@@ -581,6 +609,20 @@
         "mintableAt": "2026-10-24T13:30:38.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x8E43b93cD0284df9cE01b4bC613891775837FFe8",
+        "name": "DogeOS Test EUR",
+        "symbol": "testEUR",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x13aD97ec6E2529068C9D09bADbF7D497f55f9893",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "JPY": {
@@ -636,19 +678,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0x371a4e45d877f75eac3a4087f9bd31bb5eb9ec01ef5c271932a9d920493b45f5"
@@ -704,20 +746,20 @@
             "mofx": "500.0",
             "k9jpy": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x46b8211287d0050f04fc134b63fb2253505eecd24030fa7cd0104946d897f261",
           "initializeTx": "0x7eebe2a0e1f18d45d3edd3ff47ed3f60bb41b69a9e48d0f5a9be9d62e5e5f618",
           "mintTx": "0xbb95e4aab253bcc25ce355ff39555a5007725fc97a1e5b952e5e07519f456733",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x201B4f8804885A711b17b2D87B8b5f993C6DDE85",
@@ -731,6 +773,20 @@
         "mintableAt": "2026-10-24T13:30:53.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x2a5abf70236098aA7D18Ab29E2858e8BA6A8AF59",
+        "name": "DogeOS Test JPY",
+        "symbol": "testJPY",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x65b3373B6cB9ca5Fe6379356edeA3ceE61636aF9",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "GBP": {
@@ -786,19 +842,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0xfece70b92a383bf2926ea3fbeccdc7fc972a3e851084a734e4f0cfecda681326"
@@ -854,20 +910,20 @@
             "mofx": "500.0",
             "k9gbp": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x5577a2cbdbf1a9372db31630468cf21cf232edb5ab0913325c50196e208b125a",
           "initializeTx": "0x5518a60c4ad05fb8c8b2c0e26012d1b97ef8cce6237a27a4ceb875a282b9b82d",
           "mintTx": "0x44c6248d2c27cb45bf9638b99fb920a835f1150e7209b717e07f9e21838725ca",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x426e7DB305DB312389de26dcBeA5625B3d7eC43F",
@@ -881,6 +937,20 @@
         "mintableAt": "2026-10-24T13:31:08.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x251c289498497967b9C84b79c51e4281A5a02A51",
+        "name": "DogeOS Test GBP",
+        "symbol": "testGBP",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0xC023D844678602d42f698A23eD429341b5fE885a",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "AUD": {
@@ -936,19 +1006,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0xdd84cf6ad8b35abb902b9c33411db169c01ec3eed6d637b4b3d01de9b0e20c95"
@@ -1004,20 +1074,20 @@
             "mofx": "500.0",
             "k9aud": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0xc4e23da6c5e679da5b05f265762aae4c2c625568099100747dfbc96f7b60e301",
           "initializeTx": "0x60db29e8da87734e7cf29527c9305fb9dbd9804344bfcd586ed8ea25c5937222",
           "mintTx": "0xd28c0ac100cac25ba2f5599f67f8b415bde02e40e6dc4a0aa6bd6a56b2c24d05",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x4E50a674fbE8db96bDb0CBEe9193b84C4aD758e3",
@@ -1031,6 +1101,20 @@
         "mintableAt": "2026-10-24T13:31:23.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x0035A56458F96050214375Ff7d5Ca5aA58A139D6",
+        "name": "DogeOS Test AUD",
+        "symbol": "testAUD",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x7cd06c68373EAb979aFe1c939E6b9FFC98197fDf",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "CNY": {
@@ -1086,19 +1170,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0x33a443ccb0b9ebf589c3a797e12f1214cff5b1f75cb44af6b3c9e6118dffae0b"
@@ -1154,20 +1238,20 @@
             "mofx": "500.0",
             "k9cny": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x12b1ddbbf8e11ccbc804b05f8710f600207ff572367a262418a3dca8adc4a83c",
           "initializeTx": "0xc9ad63a6c3cfdea25527526416381194f51bc111f663e7ab91bda41208f88e60",
           "mintTx": "0x91648750c48d35f8b8b656f7f5a7935b1be7e4443b0434d4c32ee24d9028c9cf",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x4D4F619a0d59d42fA2291d93cBF46659b93b8797",
@@ -1181,6 +1265,20 @@
         "mintableAt": "2026-10-24T13:31:38.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0xB3c74fDdf7c44Da7C4b4aD319C6FB60d73351c1d",
+        "name": "DogeOS Test CNY",
+        "symbol": "testCNY",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x1E1648707f10c230B2045133440780C90350c5CA",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "BRL": {
@@ -1236,19 +1334,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0xd67983805734f8c1d7d96e0df0fc95da48dc302192736b28d064deb9922648dc"
@@ -1304,20 +1402,20 @@
             "mofx": "500.0",
             "k9brl": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0xf85d8ea26b783f4366c98955425bebbc007189acd2d5675c65ca27172d64e315",
           "initializeTx": "0xc2da206959e5d19beddf3d33729f1a28ea0366cda1a6ad51293aef505788a169",
           "mintTx": "0xeade19a4ad8e6bfebd6a668ce6dd7b4a75745922097d132e4d0ddafa85c5dd22",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x0B47A96357Cb377CfC391fA0A9367eA542F67bf4",
@@ -1331,6 +1429,20 @@
         "mintableAt": "2026-10-24T13:31:50.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0xDa69c87801ed31AE4BF52cFF5B6a5B5DF5f1022f",
+        "name": "DogeOS Test BRL",
+        "symbol": "testBRL",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x1fF07C36CB5f4b5c24F1cEa1e3fcAC0b8DCD878d",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "PKR": {
@@ -1386,19 +1498,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0xb2464752b24f98ae59729e23ed8d82f4ee019bd6b5c9e19c55d34fea1bb68c69"
@@ -1454,20 +1566,20 @@
             "mofx": "500.0",
             "k9pkr": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x6403d7577db9c41205d340be84bf86d388add8b803ee86df50cf9f6336c7b660",
           "initializeTx": "0x0ee4042f819ce71ffa8b4bc6a7ac22c02ca466ff057159c621e121d3fe811294",
           "mintTx": "0x2b348432fa9b6e5486a0ac0e03fc828f1f93fa63ccb17c521a7cc35d659c6de9",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0xDb8727F9666c5244407F4745dd41047f2B1A84a0",
@@ -1481,6 +1593,20 @@
         "mintableAt": "2026-10-24T13:32:05.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x76F4291180bd1D5349f8401E8Ec208b28eB27718",
+        "name": "DogeOS Test PKR",
+        "symbol": "testPKR",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x1632618c9088BaBa94D4A6352086F49dB0fC8995",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "BDT": {
@@ -1536,19 +1662,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0x6ce85df917e2b9fa94849fd8e5c94944b1deb62248deaa545ce6c89c4a7e1312"
@@ -1604,20 +1730,20 @@
             "mofx": "500.0",
             "k9bdt": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0xb54edacb1b1db136a408f6e528bd3840826f8e762258d593982a60be7c8786ae",
           "initializeTx": "0x3d5a48adab7b131155a9589e60a8256c1fc67c65f07402af18dfcd11a1253c42",
           "mintTx": "0x7f1e87c4b39db5f504941c8141470284c7b1eaf32bd438b516f844f6f3996b5d",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x18C505731139d7974Dc776Ed49c617e50FB96031",
@@ -1631,6 +1757,20 @@
         "mintableAt": "2026-10-24T13:32:20.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0xf91845D71080F62Cd99C9f4bfBAE6CCd4057b405",
+        "name": "DogeOS Test BDT",
+        "symbol": "testBDT",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x3919a24abB6F160e2Ce3F1ae91aF107445e8687E",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "INR": {
@@ -1686,19 +1826,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0x42e95016276e079fdd1316343057f5d66e1452aff0e22a1e6f04ac1476c47ac8"
@@ -1754,20 +1894,20 @@
             "mofx": "500.0",
             "k9inr": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0xd60a89e50c9144176d75873f3c14e19aced910511c6aed3ec443255c93ffac11",
           "initializeTx": "0xb91ac50382e6a46c6055e18222e82a86f03229fcd0253dcb8fd1bcf548b57844",
           "mintTx": "0x239354dee9c8c03ca56c35f737d7ecfa99ee6866cc134a58777df398de93fb90",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0x6DfA7b439b77b021e27D7e24640B7815A1C89914",
@@ -1781,6 +1921,20 @@
         "mintableAt": "2026-10-24T13:32:32.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x98bA1D98Cf0Ec914965e8C2f7F40E9bf051A6bCE",
+        "name": "DogeOS Test INR",
+        "symbol": "testINR",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0xe084A07B88940d11ed3f4C15678811d251437191",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     },
     "NGN": {
@@ -1836,19 +1990,19 @@
         "allocations": {
           "poolSeed": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           },
           "equity": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 250000000000000000000000
+            "amount": 2.5e+23
           },
           "challengerBounty": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 50000000000000000000000
+            "amount": 5e+22
           },
           "incentives": {
             "recipient": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
-            "amount": 100000000000000000000000
+            "amount": 1e+23
           }
         },
         "executeTx": "0xbbc0570ec092e837c2642165ea0ccfba71295dd72cdcf6a46b08650c0e60e9b3"
@@ -1904,20 +2058,20 @@
             "mofx": "500.0",
             "k9ngn": "500.0"
           },
-          "band": "\u00b11% around par",
+          "band": "±1% around par",
           "ticks": [
             -60,
             60
           ],
           "tickSpacing": 60,
           "impliedMofxPerK9": 1,
-          "check": "par 1.000 within \u00b11% \u2014 PASS (oracle-free reference for keeper challenges, \u00a73.2)",
+          "check": "par 1.000 within ±1% — PASS (oracle-free reference for keeper challenges, §3.2)",
           "createTx": "0x4ad467ea5f8a1336f79ca76f37f70702f80dd9ea7f2ef039224b4ecf6edbb376",
           "initializeTx": "0x393c9a8645514a62ba4b66c1e5b4fc11b40b101c53a80a5b7c1167e124148b1c",
           "mintTx": "0xa7046ed7ffb61a510be011048095e426efa77ee7bb5be4ffd34b3e8212a64254",
           "lpOwner": "0x1C96FeA6e75b3D9099c0e103644A76DdDb7153d0"
         },
-        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet \u2014 tracked in BACKLOG"
+        "note": "star pools (K9XXX/wDOGE) not seeded for non-USD instances yet — tracked in BACKLOG"
       },
       "rehearsalPosition": {
         "position": "0xC0619923fd65deCB6e6171A3EAd517d1dEFc0A70",
@@ -1931,6 +2085,20 @@
         "mintableAt": "2026-10-24T13:32:47.000Z",
         "challengePeriodDays": 1,
         "note": "conservative MOFX collateral; challenge rehearsal scheduled: mint+launch 2026-10-24, settle 2026-10-25"
+      },
+      "testStable": {
+        "address": "0x129a75a2DcF58FB2deaf93ABd4a7d50A58E403F9",
+        "name": "DogeOS Test NGN",
+        "symbol": "testNGN",
+        "decimals": 18,
+        "verified": false
+      },
+      "bridge": {
+        "address": "0x797354ACDCC1F61aAaa53fA75Db4CCD888b689f4",
+        "contract": "StablecoinBridge",
+        "limit": "1000000000000000000000000",
+        "horizonWeeks": 52,
+        "verified": false
       }
     }
   }
