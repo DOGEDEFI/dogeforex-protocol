@@ -77,7 +77,7 @@ describe("Equity Tests", () => {
 
   describe("minting shares", () => {
     it("should revert minting less than minimum equity amount", async () => {
-      await expect(equity.invest(floatToDec18(999), 0)).to.be.revertedWith(
+      await expect(equity.invest(floatToDec18(99), 0)).to.be.revertedWith(
         "insuf equity"
       );
     });
@@ -385,9 +385,11 @@ describe("Equity Tests", () => {
         equity.restructureCapTable([], [])
       ).to.be.revertedWithoutReason();
     });
-    it("should burn equity balances of given users", async () => {
-      await ofd.transfer(await equity.getAddress(), floatToDec18(100));
-      await equity.restructureCapTable([], [alice.address, bob.address]);
+    it("should reject zero-vote restructuring below the minimum", async () => {
+      await ofd.transfer(await equity.getAddress(), floatToDec18(99));
+      await expect(
+        equity.restructureCapTable([], [alice.address, bob.address])
+      ).to.be.revertedWithCustomError(equity, "NotQualified");
     });
   });
 });

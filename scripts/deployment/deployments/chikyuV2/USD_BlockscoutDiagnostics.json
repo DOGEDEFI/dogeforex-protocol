@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0",
+  "network": "chikyuV2",
+  "chainId": "6281971",
+  "code": "USD",
+  "checkedAt": "2026-10-27T11:15:41.373Z",
+  "requiredContracts": 8,
+  "sourcifyExactCreationAndRuntimeMatches": 8,
+  "blockscoutDisplayVerified": 0,
+  "complete": false,
+  "onchainTransactionsBroadcast": 0,
+  "attempts": [
+    {
+      "method": "native standard-input",
+      "scope": "all eight contracts",
+      "submissionHttpStatus": 200,
+      "submissionResponse": "Smart-contract verification started",
+      "displayResult": "No contract reported is_verified=true after the polling window or at the final independent check."
+    },
+    {
+      "method": "native multi-part",
+      "scope": "TestUSDC 0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "submissionHttpStatus": 200,
+      "submissionResponse": "Smart-contract verification started",
+      "displayResult": "No is_verified=true result at the final independent check."
+    },
+    {
+      "method": "native flattened-code",
+      "scope": "TestUSDC 0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "submissionHttpStatus": 200,
+      "submissionResponse": "Smart-contract verification started",
+      "displayResult": "No is_verified=true result after 120 seconds or at the final independent check."
+    },
+    {
+      "method": "Etherscan-compatible Hardhat verification",
+      "scope": "TestUSDC with both minimal and full standard-JSON input",
+      "displayResult": "Fail - Unable to verify"
+    },
+    {
+      "method": "verification-result websocket",
+      "scope": "/socket, /socket/v2 and their /websocket transport paths",
+      "displayResult": "HTTP 404; no verification-result event channel was available."
+    }
+  ],
+  "status": "external-blocker",
+  "conclusion": "Blockscout accepted verification jobs but did not publish source for any of the eight contracts. The same sources have eight independent Sourcify exact creation/runtime matches. No contract change or redeployment was performed.",
+  "completionCondition": "All eight Blockscout smart-contract API records report is_verified=true and the public code pages display the verified source."
+}

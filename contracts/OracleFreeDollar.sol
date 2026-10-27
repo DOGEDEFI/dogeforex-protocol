@@ -5,11 +5,10 @@ import "./utils/ERC20PermitLight.sol";
 import "./Equity.sol";
 import "./interface/IReserve.sol";
 import "./interface/IOracleFreeDollar.sol";
-import "./interface/IGuardianTimelock.sol";
 
 /**
- * @title OracleFreeDollar
- * @notice The OracleFreeDollar (OFD) is an ERC-20 token that is designed to track the value of the American Dollar.
+ * @title Currency Token
+ * @notice An ERC-20 token with Frankencoin-style mechanics, designed to track the value of its reference currency.
  * It is not upgradable, but open to arbitrary minting plugins. These are automatically accepted if none of the
  * qualified pool share holders casts a veto, leading to a flexible but conservative governance.
  */
@@ -47,18 +46,8 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     address private immutable _deployer;
 
     /**
-     * @notice Admission gate (guardian). Address of a GuardianTimelock contract, or zero if no
-     * guardian was wired for this instance. While the GuardianTimelock is paused, suggesting new
-     * minters is blocked; everything else (transfers, minting on existing positions, challenges)
-     * always remains open. Zero address = default Frankencoin behavior, gate fully open.
-     * @dev Set once via setGuardian, callable only by the deployer, in the same trust window as
-     * the genesis initialize() calls.
-     */
-    address public guardian;
-
-    /**
      * @notice Map of minters to approval time stamps. If the time stamp is in the past, the minter contract is allowed
-     * to mint OracleFreeDollars.
+     * to mint currency units.
      */
     mapping(address minter => uint256 validityStart) public minters;
 
@@ -71,15 +60,12 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     event MinterDenied(address indexed minter, string message);
     event Loss(address indexed reportingMinter, uint256 amount);
     event Profit(address indexed reportingMinter, uint256 amount);
-    event GuardianSet(address indexed guardian);
 
     error PeriodTooShort();
     error FeeTooLow();
     error AlreadyRegistered();
     error NotMinter();
     error TooLate();
-    error AdmissionPaused();
-    error GuardianAlreadySet();
     error NotDeployer();
 
     modifier minterOnly() {
@@ -87,30 +73,9 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
         _;
     }
 
-    /**
-     * @notice Admission gate: reverts while the guardian (GuardianTimelock) is paused. Applies to
-     * new-minter suggestions and new-position admission only; transfers, existing minters, and the
-     * challenge game are never affected.
-     */
-    modifier whenAdmissionOpen() {
-        address _guardian = guardian;
-        if (_guardian != address(0) && IGuardianTimelock(_guardian).paused()) revert AdmissionPaused();
-        _;
-    }
 
     /**
-     * @notice Wire the guardian (GuardianTimelock) once. Only the deployer may call this, mirroring
-     * the initialize() trust window. If never called, the gate stays open forever.
-     */
-    function setGuardian(address _guardian) external {
-        if (msg.sender != _deployer) revert NotDeployer();
-        if (guardian != address(0)) revert GuardianAlreadySet();
-        guardian = _guardian;
-        emit GuardianSet(_guardian);
-    }
-
-    /**
-     * @notice Initiates the OracleFreeDollar with the provided minimum application period for new plugins
+     * @notice Initiates the currency token with the provided minimum application period for new plugins
      * in seconds, for example 10 days, i.e. 3600*24*10 = 864000
      * @param _minApplicationPeriod Minimal application period for new minters, in seconds
      * @param _name                 Currency display name, e.g. "DogeForex Dollar" (K9USD)
@@ -140,15 +105,15 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * @notice Publicly accessible method to suggest a new way of minting OracleFreeDollar.
+     * @notice Publicly accessible method to suggest a new way of minting currency units.
      * @dev The caller has to pay an application fee that is irrevocably lost even if the new minter is vetoed.
      * The caller must assume that someone will veto the new minter unless there is broad consensus that the new minter
-     * adds value to the OracleFreeDollar system. Complex proposals should have application periods and applications fees
+     * adds value to the currency system. Complex proposals should have application periods and applications fees
      * above the minimum. It is assumed that over time, informal ways to coordinate on new minters emerge. The message
      * parameter might be useful for initiating further communication. Maybe it contains a link to a website describing
      * the proposed minter.
      *
-     * @param _minter              An address that is given the permission to mint OracleFreeDollars
+     * @param _minter              An address that is given the permission to mint currency units
      * @param _applicationPeriod   The time others have to veto the suggestion, at least MIN_APPLICATION_PERIOD
      * @param _applicationFee      The fee paid by the caller, at least MIN_FEE
      * @param _message             An optional human readable message to everyone watching this contract
@@ -158,7 +123,7 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
         uint256 _applicationPeriod,
         uint256 _applicationFee,
         string calldata _message
-    ) external override whenAdmissionOpen {
+    ) external override {
         if (_applicationPeriod < MIN_APPLICATION_PERIOD) revert PeriodTooShort();
         if (_applicationFee < MIN_FEE) revert FeeTooLow();
         if (minters[_minter] != 0) revert AlreadyRegistered();
@@ -192,7 +157,7 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * @notice Allows minters to register collateralized debt positions, thereby giving them the ability to mint OracleFreeDollars.
+     * @notice Allows minters to register collateralized debt positions, thereby giving them the ability to mint currency units.
      * @dev It is assumed that the responsible minter that registers the position ensures that the position can be trusted.
      */
     function registerPosition(address _position) external override {
@@ -201,7 +166,7 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * @notice The amount of equity of the OracleFreeDollar system in OFD, owned by the holders of OracleFreeDollar Pool Shares.
+     * @notice The amount of equity of the currency system in currency units, owned by the pool-share holders.
      * @dev Note that the equity contract technically holds both the minter reserve as well as the equity, so the minter
      * reserve must be subtracted. All fees and other kind of income is added to the Equity contract and essentially
      * constitutes profits attributable to the pool share holders.
@@ -228,7 +193,7 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * @notice Mints the provided amount of OFD to the target address, automatically forwarding
+     * @notice Mints the provided amount of currency units to the target address, automatically forwarding
      * the minting fee and the reserve to the right place.
      */
     function mintWithReserve(
@@ -249,14 +214,14 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * Anyone is allowed to burn their OFD.
+     * Anyone is allowed to burn their currency units.
      */
     function burn(uint256 _amount) external {
         _burn(msg.sender, _amount);
     }
 
     /**
-     * @notice Burn someone elses OFD.
+     * @notice Burn someone elses currency units.
      */
     function burnFrom(address _owner, uint256 _amount) external override minterOnly {
         _burn(_owner, _amount);
@@ -270,9 +235,9 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
      * Design rule: Minters calling this method are only allowed to so for tokens amounts they previously minted with
      * the same _reservePPM amount.
      *
-     * For example, if someone minted 50 OFD earlier with a 20% reserve requirement (200000 ppm), they got 40 OFD
-     * and paid 10 OFD into the reserve. Now they want to repay the debt by burning 50 OFD. When doing so using this
-     * method, 50 OFD get burned and on top of that, 10 OFD previously assigned to the minter's reserved are
+     * For example, if someone minted 50 currency units earlier with a 20% reserve requirement (200000 ppm), they got 40 currency units
+     * and paid 10 currency units into the reserve. Now they want to repay the debt by burning 50 currency units. When doing so using this
+     * method, 50 currency units get burned and on top of that, 10 currency units previously assigned to the minter's reserved are
      * reassigned to the pool share holders.
      */
     function burnWithoutReserve(uint256 amount, uint32 reservePPM) public override minterOnly {
@@ -292,10 +257,10 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
      * requirement. The caller is only allowed to use this method for tokens also minted through the caller with the
      * same _reservePPM amount.
      *
-     * Example: the calling contract has previously minted 100 OFD with a reserve ratio of 20% (i.e. 200000 ppm).
-     * Now they have 41 OFD that they do not need so they decide to repay that amount. Assuming the reserves are
+     * Example: the calling contract has previously minted 100 currency units with a reserve ratio of 20% (i.e. 200000 ppm).
+     * Now they have 41 currency units that they do not need so they decide to repay that amount. Assuming the reserves are
      * only 90% covered, the call to burnWithReserve will burn the 41 plus 9 from the reserve, reducing the outstanding
-     * 'debt' of the caller by 50 OFD in total. This total is returned by the method so the caller knows how much less
+     * 'debt' of the caller by 50 currency units in total. This total is returned by the method so the caller knows how much less
      * they owe.
      */
     function burnWithReserve(
@@ -313,9 +278,9 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
      * @notice Burns the target amount taking the tokens to be burned from the payer and the payer's reserve.
      * Only use this method for tokens also minted by the caller with the same _reservePPM.
      *
-     * Example: the calling contract has previously minted 100 OFD with a reserve ratio of 20% (i.e. 200000 ppm).
-     * To burn half of that again, the minter calls burnFrom with a target amount of 50 OFD. Assuming that reserves
-     * are only 90% covered, this call will deduct 41 OFD from the payer's balance and 9 from the reserve, while
+     * Example: the calling contract has previously minted 100 currency units with a reserve ratio of 20% (i.e. 200000 ppm).
+     * To burn half of that again, the minter calls burnFrom with a target amount of 50 currency units. Assuming that reserves
+     * are only 90% covered, this call will deduct 41 currency units from the payer's balance and 9 from the reserve, while
      * reducing the minter reserve by 10.
      */
     function burnFromWithReserve(
@@ -364,11 +329,11 @@ contract OracleFreeDollar is ERC20PermitLight, IOracleFreeDollar {
     }
 
     /**
-     * @notice Notify the OracleFreeDollar that a minter lost economic access to some coins. This does not mean that the coins are
-     * literally lost. It just means that some OFD will likely never be repaid and that in order to bring the system
-     * back into balance, the lost amount of OFD must be removed from the reserve instead.
+     * @notice Notify the currency token that a minter lost economic access to some coins. This does not mean that the coins are
+     * literally lost. It just means that some currency units will likely never be repaid and that in order to bring the system
+     * back into balance, the lost amount of currency units must be removed from the reserve instead.
      *
-     * For example, if a minter printed 1 million OFD for a mortgage and the mortgage turned out to be unsound with
+     * For example, if a minter printed 1 million currency units for a mortgage and the mortgage turned out to be unsound with
      * the house only yielding 800'000 in the subsequent auction, there is a loss of 200'000 that needs to be covered
      * by the reserve.
      */

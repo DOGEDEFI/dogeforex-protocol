@@ -36,7 +36,7 @@ contract PositionRoller {
      * The following is assumed:
      * - If the limit of the target position permits, the user wants to roll everything
      * - The user does not want to add additional collateral, but excess collateral is returned
-     * - If not enough can be minted in the new position, it is ok for the roller to use OFD from the msg.sender
+     * - If not enough can be minted in the new position, it is ok for the roller to use currency units from the msg.sender
      */
 	function rollFully(IPosition source, IPosition target) external {
 		rollFullyWithExpiration(source, target, target.expiration());

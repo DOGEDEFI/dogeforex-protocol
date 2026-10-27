@@ -45,6 +45,8 @@ describe("Plugin Veto Tests", () => {
     // owner also mints some to be able to veto
     await mockXOFD.approve(await bridge.getAddress(), amount);
     await bridge.mint(amount);
+    const equity = await ethers.getContractAt("Equity", await ofd.reserve());
+    await equity.invest(floatToDec18(1000), 0);
   });
 
   describe("create secondary bridge plugin", () => {

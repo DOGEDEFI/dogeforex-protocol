@@ -377,8 +377,8 @@ try {
       const spacing = Number(await p.tickSpacing());
       const tickLower = Math.floor(-51 / spacing) * spacing;
       const tickUpper = Math.ceil(51 / spacing) * spacing;
-      await ensureAllowance(lp, stable, BARKSWAP.pm, SIZES.poolStable, `${code} lp testStable->PM`);
-      await ensureAllowance(lp, token, BARKSWAP.pm, SIZES.poolK9, `${code} lp K9->PM`);
+      await ensureAllowance(lp, stable, BARKSWAP.pm, SIZES.poolStable, ethers.MaxUint256, `${code} lp testStable->PM`);
+      await ensureAllowance(lp, token, BARKSWAP.pm, SIZES.poolK9, ethers.MaxUint256, `${code} lp K9->PM`);
       const pm = C(BARKSWAP.pm, ABI.pm, lp);
       const stableIs0 = t0.toLowerCase() === stable.toLowerCase();
       const amt0 = stableIs0 ? SIZES.poolStable : SIZES.poolK9;

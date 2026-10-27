@@ -78,8 +78,13 @@
       "stateFile": "~/.dogeforex/bridge-bootstrap.json"
     }
   },
-  "updatedAt": "2026-10-19T13:34:03Z",
-  "updatedBy": "P2b execution + rehearsal positions opened on 10 instances",
+  "updatedAt": "2026-10-27T10:56:37.483Z",
+  "updatedBy": "Read-only V1 rehearsal reconciliation; see chikyu.rehearsal-reconciliation.json",
+  "rehearsalReconciliation": {
+    "artifact": "chikyu.rehearsal-reconciliation.json",
+    "command": "npm run reconcile:v1:rehearsals",
+    "readOnly": true
+  },
   "dex": {
     "engine": "Barkswap (Algebra, ve(3,3))",
     "factory": "0xF3961157f56C983316657f0267B4C04460beE43f",

@@ -1,0 +1,576 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "dogeforex.v1-rehearsal-reconciliation",
+  "network": {
+    "name": "DogeOS Chikyū Testnet",
+    "chainId": "6281971",
+    "rpc": "https://rpc.testnet.dogeos.com",
+    "blockNumber": 8948414,
+    "blockTimestamp": 1793100150,
+    "blockTimestampIso": "2026-10-27T11:22:30.000Z",
+    "blockHash": "0x6eed1a207428eda23afbe15eb5d7e7d891c95de18d7e1df2ea9256a7123586b4"
+  },
+  "checkedAt": "2026-10-27T11:23:59.038Z",
+  "registry": "k9usd.chikyu.json",
+  "readOnly": true,
+  "guardian": {
+    "address": "0xeA968095C2828A7ed16D0336fE626653C4BAB27c",
+    "pauseReceipt": {
+      "hash": "0xcdfe9f9dd718cf0919d9109b4e359fdf46bf85c3247b849b5271efc171f8a012",
+      "status": 1,
+      "blockNumber": 8761795
+    },
+    "current": {
+      "paused": true,
+      "unpauseAvailableAt": "1792813112",
+      "tokenGuardian": "0xeA968095C2828A7ed16D0336fE626653C4BAB27c",
+      "hubAdmissionPaused": true
+    },
+    "events": {
+      "paused": [
+        {
+          "transactionHash": "0xcdfe9f9dd718cf0919d9109b4e359fdf46bf85c3247b849b5271efc171f8a012",
+          "blockNumber": 8761795,
+          "logIndex": 1,
+          "by": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171"
+        }
+      ],
+      "unpauseScheduled": [
+        {
+          "transactionHash": "0x2d81a106c10a218c45f00827c99b319b4f1d9ecac6e9474a6e9c875a83cc4fe3",
+          "blockNumber": 8766397,
+          "logIndex": 3,
+          "by": "0xEFd8D4942fFf4EB1Be2365Ebf3ffFD68d1a5e171",
+          "availableAt": "1792813112"
+        }
+      ],
+      "unpaused": []
+    },
+    "complete": false
+  },
+  "positions": {
+    "EUR": {
+      "position": "0x67297bd6C42fD7da99Dc63afE52e2fAB5F150cFb",
+      "hub": "0x287be8151F3D15ad363f9386780e5355EE5Bd357",
+      "openReceipt": {
+        "hash": "0xfc766a3615181d4bde858ca6f9f5ebfa959a82ab0df15cb0abf0f7e55d2a9b7b",
+        "status": 1,
+        "blockNumber": 8720654
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848638",
+        "expiration": "1798032638",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "JPY": {
+      "position": "0x201B4f8804885A711b17b2D87B8b5f993C6DDE85",
+      "hub": "0xc08c06E19cB9fF18573605aD72Ec4B725e9ebBF7",
+      "openReceipt": {
+        "hash": "0x6fe1d0836a861d3d511b8d2ae69f7bd28887f1a989559a5d5469c3ddf3111569",
+        "status": 1,
+        "blockNumber": 8720659
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848653",
+        "expiration": "1798032653",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "GBP": {
+      "position": "0x426e7DB305DB312389de26dcBeA5625B3d7eC43F",
+      "hub": "0x534fD5145374D7a20dc353EcA512B92b35057B2C",
+      "openReceipt": {
+        "hash": "0x602d10bc402cb20ec4c1243d293d9363c09bc7721d0f31be9884cd9d7f861628",
+        "status": 1,
+        "blockNumber": 8720664
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848668",
+        "expiration": "1798032668",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "AUD": {
+      "position": "0x4E50a674fbE8db96bDb0CBEe9193b84C4aD758e3",
+      "hub": "0xBe78DAC5f06379D15B3d0949c3eb77150c7Aac6f",
+      "openReceipt": {
+        "hash": "0x2480c36ab1eca47b4c54da1e00becefcf3a68c346d0a033aafa8428424a87810",
+        "status": 1,
+        "blockNumber": 8720669
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848683",
+        "expiration": "1798032683",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "CNY": {
+      "position": "0x4D4F619a0d59d42fA2291d93cBF46659b93b8797",
+      "hub": "0xF9334858D269695f85cE678e81F55df65a84a0eE",
+      "openReceipt": {
+        "hash": "0xa81bd854d20f26b7b54be9a2cc3af7529000c16975a64f03762f24836f1e564b",
+        "status": 1,
+        "blockNumber": 8720674
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848698",
+        "expiration": "1798032698",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "BRL": {
+      "position": "0x0B47A96357Cb377CfC391fA0A9367eA542F67bf4",
+      "hub": "0x3B0aE768fb109537fAbF1efa91f488d2D3c3F1C1",
+      "openReceipt": {
+        "hash": "0x7f956c775a9758c6e7a0d1bdaecf2bbb19d05fcca47da37051b38fca3a111897",
+        "status": 1,
+        "blockNumber": 8720678
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848710",
+        "expiration": "1798032710",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "PKR": {
+      "position": "0xDb8727F9666c5244407F4745dd41047f2B1A84a0",
+      "hub": "0x83fDa3a014C72C06B0DB5a451f1C831A5CB1CbEf",
+      "openReceipt": {
+        "hash": "0xf6170a3a9eed756a6acd7625f3e08f9fc11dcfef23c14d0fd8ea19c32ad79ac2",
+        "status": 1,
+        "blockNumber": 8720683
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848725",
+        "expiration": "1798032725",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "BDT": {
+      "position": "0x18C505731139d7974Dc776Ed49c617e50FB96031",
+      "hub": "0x53F33Aa13DbC67Bf0C8DC63B65b7E7dc25a71742",
+      "openReceipt": {
+        "hash": "0x17a0e7d6b56d95aea268c4efb54d0033dd206c0af9313fcf677236317d7f22ee",
+        "status": 1,
+        "blockNumber": 8720688
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848740",
+        "expiration": "1798032740",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "INR": {
+      "position": "0x6DfA7b439b77b021e27D7e24640B7815A1C89914",
+      "hub": "0x573b3381119A789A261A3B6383dd6143D285B3d2",
+      "openReceipt": {
+        "hash": "0x17e7f9d690ab9da6b09440d22adeec2d701bdb4fa52df2cfb53e14d97bdd6465",
+        "status": 1,
+        "blockNumber": 8720692
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848752",
+        "expiration": "1798032752",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    },
+    "NGN": {
+      "position": "0xC0619923fd65deCB6e6171A3EAd517d1dEFc0A70",
+      "hub": "0xbCaCc91219244148211B5ece5b083589899abfB1",
+      "openReceipt": {
+        "hash": "0x19b5fc359b533cc0f0b8746f0641dd827bb1a9037548b735fb2c11d3c036b673",
+        "status": 1,
+        "blockNumber": 8720697
+      },
+      "expected": {
+        "mint": "3500000000000000000000",
+        "challengeSize": "4000000000000000000000",
+        "challenger": "0x82E625F5ACaFd9ea450278F782922E103b1E8589"
+      },
+      "observed": {
+        "expectedMint": false,
+        "expectedChallenge": false,
+        "phaseOneComplete": false,
+        "phaseTwoComplete": false,
+        "status": "not-started"
+      },
+      "current": {
+        "minted": "0",
+        "challengedAmount": "0",
+        "collateral": "0x2F0393CEb21b040722D36b628DB2C75aB0E0b156",
+        "collateralBalance": "6000000000000000000000",
+        "price": "1000000000000000000",
+        "cooldown": "1792848767",
+        "expiration": "1798032767",
+        "minimumCollateral": "4000000000000000000000",
+        "openChallengeNumbers": [],
+        "challenges": []
+      },
+      "events": {
+        "mintingUpdates": [],
+        "challengeStarted": [],
+        "challengeSucceeded": [],
+        "challengeAverted": []
+      }
+    }
+  },
+  "bridges": {
+    "USD": {
+      "bridge": "0x8285d72635222fD631f40A10A0347f6a15a14d35",
+      "token": "0x7cd12A6C4CbcfE87af588d9c3FF8576aB4FBF5A8",
+      "current": {
+        "minted": "31500000000000000000000",
+        "limit": "1000000000000000000000000",
+        "isMinter": true,
+        "validityStart": "1792576221"
+      },
+      "status": "observed-minted"
+    },
+    "EUR": {
+      "bridge": "0x13aD97ec6E2529068C9D09bADbF7D497f55f9893",
+      "token": "0x8a3d30187EA82e55F114Ace84FfdB1a503b61517",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "JPY": {
+      "bridge": "0x65b3373B6cB9ca5Fe6379356edeA3ceE61636aF9",
+      "token": "0x66C4488e55CB19B12b5ebf1126223346EA3bc499",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "GBP": {
+      "bridge": "0xC023D844678602d42f698A23eD429341b5fE885a",
+      "token": "0x6EDE7345fCD567B6c111bBb95B808027fcCD8Fe6",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "AUD": {
+      "bridge": "0x7cd06c68373EAb979aFe1c939E6b9FFC98197fDf",
+      "token": "0x2c1e0F1b165b3cf6152fB10EEfd5f36839a303bC",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "CNY": {
+      "bridge": "0x1E1648707f10c230B2045133440780C90350c5CA",
+      "token": "0x86B40076a1c375200D9AC7f9ab7477dDA970Ee6E",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "BRL": {
+      "bridge": "0x1fF07C36CB5f4b5c24F1cEa1e3fcAC0b8DCD878d",
+      "token": "0x196134777200eF20EFa99C79615BcEE02BA7d63A",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "PKR": {
+      "bridge": "0x1632618c9088BaBa94D4A6352086F49dB0fC8995",
+      "token": "0x9A1b29BD4927DEaF4DB491970A5c4a442fdB4B4A",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "BDT": {
+      "bridge": "0x3919a24abB6F160e2Ce3F1ae91aF107445e8687E",
+      "token": "0xa714CE79900acA2298e729f8caF126BE0FeC60c6",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "INR": {
+      "bridge": "0xe084A07B88940d11ed3f4C15678811d251437191",
+      "token": "0xB319B76C44F89fCB255bfA95877CCbD4595d49e4",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    },
+    "NGN": {
+      "bridge": "0x797354ACDCC1F61aAaa53fA75Db4CCD888b689f4",
+      "token": "0xdB6d2149Db7694f1F66744314bE70E1266873886",
+      "current": {
+        "minted": "0",
+        "limit": "1000000000000000000000000",
+        "isMinter": false,
+        "validityStart": "0"
+      },
+      "status": "not-registered"
+    }
+  },
+  "summary": {
+    "guardianComplete": false,
+    "rehearsalPositions": 10,
+    "phaseOneComplete": 0,
+    "phaseTwoComplete": 0,
+    "challengesOpen": 0,
+    "challengesNotStarted": 10,
+    "bridgesObservedMinted": 1,
+    "bridgesNotRegistered": 10
+  }
+}

@@ -15,10 +15,10 @@ import './Leadrate.sol';
  * adjusted. The ticks counter serves as the basis for calculating the interest
  * due for the individual accounts.
  *
- * The saved OFD are subject to a lockup of up to 3 days and only start to yield
+ * The saved currency units are subject to a lockup of up to 3 days and only start to yield
  * an interest after the lockup ended. The purpose of this lockup is to discourage
  * short-term holdings and to avoid paying interest to transactional accounts.
- * Transactional accounts typically do not need an incentive to hold OracleFreeDollars.
+ * Transactional accounts typically do not need an incentive to hold the currency.
  */
 contract Savings is Leadrate {
 	uint64 public immutable INTEREST_DELAY = uint64(3 days);

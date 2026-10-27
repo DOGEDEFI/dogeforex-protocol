@@ -7,20 +7,19 @@ import './interface/IOracleFreeDollar.sol';
 import './interface/IPosition.sol';
 import './interface/IPositionFactory.sol';
 import './interface/IReserve.sol';
-import './interface/IGuardianTimelock.sol';
 
 import './PositionRoller.sol';
 import './utils/Ownable.sol';
 
 /**
  * @title Minting Hub
- * @notice The central hub for creating, cloning and challenging collateralized OracleFreeDollar positions.
+ * @notice The central hub for creating, cloning and challenging collateralized minting positions.
  * @dev Only one instance of this contract is required, whereas every new position comes with a new position
  * contract. Pending challenges are stored as structs in an array.
  */
 contract MintingHub {
 	/**
-     * @notice Irrevocable fee in OFD when proposing a new position (but not when cloning an existing one).
+     * @notice Irrevocable fee in currency units when proposing a new position (but not when cloning an existing one).
      */
 	uint256 public constant OPENING_FEE = 1000 * 10 ** 18;
 
@@ -69,34 +68,10 @@ contract MintingHub {
 	error InvalidPos();
 	error IncompatibleCollateral();
 	error InsufficientCollateral();
-	error AdmissionPaused();
 
 	modifier validPos(address position) {
 		if (ofd.getPositionParent(position) != address(this)) revert InvalidPos();
 		_;
-	}
-
-	/**
-	 * @notice Admission gate: reverts while the guardian (GuardianTimelock) wired on the token is
-	 * paused. Applies to new-position admission (openPosition, clone) only. Challenges, bids,
-	 * repayments, withdrawals, savings, and plain transfers are NEVER pausable — the challenge
-	 * game and user funds never stop. Zero guardian address = gate open (upstream behavior).
-	 * @dev The guardian address lives on the token (single source of truth); the hub reads it via
-	 * ofd.guardian() so token and hub can never disagree about who the guardian is. The check runs
-	 * as an external-style view call (not inlined) to keep openPosition within the no-viaIR stack
-	 * limit — openPosition sits exactly at the stack ceiling in the upstream code.
-	 */
-	modifier whenAdmissionOpen() {
-		if (admissionGuardianPaused()) revert AdmissionPaused();
-		_;
-	}
-
-	/**
-	 * @notice True while the guardian has admissions paused. Also useful for frontends/bots.
-	 */
-	function admissionGuardianPaused() public view returns (bool) {
-		address _guardian = ofd.guardian();
-		return _guardian != address(0) && IGuardianTimelock(_guardian).paused();
 	}
 
 	constructor(address _ofd, address _leadrate, address _roller, address _factory) {
@@ -107,7 +82,7 @@ contract MintingHub {
 	}
 
 	/**
-     * @notice Open a collateralized loan position. See also https://oracle-free-dollar.gitbook.io/ofd/collateralised-minting/opening-new-position .
+     * @notice Open a collateralized loan position using Frankencoin-style mechanics.
      * @dev For a successful call, you must set an allowance for the collateral token, allowing
      * the minting hub to transfer the initial collateral amount to the newly created position and to
      * withdraw the fees.
@@ -115,7 +90,7 @@ contract MintingHub {
      * @param _collateralAddress        address of collateral token
      * @param _minCollateral     minimum collateral required to prevent dust amounts
      * @param _initialCollateral amount of initial collateral to be deposited
-     * @param _mintingMaximum    maximal amount of OFD that can be minted by the position owner
+     * @param _mintingMaximum    maximal amount of currency units that can be minted by the position owner
      * @param _expirationSeconds position tenor in unit of timestamp (seconds) from 'now'
      * @param _challengeSeconds  challenge period. Longer for less liquid collateral.
      * @param _riskPremium       ppm of minted amount that is added to the applicible minting fee as a risk premium
@@ -135,7 +110,7 @@ contract MintingHub {
 		uint24 _riskPremium,
 		uint256 _liqPrice,
 		uint24 _reservePPM
-	) public whenAdmissionOpen returns (address) {
+	) public returns (address) {
 		{
 			require(_riskPremium <= 1000000);
 			require(CHALLENGER_REWARD <= _reservePPM && _reservePPM <= 1000000);
@@ -148,7 +123,7 @@ contract MintingHub {
 			} catch (bytes memory /*lowLevelData*/) {
 			}
 			if (_initialCollateral < _minCollateral) revert InsufficientCollateral();
-			if (_minCollateral * _liqPrice < 3500 ether * 10 ** 18) revert InsufficientCollateral(); // must start with at least 3500 OFD worth of collateral
+			if (_minCollateral * _liqPrice < 3500 ether * 10 ** 18) revert InsufficientCollateral(); // must start with at least 3500 currency units worth of collateral
 		}
 		IPosition pos = IPosition(
 			POSITION_FACTORY.createNewPosition(
@@ -173,7 +148,7 @@ contract MintingHub {
 		return address(pos);
 	}
 
-	function clone(address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public whenAdmissionOpen returns (address) {
+	function clone(address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public returns (address) {
 		return clone(msg.sender, parent, _initialCollateral, _initialMint, expiration);
 	}
 
@@ -181,7 +156,7 @@ contract MintingHub {
      * @notice Clones an existing position and immediately tries to mint the specified amount using the given collateral.
      * @dev This needs an allowance to be set on the collateral contract such that the minting hub can get the collateral.
      */
-	function clone(address owner, address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public validPos(parent) whenAdmissionOpen returns (address) {
+	function clone(address owner, address parent, uint256 _initialCollateral, uint256 _initialMint, uint40 expiration) public validPos(parent) returns (address) {
 		address pos = POSITION_FACTORY.clonePosition(parent);
 		IPosition child = IPosition(pos);
 		child.initialize(parent, expiration);
@@ -221,7 +196,7 @@ contract MintingHub {
 	}
 
 	/**
-     * @notice Post a bid in OFD given an open challenge.
+     * @notice Post a bid in currency units given an open challenge.
      *
      * @dev In case that the collateral cannot be transfered back to the challenger (i.e. because the collateral token
      * has a blacklist and the challenger is on it), it is possible to postpone the return of the collateral.
@@ -274,7 +249,7 @@ contract MintingHub {
 		} else if (fundsAvailable < repayment) {
 			ofd.coverLoss(address(this), repayment - fundsAvailable); // ensure we have enough to pay everything
 		}
-		ofd.burnWithoutReserve(repayment, reservePPM); // Repay the challenged part, example: 50 OFD leading to 10 OFD in implicit profits
+		ofd.burnWithoutReserve(repayment, reservePPM); // Repay the challenged part, example: 50 currency units leading to 10 currency units in implicit profits
 		return (collateral, offer);
 	}
 

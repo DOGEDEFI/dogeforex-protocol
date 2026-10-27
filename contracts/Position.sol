@@ -22,7 +22,7 @@ contract Position is Ownable, IPosition, MathUtil {
      */
 
 	/**
-     * @notice The ofd price per unit of the collateral below which challenges succeed, (36 - collateral.decimals) decimals
+     * @notice The currency-unit price per unit of collateral below which challenges succeed, with (36 - collateral.decimals) decimals
      */
 	uint256 public price;
 
@@ -78,7 +78,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	address public immutable hub;
 
 	/**
-     * @notice The OracleFreeDollar contract.
+     * @notice The local currency token contract.
      */
 	IOracleFreeDollar public immutable ofd;
 
@@ -93,7 +93,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	uint256 public immutable override minimumCollateral;
 
 	/**
-     * @notice The interest in parts per million per year that is deducted when minting OracleFreeDollars.
+     * @notice The interest in parts per million per year that is deducted when minting currency units.
      * To be paid upfront.
      */
 	uint24 public immutable riskPremiumPPM;
@@ -164,7 +164,7 @@ contract Position is Ownable, IPosition, MathUtil {
 		uint256 _minCollateral, uint256 _initialLimit,
 		uint40 _initPeriod, uint40 _duration, uint40 _challengePeriod,
 		uint24 _riskPremiumPPM, uint256 _liqPrice, uint24 _reservePPM) {
-		require(_initPeriod >= 5 days); // must be at least five days, recommended to use higher values
+		require(_initPeriod >= 3 days); // must be at least three days, recommended to use higher values
 		_setOwner(_owner);
 		original = address(this);
 		hub = _hub;
@@ -174,7 +174,7 @@ contract Position is Ownable, IPosition, MathUtil {
 		reserveContribution = _reservePPM;
 		minimumCollateral = _minCollateral;
 		challengePeriod = _challengePeriod;
-		start = uint40(block.timestamp) + _initPeriod; // at least five days time to deny the position
+		start = uint40(block.timestamp) + _initPeriod; // at least three days time to deny the position
 		cooldown = start;
 		expiration = start + _duration;
 		limit = _initialLimit;
@@ -262,7 +262,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * @notice This is how much the minter can actually use when minting OFD, with the rest being used
+     * @notice This is how much the minter can actually use when minting currency units, with the rest being used
      * assigned to the minter reserve or (if applicable) fees.
      */
 	function getUsableMint(uint256 totalMint, bool afterFees) public view returns (uint256) {
@@ -281,7 +281,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * @notice "All in one" function to adjust the outstanding amount of OFD, the collateral amount,
+     * @notice "All in one" function to adjust the outstanding amount of currency units, the collateral amount,
      * and the price in one transaction.
      */
 	function adjust(uint256 newMinted, uint256 newCollateral, uint256 newPrice) external onlyOwner {
@@ -336,7 +336,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * @notice Mint OFD as long as there is no open challenge, the position is not subject to a cooldown,
+     * @notice Mint currency units as long as there is no open challenge, the position is not subject to a cooldown,
      * and there is sufficient collateral.
      */
 	function mint(address target, uint256 amount) public ownerOrRoller {
@@ -346,7 +346,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * The applicable upfront fee in ppm when minting more OracleFreeDollars based on the annual interest rate and
+     * The applicable upfront fee in ppm when minting more currency units based on the annual interest rate and
      * the expiration of the position.
      */
 	function calculateCurrentFee() public view returns (uint24) {
@@ -354,7 +354,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * The applicable interest rate in ppm when minting more OracleFreeDollars.
+     * The applicable interest rate in ppm when minting more currency units.
      * It consists on the globally valid interest plus an individual risk premium.
      */
 	function annualInterestPPM() public view returns (uint24) {
@@ -388,7 +388,7 @@ contract Position is Ownable, IPosition, MathUtil {
 	}
 
 	/**
-     * @notice Repay some OFD. If too much is repaid, the call fails.
+     * @notice Repay some currency units. If too much is repaid, the call fails.
      * It is possible to repay while there are challenges, but the collateral is locked until all is clear again.
      *
      * The repaid amount should fulfill the following equation in order to close the position,
@@ -544,7 +544,7 @@ contract Position is Ownable, IPosition, MathUtil {
      *
      * @param _bidder   address of the bidder that receives the collateral
      * @param _size     amount of the collateral bid for
-     * @return (position owner, effective challenge size in OFD, amount to be repaid, reserve ppm)
+     * @return (position owner, effective challenge size in collateral units, amount to be repaid, reserve ppm)
      */
 	function notifyChallengeSucceeded(
 		address _bidder,

@@ -66,7 +66,7 @@ contract OFDPSWrapper is ERC20 {
      *
      * Anyone can prevent this method from being executable via the
      * halveHoldingDuration function. Also, it won't be executable in an
-     * expanding market where the number of wrapped FPS doubles every
+     * expanding market where the number of wrapped pool shares doubles every
      * 90 days such that the average holding period of this contract stays
      * below that duration.
      */
@@ -76,12 +76,12 @@ contract OFDPSWrapper is ERC20 {
     }
 
     /**
-     * Reduces the recorded holding duration of the wrapped FPS. This has two effects:
+     * Reduces the recorded holding duration of the wrapped pool shares. This has two effects:
      * - Averts the risk of this contract accumulating too many votes over time (i.e. 98%)
      * - Can prevent "unwrapAndSell" from succeeding (which can be desired to prevent short
-     *   term arbitrage at the cost of all other FPS holders)
+     *   term arbitrage at the cost of all other pool-share holders)
      *
-     * Anyone with 2% of the votes can call this.
+     * Anyone with more than 2% of the votes can call this.
      */
     function halveHoldingDuration(address[] calldata helpers) public {
         ofdps.checkQualified(msg.sender, helpers);

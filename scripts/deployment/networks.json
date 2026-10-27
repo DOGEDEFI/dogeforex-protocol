@@ -1,0 +1,20 @@
+{
+  "hardhat": {
+    "chainId": 31337,
+    "source": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC"
+    },
+    "testBridgeLimitLocal": "1000000"
+  },
+  "chikyuV2": {
+    "chainId": 6281971,
+    "source": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC"
+    },
+    "testBridgeLimitLocal": "1000000"
+  }
+}

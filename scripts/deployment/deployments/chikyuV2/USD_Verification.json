@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "1.0",
+  "network": "chikyuV2",
+  "chainId": "6281971",
+  "code": "USD",
+  "checkedAt": "2026-10-27T11:25:29.947Z",
+  "complete": false,
+  "registry": "USD_V2Registry.json",
+  "addresses": {
+    "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+    "Token": "0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC",
+    "Equity": "0x8596E9E4B980739CE2E6C155e520a0ef46381568",
+    "PositionFactory": "0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB",
+    "PositionRoller": "0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052",
+    "Savings": "0x7004C5e94189A77d38522c261ABA2e3ee23dfC75",
+    "MintingHub": "0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2",
+    "Bridge": "0x1dBb32855fcA4719239d9eBF6dE6483315f76951"
+  },
+  "links": {
+    "deployer": "https://blockscout.testnet.dogeos.com/address/0x8666f1d19e04c7831EA23066a4b14c0260fC2B50#code",
+    "source": "https://blockscout.testnet.dogeos.com/address/0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a#code",
+    "Token": "https://blockscout.testnet.dogeos.com/address/0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC#code",
+    "Equity": "https://blockscout.testnet.dogeos.com/address/0x8596E9E4B980739CE2E6C155e520a0ef46381568#code",
+    "PositionFactory": "https://blockscout.testnet.dogeos.com/address/0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB#code",
+    "PositionRoller": "https://blockscout.testnet.dogeos.com/address/0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052#code",
+    "Savings": "https://blockscout.testnet.dogeos.com/address/0x7004C5e94189A77d38522c261ABA2e3ee23dfC75#code",
+    "MintingHub": "https://blockscout.testnet.dogeos.com/address/0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2#code",
+    "Bridge": "https://blockscout.testnet.dogeos.com/address/0x1dBb32855fcA4719239d9eBF6dE6483315f76951#code"
+  },
+  "receipts": {
+    "TestUSDC": {
+      "hash": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+      "l1FeeWei": "78261941417496838",
+      "l2FeeWei": "7074943581345",
+      "totalFeeWei": "78269016361078183",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314"
+    },
+    "USD_Token": {
+      "hash": "0x9dff78beeb5ce68afe81ccf3f631bc2f35f27cd5c961a5cfe373b2e49ceebd36",
+      "l1FeeWei": "939887769164930439",
+      "l2FeeWei": "59962587068862",
+      "totalFeeWei": "939947731751999301",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x9dff78beeb5ce68afe81ccf3f631bc2f35f27cd5c961a5cfe373b2e49ceebd36"
+    },
+    "USD_PositionFactory": {
+      "hash": "0xb28feb0f2dd1fea8bd9406b39006cbcc0728008881613889c008633f58e8cfda",
+      "l1FeeWei": "493440857494298738",
+      "l2FeeWei": "47841066177370",
+      "totalFeeWei": "493488698560476108",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0xb28feb0f2dd1fea8bd9406b39006cbcc0728008881613889c008633f58e8cfda"
+    },
+    "USD_PositionRoller": {
+      "hash": "0x5ada9dbf36ed22b974b706da99374ba078c51a573d207b58d822194b75d5a59c",
+      "l1FeeWei": "124247402647504211",
+      "l2FeeWei": "16435954022440",
+      "totalFeeWei": "124263838601526651",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x5ada9dbf36ed22b974b706da99374ba078c51a573d207b58d822194b75d5a59c"
+    },
+    "USD_Savings": {
+      "hash": "0xd29d401889ff3bcf01dace53b7e073a58f20799fdd8c8fdc6bd28ffe9c5ad0c0",
+      "l1FeeWei": "228053594767352881",
+      "l2FeeWei": "18355152446110",
+      "totalFeeWei": "228071949919798991",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0xd29d401889ff3bcf01dace53b7e073a58f20799fdd8c8fdc6bd28ffe9c5ad0c0"
+    },
+    "USD_MintingHub": {
+      "hash": "0x635d46e185c831f1b28882f2f47342dadeb3a488f8d9aac924055cd565442051",
+      "l1FeeWei": "399248831263089475",
+      "l2FeeWei": "35307232969310",
+      "totalFeeWei": "399284138496058785",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x635d46e185c831f1b28882f2f47342dadeb3a488f8d9aac924055cd565442051"
+    },
+    "USD_Bridge": {
+      "hash": "0x938b6000554df9c869369f72cc50d7f8ea70758564a1e9c2974eba175b6c64ae",
+      "l1FeeWei": "129282784884603274",
+      "l2FeeWei": "10455935724252",
+      "totalFeeWei": "129293240820327526",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x938b6000554df9c869369f72cc50d7f8ea70758564a1e9c2974eba175b6c64ae"
+    },
+    "TestUSDC funding": {
+      "hash": "0x7487511e81f0f4500014758fefe02a42d83b54bdd6e8b4cd91b5ffc8303377a3",
+      "l1FeeWei": "8207334865201832",
+      "l2FeeWei": "1071845210913",
+      "totalFeeWei": "8208406710412745",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x7487511e81f0f4500014758fefe02a42d83b54bdd6e8b4cd91b5ffc8303377a3"
+    },
+    "tUSDC approval": {
+      "hash": "0x85588677ffdb4ee750f9209d63eaea268db03ee066e2b16273439ab21cfd4560",
+      "l1FeeWei": "8153920797860626",
+      "l2FeeWei": "723527269587",
+      "totalFeeWei": "8154644325130213",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x85588677ffdb4ee750f9209d63eaea268db03ee066e2b16273439ab21cfd4560"
+    },
+    "bridge mint": {
+      "hash": "0x221064851e01edc7096b15e3ffcc5c890739eabcfd24fdf318cf1fc3d930c3a0",
+      "l1FeeWei": "6928256774293896",
+      "l2FeeWei": "2015725052277",
+      "totalFeeWei": "6930272499346173",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x221064851e01edc7096b15e3ffcc5c890739eabcfd24fdf318cf1fc3d930c3a0"
+    },
+    "equity investment": {
+      "hash": "0x19149bdd1adbed06ae51ade7836f4bc324f4914482f65c0d8a2678f487348ae0",
+      "l1FeeWei": "7780312423239825",
+      "l2FeeWei": "2530001267259",
+      "totalFeeWei": "7782842424507084",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x19149bdd1adbed06ae51ade7836f4bc324f4914482f65c0d8a2678f487348ae0"
+    },
+    "Savings": {
+      "hash": "0xcc74fe1b253b55b01cec7a131e96e2ba23ecb9050707483fa4e3a65d524d0542",
+      "l1FeeWei": "8688527698220669",
+      "l2FeeWei": "860195099631",
+      "totalFeeWei": "8689387893320300",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0xcc74fe1b253b55b01cec7a131e96e2ba23ecb9050707483fa4e3a65d524d0542"
+    },
+    "PositionFactory": {
+      "hash": "0x86ea6b2ea66ba49ae20d0090b6a92f4b8a5a79efd172ce9fd58093e93d2855ab",
+      "l1FeeWei": "9170559739745886",
+      "l2FeeWei": "861888551403",
+      "totalFeeWei": "9171421628297289",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x86ea6b2ea66ba49ae20d0090b6a92f4b8a5a79efd172ce9fd58093e93d2855ab"
+    },
+    "PositionRoller": {
+      "hash": "0x102039c4eecf3d297173c17668cdd39180330b9a2f253faa09be82ac8337cf6e",
+      "l1FeeWei": "9116959181625485",
+      "l2FeeWei": "861700390095",
+      "totalFeeWei": "9117820882015580",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x102039c4eecf3d297173c17668cdd39180330b9a2f253faa09be82ac8337cf6e"
+    },
+    "MintingHub": {
+      "hash": "0xcef2055555547bcaaaeb70c92740d43f09d6768de06a6b2f14c804158d85312d",
+      "l1FeeWei": "9063368984103929",
+      "l2FeeWei": "861512228787",
+      "totalFeeWei": "9064230496332716",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0xcef2055555547bcaaaeb70c92740d43f09d6768de06a6b2f14c804158d85312d"
+    },
+    "Bridge": {
+      "hash": "0x100353b9e71335c963a0e53db3c32046bcdc13a943d2953bfd92f2319dbb6d67",
+      "l1FeeWei": "9599737186267483",
+      "l2FeeWei": "863393841867",
+      "totalFeeWei": "9600600580109350",
+      "explorer": "https://blockscout.testnet.dogeos.com/tx/0x100353b9e71335c963a0e53db3c32046bcdc13a943d2953bfd92f2319dbb6d67"
+    }
+  },
+  "positionInitialization": {
+    "minimumSeconds": "259200",
+    "belowMinimumReverts": true,
+    "exactMinimumReadOnlyCallSucceeds": true,
+    "broadcast": false
+  },
+  "genesis": {
+    "minters": {
+      "Savings": "0x7004C5e94189A77d38522c261ABA2e3ee23dfC75",
+      "PositionFactory": "0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB",
+      "PositionRoller": "0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052",
+      "MintingHub": "0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2",
+      "Bridge": "0x1dBb32855fcA4719239d9eBF6dE6483315f76951"
+    },
+    "sourceLockedRaw": "100000000",
+    "localTokenSupply": "100000000000000000000",
+    "initialShares": "1000000000000000000000",
+    "deployerInitialShares": "1000000000000000000000",
+    "initialShareCustody": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+    "guardianOrAllocationMinterAPIs": false
+  },
+  "totalTrackedFeeWei": "2487499394268480206",
+  "maximumTrackedFeeWei": "50000000000000000000",
+  "contractVerification": [
+    {
+      "label": "TestUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "contract": "contracts/test/TestUSDC.sol:TestUSDC",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a#code",
+      "sourcify": {
+        "matchId": "57002768",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:14:19Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:18.428Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "Token",
+      "address": "0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC",
+      "contract": "contracts/OracleFreeDollar.sol:OracleFreeDollar",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC#code",
+      "sourcify": {
+        "matchId": "57003175",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:18:49Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0xBe01772ee4ba9807b4cF68F49E559d456d6f20cC"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:20.780Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "Equity",
+      "address": "0x8596E9E4B980739CE2E6C155e520a0ef46381568",
+      "contract": "contracts/Equity.sol:Equity",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0x8596E9E4B980739CE2E6C155e520a0ef46381568#code",
+      "sourcify": {
+        "matchId": "57003182",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:18:54Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0x8596E9E4B980739CE2E6C155e520a0ef46381568",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0x8596E9E4B980739CE2E6C155e520a0ef46381568"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:22.203Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "PositionFactory",
+      "address": "0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB",
+      "contract": "contracts/PositionFactory.sol:PositionFactory",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB#code",
+      "sourcify": {
+        "matchId": "57003191",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:18:59Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0xFEd78F8a2484588308Ef3F589A9eAa68eDD623bB"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:24.865Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "PositionRoller",
+      "address": "0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052",
+      "contract": "contracts/PositionRoller.sol:PositionRoller",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052#code",
+      "sourcify": {
+        "matchId": "57003210",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:19:03Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0xFf2cA3C4a2CCAc366FE2307cBcEeAd9ADb99a052"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:25.977Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "Savings",
+      "address": "0x7004C5e94189A77d38522c261ABA2e3ee23dfC75",
+      "contract": "contracts/Savings.sol:Savings",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0x7004C5e94189A77d38522c261ABA2e3ee23dfC75#code",
+      "sourcify": {
+        "matchId": "57003211",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:19:09Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0x7004C5e94189A77d38522c261ABA2e3ee23dfC75",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0x7004C5e94189A77d38522c261ABA2e3ee23dfC75"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:27.565Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "MintingHub",
+      "address": "0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2",
+      "contract": "contracts/MintingHub.sol:MintingHub",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2#code",
+      "sourcify": {
+        "matchId": "57003220",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:19:15Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0xFA6216b8C42b5e09Df8984701345c0fC98c7CDe2"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:28.835Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    },
+    {
+      "label": "Bridge",
+      "address": "0x1dBb32855fcA4719239d9eBF6dE6483315f76951",
+      "contract": "contracts/StablecoinBridge.sol:StablecoinBridge",
+      "sourceUrl": "https://blockscout.testnet.dogeos.com/address/0x1dBb32855fcA4719239d9eBF6dE6483315f76951#code",
+      "sourcify": {
+        "matchId": "57003228",
+        "creationMatch": "exact_match",
+        "runtimeMatch": "exact_match",
+        "verifiedAt": "2026-10-25T20:19:20Z",
+        "match": "exact_match",
+        "chainId": "6281971",
+        "address": "0x1dBb32855fcA4719239d9eBF6dE6483315f76951",
+        "apiUrl": "https://sourcify.dev/server/v2/contract/6281971/0x1dBb32855fcA4719239d9eBF6dE6483315f76951"
+      },
+      "explorerSubmission": {
+        "method": "standard-input",
+        "submittedAt": "2026-10-27T11:23:29.571Z",
+        "httpStatus": 200,
+        "response": {
+          "message": "Smart-contract verification started"
+        }
+      },
+      "explorerVerified": false,
+      "explorerHttpStatus": 200
+    }
+  ],
+  "sourceVerification": {
+    "requiredContracts": 8,
+    "sourcifyExactMatches": 8,
+    "blockscoutVerified": 0
+  },
+  "blockers": [
+    "TestUSDC is not verified on Blockscout",
+    "Token is not verified on Blockscout",
+    "Equity is not verified on Blockscout",
+    "PositionFactory is not verified on Blockscout",
+    "PositionRoller is not verified on Blockscout",
+    "Savings is not verified on Blockscout",
+    "MintingHub is not verified on Blockscout",
+    "Bridge is not verified on Blockscout"
+  ]
+}

@@ -62,8 +62,11 @@ describe("Basic Tests", () => {
       let nextRatePPM = await savings.nextRatePPM();
       expect(nextRatePPM).to.be.equal(20000n);
     });
-    it("tries to propose no changes", async () => {
-      await savings.proposeChange(20000n, []);
+    it("rejects rate proposals when total votes are zero", async () => {
+      await expect(savings.proposeChange(20000n, [])).to.be.revertedWithCustomError(
+        equity,
+        "NotQualified"
+      );
     });
     it("tries to apply no changes", async () => {
       await expect(savings.applyChange()).to.be.revertedWithCustomError(

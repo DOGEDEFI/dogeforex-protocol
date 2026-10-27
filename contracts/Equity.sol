@@ -10,34 +10,21 @@ import "./utils/ERC20PermitLight.sol";
 
 /**
  * @title Equity
- * @notice If the OracleFreeDollar system was a bank, this contract would represent the equity on its balance sheet.
- * Like with a corporation, the owners of the equity capital are the shareholders, or in this case the holders
- * of OracleFreeDollar Pool Shares (OFDPS) tokens. Anyone can mint additional OFDPS tokens by adding OracleFreeDollars to the
- * reserve pool. Also, OFDPS tokens can be redeemed for OracleFreeDollars again after a minimum holding period.
- * Furthermore, the OFDPS shares come with some voting power. Anyone that held at least 3% of the holding-period-
- * weighted reserve pool shares gains veto power and can veto new proposals.
+ * @notice The equity reserve and pool-share system for one Frankencoin-style currency.
+ * Anyone can invest currency units to mint pool shares, redeem them after the minimum holding period,
+ * and use their holding-period-weighted votes for qualified governance actions.
+ * Qualification requires strictly more than 2% of the time-weighted votes.
  */
 contract Equity is ERC20PermitLight, MathUtil, IReserve {
     /**
-     * The VALUATION_FACTOR determines the market cap of the reserve pool shares relative to the equity reserves.
-     * The following always holds: Market Cap = Valuation Factor * Equity Reserve = Price * Supply
-     *
-     * In the absence of profits and losses, the variables grow as follows when OFDPS tokens are minted:
-     *
-     * |   Reserve     |   Market Cap  |     Price     |     Supply   |
-     * |          1000 |          3000 |             3 |         1000 |
-     * |       1000000 |       3000000 |           300 |        10000 |
-     * |    1000000000 |    3000000000 |         30000 |       100000 |
-     * | 1000000000000 | 3000000000000 |       3000000 |      1000000 |
-     *
-     * I.e., the supply is proporational to the cubic root of the reserve and the price is proportional to the
-     * squared cubic root. When profits accumulate or losses materialize, the reserve, the market cap,
-     * and the price are adjusted proportionally, with the supply staying constant. In the absence of an extreme
-     * inflation of the American Dollar, it is unlikely that there will ever be more than ten million OFDPS.
+     * Market Cap = Valuation Factor * Equity Reserve = Price * Supply.
+     * After the initial investment, share supply scales with the cubic root of capital and price with
+     * its square. Profits and losses adjust reserve value and price while supply stays constant.
+     * The first 100-unit investment issues 1,000 shares and results in a price of 0.3 units per share.
      */
     uint32 public constant VALUATION_FACTOR = 3;
 
-    uint256 private constant MINIMUM_EQUITY = 1000 * ONE_DEC18;
+    uint256 private constant MINIMUM_EQUITY = 100 * ONE_DEC18;
 
     /**
      * @notice The quorum in basis points. 100 is 1%.
@@ -113,12 +100,13 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Returns the price of one OFDPS in OFD with 18 decimals precision.
+     * @notice Returns the price of one pool share in currency units with 18 decimals precision.
+     * An empty system returns 1; the initial 100-unit investment instead results in a price of 0.3.
      */
     function price() public view returns (uint256) {
         uint256 equity = ofd.equity();
         if (equity == 0 || totalSupply() == 0) {
-            return ONE_DEC18; // initial price is 1000 OFD for the first 1000 OFDPS
+            return ONE_DEC18; // empty-system price, not the price after the initial investment
         } else {
             return (VALUATION_FACTOR * ofd.equity() * ONE_DEC18) / totalSupply();
         }
@@ -137,7 +125,7 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Returns whether the given address is allowed to redeem OFDPS, which is the
+     * @notice Returns whether the given address is allowed to redeem pool shares, which is the
      * case after their average holding duration is larger than the required minimum.
      */
     function canRedeem(address owner) public view returns (bool) {
@@ -199,7 +187,7 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice How long the holder already held onto their average OFDPS in seconds.
+     * @notice How long the holder already held onto their average pool shares in seconds.
      */
     function holdingDuration(address holder) public view returns (uint256) {
         return (_anchorTime() - voteAnchor[holder]) >> TIME_RESOLUTION_BITS;
@@ -254,7 +242,8 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
      */
     function checkQualified(address sender, address[] calldata helpers) public view override {
         uint256 _votes = votesDelegated(sender, helpers);
-        if (_votes * 10000 < QUORUM * totalVotes()) revert NotQualified();
+        // The strict boundary rejects zero votes when totalVotes is zero and requires more than QUORUM.
+        if (_votes * 10000 <= QUORUM * totalVotes()) revert NotQualified();
     }
 
     error NotQualified();
@@ -313,19 +302,19 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Call this method to obtain newly minted pool shares in exchange for OracleFreeDollars.
-     * No allowance required (i.e. it is hardcoded in the OracleFreeDollar token contract).
+     * @notice Call this method to obtain newly minted pool shares in exchange for currency units.
+     * No allowance required (i.e. it is hardcoded in the currency token contract).
      * Make sure to invest at least 10e-12 * market cap to avoid rounding losses.
      *
-     * @dev If equity is close to zero or negative, you need to send enough OFD to bring equity back to 1000 OFD.
+     * @dev If equity is close to zero or negative, you need to send enough currency units to bring equity back to 100.
      *
-     * @param amount            OracleFreeDollars to invest
+     * @param amount            Currency units to invest
      * @param expectedShares    Minimum amount of expected shares for frontrunning protection
      */
     function invest(uint256 amount, uint256 expectedShares) external returns (uint256) {
         ofd.transferFrom(msg.sender, address(this), amount);
         uint256 equity = ofd.equity();
-        require(equity >= MINIMUM_EQUITY, "insuf equity"); // ensures that the initial deposit is at least 1000 OFD
+        require(equity >= MINIMUM_EQUITY, "insuf equity"); // ensures that the initial deposit is at least 100 currency units
 
         uint256 shares = _calculateShares(equity <= amount ? 0 : equity - amount, amount);
         require(shares >= expectedShares);
@@ -339,8 +328,8 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Calculate shares received when investing OracleFreeDollars
-     * @param investment    OFD to be invested
+     * @notice Calculate shares received when investing currency units
+     * @param investment    Currency units to be invested
      * @return shares to be received in return
      */
     function calculateShares(uint256 investment) external view returns (uint256) {
@@ -350,7 +339,7 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     function _calculateShares(uint256 capitalBefore, uint256 investment) internal view returns (uint256) {
         uint256 totalShares = totalSupply();
         uint256 investmentExFees = (investment * 997) / 1000; // remove 0.3% fee
-        // Assign 1000 OFDPS for the initial deposit, calculate the amount otherwise
+        // Assign 1000 pool shares for the initial deposit, calculate the amount otherwise
         uint256 newTotalShares = capitalBefore < MINIMUM_EQUITY || totalShares == 0
             ? totalShares + 1000 * ONE_DEC18
             : _mulD18(totalShares, _cubicRoot(_divD18(capitalBefore + investmentExFees, capitalBefore)));
@@ -359,7 +348,7 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
 
     /**
      * @notice Redeem the given amount of shares owned by the sender and transfer the proceeds to the target.
-     * @return The amount of OFD transferred to the target
+     * @return The amount of currency units transferred to the target
      */
     function redeem(address target, uint256 shares) external returns (uint256) {
         return _redeemFrom(msg.sender, target, shares);
@@ -376,7 +365,7 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Redeem OFDPS based on an allowance from the owner to the caller.
+     * @notice Redeem pool shares based on an allowance from the owner to the caller.
      * See also redeemExpected(...).
      */
     function redeemFrom(
@@ -401,10 +390,10 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice Calculate OFD received when depositing shares
-     * @param shares number of shares we want to exchange for OFD,
+     * @notice Calculate currency units received when redeeming shares
+     * @param shares number of shares we want to exchange for currency units,
      *               in dec18 format
-     * @return amount of OFD received for the shares
+     * @return amount of currency units received for the shares
      */
     function calculateProceeds(uint256 shares) public view returns (uint256) {
         uint256 totalShares = totalSupply();
@@ -416,17 +405,17 @@ contract Equity is ERC20PermitLight, MathUtil, IReserve {
     }
 
     /**
-     * @notice If there is less than 1000 OFD in equity left (maybe even negative), the system is at risk
-     * and we should allow qualified OFDPS holders to restructure the system.
+     * @notice If there is less than 100 currency units in equity left (maybe even negative), the system is at risk
+     * and we should allow qualified pool-share holders to restructure the system.
      *
      * Example: there was a devastating loss and equity stands at -1'000'000. Most shareholders have lost hope in the
-     * OracleFreeDollar system except for a group of small OFDPS holders who still believes in it and is willing to provide
-     * 2'000'000 OFD to save it. These brave souls are essentially donating 1'000'000 to the minter reserve and it
-     * would be wrong to force them to share the other million with the passive OFDPS holders. Instead, they will get
-     * the possibility to bootstrap the system again owning 100% of all OFDPS shares.
+     * currency system except for a group of small pool-share holders who still believe in it and are willing to provide
+     * 2'000'000 currency units to save it. These brave souls are essentially donating 1'000'000 to the minter reserve and it
+     * would be wrong to force them to share the other million with the passive pool-share holders. Instead, they will get
+     * the possibility to bootstrap the system again owning 100% of all pool shares.
      *
      * @param helpers          A list of addresses that delegate to the caller in incremental order
-     * @param addressesToWipe  A list of addresses whose OFDPS will be burned to zero
+     * @param addressesToWipe  A list of addresses whose pool shares will be burned to zero
      */
     function restructureCapTable(address[] calldata helpers, address[] calldata addressesToWipe) external {
         require(ofd.equity() < MINIMUM_EQUITY);

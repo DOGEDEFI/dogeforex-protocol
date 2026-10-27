@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0",
+  "complete": true,
+  "status": "passed",
+  "network": "chikyuV2",
+  "chainId": "6281971",
+  "quoteBlock": "0x87d19e",
+  "code": "USD",
+  "checkedAt": "2026-10-25T19:52:16.735Z",
+  "nodeVersion": "v20.20.2",
+  "hardhatVersion": "2.22.2",
+  "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+  "initialSharesCustody": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+  "source": {
+    "kind": "test-usdc",
+    "decimals": 6,
+    "symbol": "tUSDC"
+  },
+  "bridgeLimitLocal": "1000000000000000000000000",
+  "rateEvidence": {
+    "code": "USD",
+    "instrument": "US Treasury 1-year par-yield/CMT",
+    "series": "Daily Treasury Par Yield Curve Rates, 1 Yr",
+    "tenor": "1 year",
+    "observationDate": "2026-10-23",
+    "retrievalDate": "2026-10-24",
+    "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2026/all?type=daily_treasury_yield_curve&field_tdr_date_value=2026&page&_format=csv",
+    "sourceType": "official",
+    "originalYieldPercent": "4.4400",
+    "originalUnit": "percent per year",
+    "quoteConvention": "Published annualized fitted par-yield/CMT benchmark; not a uniquely identified zero-coupon bond",
+    "normalizationFormula": "identity; use the published annual benchmark yield without a security-level conversion",
+    "normalizedAnnualYieldPercent": "4.4400",
+    "spreadPPM": 15000,
+    "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+    "leadratePPM": 59400,
+    "reviewStatus": "implementation-reviewed / production-refresh-required",
+    "methodologyUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics/treasury-yield-curve-methodology"
+  },
+  "feePolicy": {
+    "referenceL1FeePerByteWei": "71000000000000",
+    "maximumL1FeePerByteWei": "355000000000000",
+    "maximumExecutionGasPriceWei": "50000000",
+    "maximumTransactionFeeWei": "15000000000000000000",
+    "maximumTotalFeeWei": "50000000000000000000",
+    "l1QuoteMultiplier": "2",
+    "ordinaryTransactionCount": "9",
+    "ordinaryCalldataBytes": "512",
+    "ordinaryGasCeiling": "2000000"
+  },
+  "measuredProbe": {
+    "hash": "0x162ee1dd780c13eac35f747005391e7b83a65c18f13c8a778ba468593bf3c8b5",
+    "rawBytes": "110",
+    "totalFeeWei": "5737554408687641",
+    "l1FeeWei": "5737225126398641",
+    "l2FeeWei": "329282289000",
+    "l1FeePerByteWei": "52156592058169",
+    "preBroadcastOracleL1FeeWei": "5737225126398641",
+    "explorer": "https://blockscout.testnet.dogeos.com/tx/0x162ee1dd780c13eac35f747005391e7b83a65c18f13c8a778ba468593bf3c8b5"
+  },
+  "plannedCreations": [
+    {
+      "name": "TestUSDC",
+      "calldataBytes": "1908",
+      "quotedBytes": "2036",
+      "quotedL1FeeWei": "126420645572373100",
+      "maximumL1FeeWei": "722780000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "253341291144746200"
+    },
+    {
+      "name": "USD_Token",
+      "calldataBytes": "19087",
+      "quotedBytes": "19215",
+      "quotedL1FeeWei": "2896038495802134036",
+      "maximumL1FeeWei": "6821325000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "5792576991604268072"
+    },
+    {
+      "name": "USD_PositionFactory",
+      "calldataBytes": "14015",
+      "quotedBytes": "14143",
+      "quotedL1FeeWei": "1761533175364988320",
+      "maximumL1FeeWei": "5020765000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "3523566350729976640"
+    },
+    {
+      "name": "USD_PositionRoller",
+      "calldataBytes": "4660",
+      "quotedBytes": "4788",
+      "quotedL1FeeWei": "365276417399558257",
+      "maximumL1FeeWei": "1699740000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "731052834799116514"
+    },
+    {
+      "name": "USD_Savings",
+      "calldataBytes": "5675",
+      "quotedBytes": "5803",
+      "quotedL1FeeWei": "473096964667195650",
+      "maximumL1FeeWei": "2060065000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "946693929334391300"
+    },
+    {
+      "name": "USD_MintingHub",
+      "calldataBytes": "10648",
+      "quotedBytes": "10776",
+      "quotedL1FeeWei": "1154988261397358976",
+      "maximumL1FeeWei": "3825480000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "2310476522794717952"
+    },
+    {
+      "name": "USD_Bridge",
+      "calldataBytes": "3845",
+      "quotedBytes": "3973",
+      "quotedL1FeeWei": "286395556248548990",
+      "maximumL1FeeWei": "1410415000000000000",
+      "executionGasCeiling": "10000000",
+      "executionGasPriceCeilingWei": "50000000",
+      "guardedFeeWei": "573291112497097980"
+    }
+  ],
+  "ordinaryTransactionFeeAllowanceWei": "55632005738145292",
+  "conservativeRemainingPlanFeeWei": "14645063994377244040",
+  "guard": {
+    "spentFeeWei": "18161152317743211",
+    "reservedFeeWei": "0",
+    "maxTotalFeeWei": "50000000000000000000",
+    "transactions": [
+      {
+        "hash": "0x05347ee21bfad5c6e3edc21eed564797cf1ce9ddcef9bcbcbe3d7361ca77da2d",
+        "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "nonce": "301",
+        "rawBytes": "110",
+        "l1QuoteWei": "6973046580281914",
+        "maxL2FeeWei": "416745210000",
+        "reservedFeeWei": "13946509905773828",
+        "label": "native-fee-probe",
+        "status": "mined",
+        "actualFeeWei": "6973375862549914",
+        "actualL1FeeWei": "6973046580281914",
+        "blockNumber": "8898525"
+      },
+      {
+        "hash": "0x88a1288d65459184553d88a80814787cd4b6a10a90893bc255345b95e4b48301",
+        "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "nonce": "302",
+        "rawBytes": "110",
+        "l1QuoteWei": "5449892764216656",
+        "maxL2FeeWei": "416745231000",
+        "reservedFeeWei": "10900202273664312",
+        "label": "native-fee-probe",
+        "status": "mined",
+        "actualFeeWei": "5450222046505656",
+        "actualL1FeeWei": "5449892764216656",
+        "blockNumber": "8900957"
+      },
+      {
+        "hash": "0x162ee1dd780c13eac35f747005391e7b83a65c18f13c8a778ba468593bf3c8b5",
+        "from": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+        "nonce": "303",
+        "rawBytes": "110",
+        "l1QuoteWei": "5737225126398641",
+        "maxL2FeeWei": "416745231000",
+        "reservedFeeWei": "11474866998028282",
+        "label": "native-fee-probe",
+        "status": "mined",
+        "actualFeeWei": "5737554408687641",
+        "actualL1FeeWei": "5737225126398641",
+        "blockNumber": "8901024"
+      }
+    ]
+  }
+}

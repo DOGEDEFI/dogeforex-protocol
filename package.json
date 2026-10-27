@@ -1,14 +1,18 @@
 {
-  "name": "OracleFreeDollar",
-  "version": "1.0.0",
-  "description": "It shall support a wide range of collateralized minting methods that are governed by a democratic process.",
-  "main": ".solcover.js",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
+  "name": "imf-protocol",
+  "version": "2.0.0",
+  "description": "Independent currency systems extending Frankencoin mechanics to DogeOS.",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "size": "hardhat size-contracts",
+    "deploy:local": "hardhat deploy --tags 00_deploy_all --network hardhat",
+    "estimate:v2:usd": "node scripts/execution/v2_deploy_usd.mjs --estimate",
+    "deploy:v2:preflight": "node scripts/execution/v2_deploy_usd.mjs --preflight",
+    "deploy:v2:usd": "node scripts/execution/v2_deploy_usd.mjs --deploy",
+    "verify:v2:usd": "node scripts/execution/v2_deploy_usd.mjs --verify",
+    "reconcile:v1:rehearsals": "node scripts/execution/reconcile_rehearsals.mjs",
     "deploy:network": "npx hardhat deploy --network",
     "deploynotesttoken:network": "export deploymode=base && export deploymode=base && npx hardhat deploy --network",
     "redeploynotesttoken:network": "export deployoption=notesttoken && export deploymode=base && npx hardhat deploy --reset --network",

@@ -1,31 +1,11 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-
-/**
- * Currency-agnostic instance configuration. instances/instances.json is the single source of
- * truth for the seven DogeForex currencies (K9USD...K9BRL); deploy scripts iterate this list so
- * every instance is deployed from the same audited bytecode with different constructor args.
- */
-export interface BootstrapConfig {
-  // null recipients default to the deployer (testnet convenience); set real addresses (Ops Safe)
-  // before any mainnet deployment.
-  poolSeedRecipient: string | null;
-  equityRecipient: string | null;
-  challengerBountyRecipient: string | null;
-  incentivesRecipient: string | null;
-  poolSeedAmount: string; // decimal-string wei amounts
-  equityAmount: string;
-  challengerBountyAmount: string;
-  incentivesAmount: string;
-  durationDays: number; // sale endTime = deploy time + durationDays
-}
+import { InitialLeadratesManifest, loadAndValidateRateManifest } from "./rateConfig";
 
 export interface InstanceConfig {
-  code: string; // ISO 4217 currency code; also the per-instance deploy tag
-  tokenName: string; // ERC20 name constructor arg, e.g. "DogeForex Dollar"
-  tokenSymbol: string; // ERC20 symbol constructor arg, e.g. "K9USD"
-  leadratePPM: number; // genesis savings/leadrate rate
-  guardian: string | null; // initial guardian key (3-of-5 Ops Safe) for the GuardianTimelock; null = admission gate not wired
-  bootstrap: BootstrapConfig | null; // genesis float; null = skip 06_genesis_bootstrap for this instance
+  code: string;
+  tokenName: string;
+  tokenSymbol: string;
+  leadratePPM: number;
 }
 
 export function deploymentName(inst: InstanceConfig, contract: string): string {
@@ -37,11 +17,23 @@ export function loadInstances(): InstanceConfig[] {
   return require(__dirname + "/instances/instances.json") as InstanceConfig[];
 }
 
-/**
- * When --tags <CODE> is given, restrict the run to exactly those currency instances. The
- * stage tags (00_deploy_all / 06_genesis_bootstrap / 07_guardian_timelock) run all instances.
- * hardhat-deploy keeps task params out of hre.hardhatArguments, so parse process.argv.
- */
+export function validateInstances(instances: InstanceConfig[]): InitialLeadratesManifest {
+  if (!Array.isArray(instances)) throw new Error("instances.json must contain an array");
+  const symbols = new Set<string>();
+  for (const instance of instances) {
+    if (!/^[A-Z]{3}$/.test(instance.code)) throw new Error(`Invalid three-letter currency code: ${instance.code}`);
+    if (typeof instance.tokenName !== "string" || instance.tokenName.length === 0) {
+      throw new Error(`${instance.code}.tokenName must be non-empty`);
+    }
+    if (typeof instance.tokenSymbol !== "string" || instance.tokenSymbol.length === 0) {
+      throw new Error(`${instance.code}.tokenSymbol must be non-empty`);
+    }
+    if (symbols.has(instance.tokenSymbol)) throw new Error(`Duplicate token symbol ${instance.tokenSymbol}`);
+    symbols.add(instance.tokenSymbol);
+  }
+  return loadAndValidateRateManifest(instances);
+}
+
 export function selectInstances(hre: HardhatRuntimeEnvironment, instances: InstanceConfig[]): InstanceConfig[] {
   const argv = process.argv;
   let tags: string[] = [];
@@ -54,9 +46,9 @@ export function selectInstances(hre: HardhatRuntimeEnvironment, instances: Insta
       tags.push(...argv[i].slice("--tags=".length).split(","));
     }
   }
-  const codes = tags.filter((t) => instances.some((i) => i.code === t));
+  const codes = tags.filter((tag) => instances.some((instance) => instance.code === tag));
   if (codes.length === 0) return instances;
-  return instances.filter((i) => codes.includes(i.code));
+  return instances.filter((instance) => codes.includes(instance.code));
 }
 
 export function minApplicationPeriodFor(chainId: number): number {
@@ -65,7 +57,10 @@ export function minApplicationPeriodFor(chainId: number): number {
     chainId: number;
     minApplicationPeriod: number;
   }>;
-  const hit = params.find((p) => p.chainId === chainId);
+  const hit = params.find((candidate) => candidate.chainId === chainId);
   if (!hit) throw new Error(`No minApplicationPeriod configured for chainId ${chainId}`);
+  if (!Number.isSafeInteger(hit.minApplicationPeriod) || hit.minApplicationPeriod <= 0) {
+    throw new Error(`Invalid minApplicationPeriod for chainId ${chainId}`);
+  }
   return hit.minApplicationPeriod;
 }

@@ -1,4 +1,4 @@
-import { HardhatUserConfig } from "hardhat/config";
+import { extendProvider, HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
@@ -6,9 +6,22 @@ import "@nomicfoundation/hardhat-network-helpers";
 import "hardhat-deploy";
 import "hardhat-abi-exporter";
 import "hardhat-contract-sizer";
+import { registerTotalFeeGuard, TotalFeeGuard } from "./scripts/deployment/v2FeeGuard";
 
 import dotenv from "dotenv";
 dotenv.config();
+
+extendProvider((provider, resolvedConfig, networkName) => {
+  if (networkName !== "chikyuV2") return provider;
+  const guard = new TotalFeeGuard(provider, {
+    network: networkName,
+    chainId: BigInt(resolvedConfig.networks[networkName].chainId ?? 0),
+    deployer: process.env.IMF_V2_DEPLOYER,
+    scope: process.env.IMF_V2_DEPLOYMENT_SCOPE,
+  });
+  registerTotalFeeGuard(guard);
+  return guard;
+});
 
 // Never commit keys. Copy .env.example to .env and fill in locally.
 const CHIKYU_RPC_URL = process.env.RPC_URL_CHIKYU ?? "https://rpc.testnet.dogeos.com";
@@ -45,6 +58,13 @@ const config: HardhatUserConfig = {
       accounts: CHIKYU_DEPLOYER_PK ? [CHIKYU_DEPLOYER_PK] : [],
       timeout: 900000,
     },
+    chikyuV2: {
+      url: CHIKYU_RPC_URL,
+      chainId: 6281971,
+      gasPrice: "auto",
+      accounts: CHIKYU_DEPLOYER_PK ? [CHIKYU_DEPLOYER_PK] : [],
+      timeout: 900000,
+    },
   },
   namedAccounts: {
     deployer: {
@@ -55,6 +75,7 @@ const config: HardhatUserConfig = {
     // Blockscout (DogeOS) exposes an Etherscan-compatible API and ignores the key; placeholder only.
     apiKey: {
       chikyu: "blockscout",
+      chikyuV2: "blockscout",
     },
     customChains: [
       {
@@ -65,10 +86,15 @@ const config: HardhatUserConfig = {
           browserURL: "https://blockscout.testnet.dogeos.com",
         },
       },
+      {
+        network: "chikyuV2",
+        chainId: 6281971,
+        urls: {
+          apiURL: "https://blockscout.testnet.dogeos.com/api",
+          browserURL: "https://blockscout.testnet.dogeos.com",
+        },
+      },
     ],
-  },
-  sourcify: {
-    enabled: true,
   },
   paths: {
     sources: "./contracts",

@@ -1,68 +1,49 @@
 [
     {
-        "inputs": [
-            {
-                "internalType": "contract IOracleFreeDollar",
-                "name": "ofd_",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "endTime_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "poolSeedRecipient_",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "equityRecipient_",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "challengerBountyRecipient_",
-                "type": "address"
-            },
-            {
-                "internalType": "address",
-                "name": "incentivesRecipient_",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "poolSeedAmount_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "equityAmount_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "challengerBountyAmount_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "incentivesAmount_",
-                "type": "uint256"
-            }
-        ],
+        "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
     },
     {
-        "inputs": [],
-        "name": "AlreadyExecuted",
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "allowance",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "needed",
+                "type": "uint256"
+            }
+        ],
+        "name": "ERC20InsufficientAllowance",
         "type": "error"
     },
     {
-        "inputs": [],
-        "name": "SaleExpired",
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "balance",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "needed",
+                "type": "uint256"
+            }
+        ],
+        "name": "ERC20InsufficientBalance",
         "type": "error"
     },
     {
@@ -71,90 +52,64 @@
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "executor",
+                "name": "owner",
                 "type": "address"
             },
             {
                 "indexed": true,
                 "internalType": "address",
-                "name": "poolSeedRecipient",
+                "name": "spender",
                 "type": "address"
             },
             {
                 "indexed": false,
                 "internalType": "uint256",
-                "name": "poolSeedAmount",
-                "type": "uint256"
-            },
-            {
-                "indexed": true,
-                "internalType": "address",
-                "name": "equityRecipient",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "equityAmount",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "challengerBountyRecipient",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "challengerBountyAmount",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "incentivesRecipient",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "incentivesAmount",
+                "name": "value",
                 "type": "uint256"
             }
         ],
-        "name": "BootstrapExecuted",
+        "name": "Approval",
         "type": "event"
     },
     {
-        "inputs": [],
-        "name": "challengerBountyAmount",
-        "outputs": [
+        "anonymous": false,
+        "inputs": [
             {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
                 "internalType": "uint256",
-                "name": "",
+                "name": "value",
                 "type": "uint256"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
+        "name": "Transfer",
+        "type": "event"
     },
     {
-        "inputs": [],
-        "name": "challengerBountyRecipient",
-        "outputs": [
+        "inputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "spender",
                 "type": "address"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "endTime",
+        "name": "allowance",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -166,41 +121,19 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "equityAmount",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "equityRecipient",
-        "outputs": [
+        "inputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "spender",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
             }
         ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "execute",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "executed",
+        "name": "approve",
         "outputs": [
             {
                 "internalType": "bool",
@@ -208,12 +141,18 @@
                 "type": "bool"
             }
         ],
-        "stateMutability": "view",
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "incentivesAmount",
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -226,7 +165,20 @@
     },
     {
         "inputs": [],
-        "name": "incentivesRecipient",
+        "name": "decimals",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "deployer",
         "outputs": [
             {
                 "internalType": "address",
@@ -238,47 +190,52 @@
         "type": "function"
     },
     {
-        "inputs": [],
-        "name": "ofd",
-        "outputs": [
-            {
-                "internalType": "contract IOracleFreeDollar",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "poolSeedAmount",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "poolSeedRecipient",
-        "outputs": [
+        "inputs": [
             {
                 "internalType": "address",
-                "name": "",
+                "name": "account",
                 "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
             }
         ],
-        "stateMutability": "view",
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
         "inputs": [],
-        "name": "totalFloat",
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -287,6 +244,59 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

@@ -90,6 +90,7 @@ describe("Position Tests", () => {
     await bridge.connect(owner).mint(limit / 3n); // owner should have plenty
     await mockXOFD.connect(bob).approve(await bridge.getAddress(), amount);
     await bridge.connect(bob).mint(amount);
+    await equity.invest(floatToDec18(1000), 0);
     // vol tokens
     mockVOL = await testTokenFactory.deploy("Volatile Token", "VOL", 18);
     amount = floatToDec18(500_000);
