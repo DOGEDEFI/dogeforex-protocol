@@ -3,19 +3,10 @@
   "network": "chikyuV2",
   "chainId": "6281971",
   "scope": "DEMO_ROLLOUT",
-  "checkedAt": "2026-10-29T16:52:01.150Z",
+  "checkedAt": "2026-10-29T18:35:13.134Z",
   "complete": false,
-  "status": "blocked",
-  "blockers": [
-    "CHF/Token exceeds the L1 per-byte safety ceiling",
-    "CHF/Token exceeds the per-transaction ceiling",
-    "CHF/PositionFactory exceeds the L1 per-byte safety ceiling",
-    "CHF/PositionFactory exceeds the per-transaction ceiling",
-    "CHF/PositionRoller exceeds the L1 per-byte safety ceiling",
-    "CHF/Savings exceeds the L1 per-byte safety ceiling",
-    "CHF/MintingHub exceeds the L1 per-byte safety ceiling",
-    "CHF/Bridge exceeds the L1 per-byte safety ceiling"
-  ],
+  "status": "affordable-estimate",
+  "blockers": [],
   "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
   "missingCurrencies": [
     "CHF"
@@ -40,48 +31,48 @@
       "contract": "OracleFreeDollar",
       "calldataBytes": "19087",
       "estimatedGas": "3878143",
-      "quotedL1FeeWei": "22018109713236254941",
-      "conservativeReservedFeeWei": "44036413333622509882"
+      "quotedL1FeeWei": "12524886085744198091",
+      "conservativeReservedFeeWei": "25049966078638396182"
     },
     {
       "code": "CHF",
       "contract": "PositionFactory",
       "calldataBytes": "14015",
       "estimatedGas": "3076449",
-      "quotedL1FeeWei": "13392650261697937808",
-      "conservativeReservedFeeWei": "26785454345845875616"
+      "quotedL1FeeWei": "7618338771976443566",
+      "conservativeReservedFeeWei": "15236831366402887132"
     },
     {
       "code": "CHF",
       "contract": "PositionRoller",
       "calldataBytes": "4660",
       "estimatedGas": "1057690",
-      "quotedL1FeeWei": "2777137198148230399",
-      "conservativeReservedFeeWei": "5554327280796460798"
+      "quotedL1FeeWei": "1579759911468662269",
+      "conservativeReservedFeeWei": "3159572707437324538"
     },
     {
       "code": "CHF",
       "contract": "Savings",
       "calldataBytes": "5675",
       "estimatedGas": "1181059",
-      "quotedL1FeeWei": "3596879284629878705",
-      "conservativeReservedFeeWei": "7193817622209757410"
+      "quotedL1FeeWei": "2046065892617478560",
+      "conservativeReservedFeeWei": "4092190838184957120"
     },
     {
       "code": "CHF",
       "contract": "MintingHub",
       "calldataBytes": "10648",
       "estimatedGas": "2270759",
-      "quotedL1FeeWei": "8781187920605784144",
-      "conservativeReservedFeeWei": "17562489379161568288"
+      "quotedL1FeeWei": "4995132635613290856",
+      "conservativeReservedFeeWei": "9990378809176581712"
     },
     {
       "code": "CHF",
       "contract": "StablecoinBridge",
       "calldataBytes": "3845",
       "estimatedGas": "673288",
-      "quotedL1FeeWei": "2177418838873996037",
-      "conservativeReservedFeeWei": "4354871342147992074"
+      "quotedL1FeeWei": "1238613272121884283",
+      "conservativeReservedFeeWei": "2477260208643768566"
     }
   ],
   "remainingStageTransactions": {
@@ -92,11 +83,11 @@
     "dueMints": 36,
     "equityInvestments": 12
   },
-  "ordinaryTransactionConservativeFeeWei": "422300808694667122",
-  "remainingStageAllowanceWei": "141048470104018818748",
-  "conservativeTotalFeeWei": "246535843407802982816",
+  "ordinaryTransactionConservativeFeeWei": "240266712905008210",
+  "remainingStageAllowanceWei": "80249082110272742140",
+  "conservativeTotalFeeWei": "140255282118756657390",
   "spentFeeWei": "60692265979421179270",
   "reservedFeeWei": "0",
-  "maximumTotalFeeWei": "500000000000000000000",
+  "maximumTotalFeeWei": "600000000000000000000",
   "broadcast": false
 }

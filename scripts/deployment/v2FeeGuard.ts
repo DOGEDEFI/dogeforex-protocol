@@ -135,7 +135,8 @@ export class TotalFeeGuard extends EventEmitter implements EIP1193Provider {
       data.network !== this.network ||
       data.chainId !== this.chainId.toString() ||
       data.scope !== this.scope ||
-      data.maxTotalFeeWei !== this.maxTotalFee.toString() ||
+      typeof data.maxTotalFeeWei !== "string" ||
+      !/^(?:0|[1-9]\d*)$/.test(data.maxTotalFeeWei) ||
       (this.deployer && data.deployer !== this.deployer) ||
       !data.transactions ||
       typeof data.transactions !== "object" ||

@@ -7,7 +7,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { deployInitializedV2Core, mintAndBridge } from "./helper/v2";
 import { evm_increaseTimeTo } from "./helper";
-import { poolTickRange, positionCollateral, selectedCurrencies, sqrtPriceX96, isqrt } from "../scripts/execution/demoMath";
+import { feePolicyForPilot, poolTickRange, positionCollateral, selectedCurrencies, sqrtPriceX96, isqrt } from "../scripts/execution/demoMath";
 import { TotalFeeGuard } from "../scripts/deployment/v2FeeGuard";
 
 const config = JSON.parse(readFileSync(join(__dirname, "../scripts/execution/demoRollout.config.json"), "utf8"));
@@ -18,6 +18,13 @@ describe("Demo rollout configuration and position lifecycle", () => {
     expect(selectedCurrencies(config.allCurrencies, "CHF")).to.deep.equal(["CHF"]);
     expect(selectedCurrencies(config.allCurrencies)).to.deep.equal(config.allCurrencies);
     expect(() => selectedCurrencies(config.allCurrencies, "UNKNOWN")).to.throw("Unknown currency pilot");
+  });
+
+  it("applies the explicitly authorized higher fee limits only to CHF", () => {
+    expect(feePolicyForPilot(config, "CHF")).to.deep.equal({ feeCapTDOGE: "600", transactionFeeCapTDOGE: "100", maxL1FeePerByteTDOGE: "0.0025" });
+    for (const pilot of [undefined, "USD", "EUR"]) {
+      expect(feePolicyForPilot(config, pilot)).to.deep.equal({ feeCapTDOGE: "500", transactionFeeCapTDOGE: "20", maxL1FeePerByteTDOGE: "0.000497" });
+    }
   });
 
   it("computes decimal-correct pool prices in either token order", () => {

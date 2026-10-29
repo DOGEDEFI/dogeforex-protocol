@@ -248,12 +248,16 @@ describe("V2 deployment total-fee guard", () => {
       expect(third.spentFee()).to.equal(2n * (21_000_000_000n + provider.oracleFee));
       third.close();
 
-      const fourth = guard({ stateFile });
+      const fourth = guard({ stateFile, maxTotalFee: ethers.parseEther("2") });
       instances.push(fourth);
       expect(fourth.spentFee()).to.equal(2n * (21_000_000_000n + provider.oracleFee));
       await send(fourth, initial);
       await expect(send(fourth, await signed({ data: "0x01" }))).to.be.rejectedWith("nonce");
       expect(provider.broadcasts).to.equal(2);
+
+      const fifth = guard({ stateFile });
+      instances.push(fifth);
+      expect(fifth.spentFee()).to.equal(2n * (21_000_000_000n + provider.oracleFee));
     } finally {
       for (const instance of instances) instance.close();
       rmSync(directory, { recursive: true, force: true });

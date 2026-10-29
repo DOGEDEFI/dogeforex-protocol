@@ -1,0 +1,125 @@
+{
+  "address": "0x3547fF62C5097460E46E40EAc68B9Dae83a9BE30",
+  "abi": [],
+  "transactionHash": "0x1178d8ae4645427897055bae39ad9b1b348ce90e8e637ac153699810592763ae",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "CHF",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "CHF",
+      "instrument": "Swiss Confederation bond spot yield, ten-year testnet exception",
+      "series": "Spot interest rates on Swiss Confederation bond issues for selected maturities",
+      "tenor": "10 years",
+      "observationDate": "2026-10-28",
+      "retrievalDate": "2026-10-29",
+      "sourceUrl": "https://www.snb.ch/en/the-snb/mandates-goals/statistics/statistics-pub/current_interest_exchange_rates",
+      "sourceType": "official",
+      "evidenceStatus": "testnet-only ten-year exception / one-year-series-stale-and-negative",
+      "originalYieldPercent": "0.4950",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Official SNB ten-year spot yield used only because the available one-year series is stale and negative; this is not a one-year benchmark or production approval",
+      "normalizationFormula": "identity; published annual ten-year spot yield with an explicit testnet tenor exception",
+      "normalizedAnnualYieldPercent": "0.4950",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 19950,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "approvalCaveat": "Replace with a refreshed reviewed production benchmark; do not present this ten-year testnet exception as a one-year rate or production approval"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Swiss Franc",
+        "K9CHF"
+      ],
+      "Equity": [
+        "0x3547ff62c5097460e46e40eac68b9dae83a9be30",
+        "DogeForex Swiss Franc",
+        "K9CHF"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0x3547ff62c5097460e46e40eac68b9dae83a9be30"
+      ],
+      "Savings": [
+        "0x3547ff62c5097460e46e40eac68b9dae83a9be30",
+        "19950"
+      ],
+      "MintingHub": [
+        "0x3547ff62c5097460e46e40eac68b9dae83a9be30",
+        "0xf3596cb225278e35436e3a37254ebfe96af70c70",
+        "0x2fa592b56056740f0dd9adf0a66860cdf2c958d5",
+        "0xe8f41c41557c82b1c542713cb17d2b56769894ad"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0x3547ff62c5097460e46e40eac68b9dae83a9be30",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0x3547fF62C5097460E46E40EAc68B9Dae83a9BE30",
+      "Equity": "0xf08539e8623c494AB7271E4A2eE6D0053Dab3cbB",
+      "PositionFactory": "0xe8f41C41557C82B1C542713Cb17D2b56769894Ad",
+      "PositionRoller": "0x2fa592B56056740F0dD9Adf0A66860CdF2C958D5",
+      "Savings": "0xf3596cB225278e35436E3A37254EBfe96Af70C70",
+      "MintingHub": "0x1a2FA5Eeb02d7F27078d8D59709E21F1f2452624",
+      "Bridge": "0x5E911Db5d8962B0148362434dC6C7Bf33f44Ca2f"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x4a567e34c87d329883daf2d1bed470cb5a7539f9b608f8579e21d5e28deba032",
+        "Equity": "0x4a567e34c87d329883daf2d1bed470cb5a7539f9b608f8579e21d5e28deba032",
+        "PositionFactory": "0x31f319cb4ff87178622959b5c473ab25f28e894b59ccad96c3b26a7fea66b220",
+        "PositionRoller": "0x1af02ae8e0f964a6705f72d2da7e471695ca2ef53a1c863cb79184073a076bb2",
+        "Savings": "0x659b34aef7bbf090841651852e447149daa528e8605afd0698206349f577e8e0",
+        "MintingHub": "0x81098aaf01d85fafab5c4636279e5f033c5f7fb04218ba5c8454e4ee7364c6ed",
+        "Bridge": "0x471fdf599fc8fa74afe036fa3492bcb053e0ff5ebd6c6087fe7f4935dbbdb046"
+      },
+      "initialize": {
+        "Savings": "0x28b727cf9e9f2625e8ae3ea79e0bb8909975f19f8ab71058084e512bb50569cb",
+        "PositionFactory": "0x1b461eaf5ca19fcdfdb740debe7f3651e05e11bc9a5ccd1b30e2bd7f5f89fc31",
+        "PositionRoller": "0xef876135f942c7fe11873ad2d226fa79a871b1aef9f25dcb1996393c47e28455",
+        "MintingHub": "0x2a226f7fbaced331622d7f0fadbf5747b6bbad870780ef145f81a53ce83ce443",
+        "Bridge": "0x189809f5b5aba18524ced0b023ad8d1920b46c3b4fcc598f5836eff42555fec6"
+      },
+      "sourceFunding": "0x3a43464b966baf9e8e695c12a42d7bda60724d226dcead6dbc403eec2b02fe0f",
+      "sourceApproval": "0x7d352c24e2b58336c116dc7ca0028c9efc0e438d333077e03672db569146793d",
+      "bridgeMint": "0xa49fad5aef7ae0a97fbf19645f85c585accd8ef92c71adad592f91d3dbe3d5e7",
+      "equityInvestment": "0x1178d8ae4645427897055bae39ad9b1b348ce90e8e637ac153699810592763ae"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "19950"
+    }
+  }
+}

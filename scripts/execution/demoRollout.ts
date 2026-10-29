@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import { dirname, join } from "node:path";
 import { Contract, Interface, parseEther, parseUnits, TransactionReceipt, ZeroAddress, getAddress, type Signer } from "ethers";
 import { getTotalFeeGuard, TotalFeeGuard } from "../deployment/v2FeeGuard";
-import { poolTickRange, positionCollateral, selectedCurrencies, sqrtPriceX96 } from "./demoMath";
+import { feePolicyForPilot, poolTickRange, positionCollateral, selectedCurrencies, sqrtPriceX96 } from "./demoMath";
 
 interface DemoTokenConfig {
   symbol: string;
@@ -26,6 +26,7 @@ interface RolloutConfig {
   feeCapTDOGE: string;
   transactionFeeCapTDOGE: string;
   maxL1FeePerByteTDOGE: string;
+  pilotFeePolicies?: Record<string, { feeCapTDOGE: string; transactionFeeCapTDOGE: string; maxL1FeePerByteTDOGE: string }>;
   newCurrencies: string[];
   allCurrencies: string[];
   bridgeTargetSource: string;
@@ -440,12 +441,13 @@ async function main(): Promise<void> {
   owner = getAddress(await signer.getAddress());
   if (owner !== getAddress(config.owner) || getAddress(process.env.IMF_V2_DEPLOYER ?? "") !== owner) throw new Error("Wrong rollout signer");
   guard = getTotalFeeGuard(hre.network.name);
-  if (guard.maxTotalFee !== parseEther(config.feeCapTDOGE) || guard.maxTransactionFee !== parseEther(config.transactionFeeCapTDOGE) || guard.maxL1FeePerByte !== parseEther(config.maxL1FeePerByteTDOGE)) throw new Error("Unexpected fee cap");
+  const feePolicy = feePolicyForPilot(config, pilot);
+  if (guard.maxTotalFee !== parseEther(feePolicy.feeCapTDOGE) || guard.maxTransactionFee !== parseEther(feePolicy.transactionFeeCapTDOGE) || guard.maxL1FeePerByte !== parseEther(feePolicy.maxL1FeePerByteTDOGE)) throw new Error("Unexpected fee cap");
   state = loadState();
   const currencies = selectedCurrencies(config.allCurrencies, pilot);
   try {
     const steps: Array<() => Promise<void>> = [];
-    if (["all", "bridges"].includes(stage)) for (const code of config.allCurrencies) steps.push(() => bridgeStep(code));
+    if (["all", "bridges"].includes(stage)) for (const code of currencies) steps.push(() => bridgeStep(code));
     if (["all", "demo-tokens"].includes(stage)) for (const token of config.demoTokens) steps.push(() => demoTokenStep(token));
     if (["all", "pools"].includes(stage)) for (const token of config.demoTokens) steps.push(() => poolStep(token));
     if (["all", "positions"].includes(stage)) {

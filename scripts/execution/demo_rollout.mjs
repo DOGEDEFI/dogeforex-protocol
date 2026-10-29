@@ -7,18 +7,26 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const config = JSON.parse(readFileSync(join(root, 'scripts/execution/demoRollout.config.json'), 'utf8'));
 const mode = process.env.DEMO_MODE || 'verify';
 const stage = process.env.DEMO_STAGE || 'all';
+const pilot = process.env.DEMO_PILOT;
 if (!['estimate', 'deploy', 'verify', 'mint-due', 'invest'].includes(mode)) throw new Error('DEMO_MODE must be estimate, deploy, verify, mint-due or invest');
 if (!['all', 'currencies', 'bridges', 'demo-tokens', 'pools', 'positions', 'equity'].includes(stage)) throw new Error('Unsupported DEMO_STAGE');
 if (!process.versions.node.startsWith('20.')) throw new Error('Use Node 20 for the demo rollout');
+if (pilot && !config.allCurrencies.includes(pilot)) throw new Error('Unknown currency pilot');
+const feePolicy = {
+  feeCapTDOGE: config.feeCapTDOGE,
+  transactionFeeCapTDOGE: config.transactionFeeCapTDOGE,
+  maxL1FeePerByteTDOGE: config.maxL1FeePerByteTDOGE,
+  ...config.pilotFeePolicies?.[pilot],
+};
 
 function hardhat(args, script = false) {
   const env = {
     ...process.env,
     IMF_V2_DEPLOYER: config.owner,
     IMF_V2_DEPLOYMENT_SCOPE: 'DEMO_ROLLOUT',
-    IMF_V2_MAX_TOTAL_FEE: config.feeCapTDOGE,
-    IMF_V2_MAX_TX_FEE: config.transactionFeeCapTDOGE,
-    IMF_V2_MAX_L1_FEE_PER_BYTE: config.maxL1FeePerByteTDOGE,
+    IMF_V2_MAX_TOTAL_FEE: feePolicy.feeCapTDOGE,
+    IMF_V2_MAX_TX_FEE: feePolicy.transactionFeeCapTDOGE,
+    IMF_V2_MAX_L1_FEE_PER_BYTE: feePolicy.maxL1FeePerByteTDOGE,
     DEMO_MODE: mode,
     DEMO_STAGE: stage,
   };

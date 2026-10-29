@@ -50,6 +50,21 @@ export function selectedCurrencies(allCurrencies: string[], pilot?: string): str
   return pilot ? [pilot] : allCurrencies;
 }
 
+export interface RolloutFeePolicy {
+  feeCapTDOGE: string;
+  transactionFeeCapTDOGE: string;
+  maxL1FeePerByteTDOGE: string;
+}
+
+export function feePolicyForPilot(config: RolloutFeePolicy & { pilotFeePolicies?: Record<string, RolloutFeePolicy> }, pilot?: string): RolloutFeePolicy {
+  return {
+    feeCapTDOGE: config.feeCapTDOGE,
+    transactionFeeCapTDOGE: config.transactionFeeCapTDOGE,
+    maxL1FeePerByteTDOGE: config.maxL1FeePerByteTDOGE,
+    ...config.pilotFeePolicies?.[pilot ?? ""],
+  };
+}
+
 export function positionCollateral(priceLocal: string, ratioPercent: number, capLocal = "10000"): {
   priceRaw: bigint;
   capRaw: bigint;

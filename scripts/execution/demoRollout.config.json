@@ -9,6 +9,13 @@
   "feeCapTDOGE": "500",
   "transactionFeeCapTDOGE": "20",
   "maxL1FeePerByteTDOGE": "0.000497",
+  "pilotFeePolicies": {
+    "CHF": {
+      "feeCapTDOGE": "600",
+      "transactionFeeCapTDOGE": "100",
+      "maxL1FeePerByteTDOGE": "0.0025"
+    }
+  },
   "newCurrencies": ["EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"],
   "allCurrencies": ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"],
   "bridgeTargetSource": "50000000000",
