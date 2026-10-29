@@ -29,10 +29,10 @@ def leadrate(evidence):
 def main():
     manifest = json.loads((ROOT / "initial-leadrates.json").read_text())
     instances = {entry["code"]: entry for entry in json.loads((ROOT / "instances" / "instances.json").read_text())}
-    expected_codes = ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN"]
+    expected_codes = ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"]
     rates = {entry["code"]: entry for entry in manifest["rates"]}
     if set(rates) != set(expected_codes) or set(instances) != set(expected_codes):
-        raise ValueError("The manifest and instances must each contain exactly the expected 11 currencies")
+        raise ValueError("The manifest and instances must each contain exactly the expected 12 currencies")
 
     for code in expected_codes:
         evidence = rates[code]

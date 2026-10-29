@@ -2,7 +2,7 @@
 
 IMF extends Frankencoin’s collateralized minting, challenge, savings, and pool-share governance mechanics to independent currency systems on DogeOS.
 
-This repository contains the v2.0 smart contracts, tests, and deployment tooling for 11 parameterized instances: K9USD, K9EUR, K9JPY, K9GBP, K9AUD, K9CNY, K9BRL, K9PKR, K9BDT, K9INR, and K9NGN. Each instance has isolated token supply, pool shares, reserves, positions, savings, losses, and source-asset conversion accounting. There is no shared basket, cross-currency reserve, or FX-conversion oracle.
+This repository contains the v2.0 smart contracts, tests, and deployment tooling for 12 parameterized instances: K9USD, K9EUR, K9JPY, K9GBP, K9AUD, K9CNY, K9BRL, K9PKR, K9BDT, K9INR, K9NGN, and K9CHF. Each instance has isolated token supply, pool shares, reserves, positions, savings, losses, and source-asset conversion accounting. There is no shared basket, cross-currency reserve, or FX-conversion oracle. The first 11 systems are deployed on Chikyū; CHF is configured locally and awaits its public fee-gated deployment.
 
 V2.0 uses fresh deployments. It does not upgrade or migrate the existing Chikyu v1 instances.
 
@@ -61,7 +61,7 @@ Production requires a separately approved DogeOS stablecoin and a risk-reviewed 
 
 ### Initial leadrates
 
-`scripts/deployment/initial-leadrates.json` records the implementation-reviewed snapshot: a local-currency one-year sovereign reference yield plus **1.50 percentage points (15,000 ppm)**. EUR uses the ECB euro-area AAA one-year curve. Continuous rates and discount rates have explicit conversions; dated and secondary evidence remains marked provisional.
+`scripts/deployment/initial-leadrates.json` records the implementation-reviewed snapshot: a local-currency one-year sovereign reference yield plus **1.50 percentage points (15,000 ppm)**. EUR uses the ECB euro-area AAA one-year curve. Continuous rates and discount rates have explicit conversions; dated and secondary evidence remains marked provisional. CHF is an explicit testnet-only exception: its 19,950 ppm configuration uses the official SNB ten-year spot yield of 0.495% observed on 2026-10-28 because the available one-year series is stale and negative. That exception is not a one-year benchmark or production approval.
 
 These values configure only the initial on-chain leadrate. There is no automatic rate oracle or administrator. Later changes follow qualified pool-share governance and the inherited seven-day delay. Production values require a fresh, signed-off snapshot before deployment.
 
@@ -72,7 +72,7 @@ The leadrate affects savings accrual and the baseline upfront cost of position m
 - `contracts/` — token, Equity, MintingHub, positions, roller, savings/leadrate, and source bridge.
 - `contracts/test/` — tUSDC and test-only fixtures.
 - `test/` — inherited regression suite plus v2.0 bootstrap, bridge, governance, and position tests.
-- `scripts/deployment/instances/instances.json` — 11 currency names, symbols, and initial leadrates.
+- `scripts/deployment/instances/instances.json` — 12 currency names, symbols, and initial leadrates.
 - `scripts/deployment/initial-leadrates.json` — dated rate evidence and conventions.
 - `scripts/deployment/networks.json` — network-specific source-asset configuration.
 - `scripts/deployment/deploy/` — currency-agnostic deployment and bootstrap calls.
@@ -95,7 +95,7 @@ npx hardhat size-contracts
 
 The compiler is solc 0.8.20 with the Shanghai EVM target, optimizer at 200 runs, and no viaIR.
 
-Run the real in-memory deployment for all 11 currencies:
+Run the real in-memory deployment for all 12 currencies:
 
 ```bash
 npx hardhat deploy --tags 00_deploy_all --network hardhat
@@ -127,9 +127,28 @@ USD V2 deployed on 2026-10-25: DogeOS Dollar (`K9USD`) is `0xBe01772ee4ba9807b4c
 
 All eight contracts have Sourcify exact creation and runtime matches. Blockscout display verification remains an external blocker. On 2026-10-27, native standard-input submissions for all eight returned HTTP 200 (`Smart-contract verification started`) but none published `is_verified=true`; native multi-part and flattened-code diagnostics for TestUSDC also remained unpublished, and the Etherscan-compatible route returned `Fail - Unable to verify` for both minimal and full input. Its Sourcify integration is disabled and the documented verification-result websocket paths return 404. `USD_BlockscoutDiagnostics.json` records the attempts. `USD_Verification.json` remains incomplete until all eight display checks pass; the verifier now submits all eight before polling them together and never treats queue acceptance as success. No contract change or redeployment was performed.
 
-After USD succeeds, rehearse bridge credits, positions, challenges, savings, and governance with separately authorized test transactions, then roll out the remaining instances with fresh fee preflights. Never use v1 addresses as v2 addresses.
+### Authorized Chikyu demo rollout
 
-Production launch additionally requires an independent audit, final source-asset approval and caps, refreshed rates, DogeOS mainnet parameters, initial-investor custody and distribution review, and legal review including MiCA. Removing the guardian alone does not establish decentralization or regulatory compliance.
+The separately authorized 2026-10-28 demo rollout deployed and verified all 11 then-current V2 currency systems, funded every bridge to 50,000 tUSDC, created ten active DEMO tokens and ten DEMO/tUSDC Barkswap pools, and opened 33 collateral positions. The resumable public journal is `scripts/deployment/deployments/chikyuV2/demo-rollout-state.json`; the human summary is `demo-rollout.json`. Actual tracked fees are 60.69226597942117927 tDOGE under the explicit 500 tDOGE total, 20 tDOGE per-transaction and 7x-reference L1 per-byte policy.
+
+CHF/K9CHF was added to that authorized testnet scope on 2026-10-29 with a planned 50,000-unit bridge, DEMO03/06/09 positions and a 6,000-unit Equity investment. Its local deployment and all 255 protocol tests pass. Public deployment remains blocked by the read-only fee preflight: the token and PositionFactory still exceed the 20 tDOGE transaction cap and other contracts exceed the per-byte ceiling. No CHF transaction or registry exists yet. `DEMO_PILOT=CHF` now also filters due-mint records so a CHF-only run cannot mint another currency's positions.
+
+Pool initialization must account for actual token order: when tUSDC is `token0`, the approved tUSDC/DEMO numerator and denominator are supplied in reverse because the Algebra price is token1/token0. `tickSpacing()` is read only after initialization, and LP positions use the approved full-range bounds -887220 to 887220 rounded to pool spacing. The DEMO02 recovery is recorded as `DEMO02_legacy`; do not fund or reuse that abandoned zero-liquidity pool.
+
+The authorized Equity scenario invested graduated amounts of existing bridge-minted currency into all 11 then-current Equity contracts: 250 USD, 500 EUR, 750 JPY, 1000 GBP, 1250 AUD, 1500 CNY, 2000 BRL, 2500 PKR, 3000 BDT, 4000 INR and 5000 NGN. Each call used a fresh `calculateShares` quote, verified exact currency/share/supply deltas and recorded the transaction under `equity` in the rollout journal. These are protocol pool shares, not Barkswap LP NFTs. Rerunning verifies recorded state rather than resubmitting. The commands are:
+
+```bash
+DEMO_MODE=invest DEMO_STAGE=equity DEMO_PILOT=USD node scripts/execution/demo_rollout.mjs
+DEMO_MODE=invest DEMO_STAGE=equity node scripts/execution/demo_rollout.mjs
+```
+
+No due position mint has been executed. Earliest mint availability is 2026-10-31T13:34:54Z. After the cooldown passes and a fresh estimate is affordable, run:
+
+```bash
+DEMO_MODE=mint-due DEMO_STAGE=positions node scripts/execution/demo_rollout.mjs
+```
+
+Never use v1 addresses as v2 addresses. Production launch additionally requires an independent audit, final source-asset approval and caps, refreshed rates, DogeOS mainnet parameters, initial-investor custody and distribution review, and legal review including MiCA. Removing the guardian alone does not establish decentralization or regulatory compliance.
 
 ## V1 rehearsal reconciliation
 

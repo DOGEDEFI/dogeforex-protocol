@@ -17,4 +17,6 @@ node_modules
 # deployment files
 /scripts/deployments/deployments/mainnet
 /scripts/deployments/deployments/sepolia
-```
+
+# local wallet material
+/data/

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0",
+  "network": "chikyuV2",
+  "chainId": "6281971",
+  "scope": "DEMO_ROLLOUT",
+  "checkedAt": "2026-10-29T16:52:01.150Z",
+  "complete": false,
+  "status": "blocked",
+  "blockers": [
+    "CHF/Token exceeds the L1 per-byte safety ceiling",
+    "CHF/Token exceeds the per-transaction ceiling",
+    "CHF/PositionFactory exceeds the L1 per-byte safety ceiling",
+    "CHF/PositionFactory exceeds the per-transaction ceiling",
+    "CHF/PositionRoller exceeds the L1 per-byte safety ceiling",
+    "CHF/Savings exceeds the L1 per-byte safety ceiling",
+    "CHF/MintingHub exceeds the L1 per-byte safety ceiling",
+    "CHF/Bridge exceeds the L1 per-byte safety ceiling"
+  ],
+  "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+  "missingCurrencies": [
+    "CHF"
+  ],
+  "alreadyDeployedCurrencies": [
+    "EUR",
+    "JPY",
+    "GBP",
+    "AUD",
+    "CNY",
+    "BRL",
+    "PKR",
+    "BDT",
+    "INR",
+    "NGN"
+  ],
+  "bridgeTargetSourceRaw": "50000000000",
+  "bridgeTargetLocalRaw": "50000000000000000000000",
+  "plannedCreations": [
+    {
+      "code": "CHF",
+      "contract": "OracleFreeDollar",
+      "calldataBytes": "19087",
+      "estimatedGas": "3878143",
+      "quotedL1FeeWei": "22018109713236254941",
+      "conservativeReservedFeeWei": "44036413333622509882"
+    },
+    {
+      "code": "CHF",
+      "contract": "PositionFactory",
+      "calldataBytes": "14015",
+      "estimatedGas": "3076449",
+      "quotedL1FeeWei": "13392650261697937808",
+      "conservativeReservedFeeWei": "26785454345845875616"
+    },
+    {
+      "code": "CHF",
+      "contract": "PositionRoller",
+      "calldataBytes": "4660",
+      "estimatedGas": "1057690",
+      "quotedL1FeeWei": "2777137198148230399",
+      "conservativeReservedFeeWei": "5554327280796460798"
+    },
+    {
+      "code": "CHF",
+      "contract": "Savings",
+      "calldataBytes": "5675",
+      "estimatedGas": "1181059",
+      "quotedL1FeeWei": "3596879284629878705",
+      "conservativeReservedFeeWei": "7193817622209757410"
+    },
+    {
+      "code": "CHF",
+      "contract": "MintingHub",
+      "calldataBytes": "10648",
+      "estimatedGas": "2270759",
+      "quotedL1FeeWei": "8781187920605784144",
+      "conservativeReservedFeeWei": "17562489379161568288"
+    },
+    {
+      "code": "CHF",
+      "contract": "StablecoinBridge",
+      "calldataBytes": "3845",
+      "estimatedGas": "673288",
+      "quotedL1FeeWei": "2177418838873996037",
+      "conservativeReservedFeeWei": "4354871342147992074"
+    }
+  ],
+  "remainingStageTransactions": {
+    "bootstrapAndBridgeFunding": 144,
+    "demoTokenDeployments": 10,
+    "poolCreationInitializationAllowancesAndMints": 60,
+    "positionApprovalsAndOpenings": 72,
+    "dueMints": 36,
+    "equityInvestments": 12
+  },
+  "ordinaryTransactionConservativeFeeWei": "422300808694667122",
+  "remainingStageAllowanceWei": "141048470104018818748",
+  "conservativeTotalFeeWei": "246535843407802982816",
+  "spentFeeWei": "60692265979421179270",
+  "reservedFeeWei": "0",
+  "maximumTotalFeeWei": "500000000000000000000",
+  "broadcast": false
+}

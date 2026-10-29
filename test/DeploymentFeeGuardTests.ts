@@ -122,7 +122,7 @@ describe("V2 deployment total-fee guard", () => {
     const instance = guard();
     const raw = await signed();
     provider.oracleFee = MAX_L1_FEE_PER_BYTE * BigInt((raw.length - 2) / 2) + 1n;
-    await expect(send(instance, raw)).to.be.rejectedWith("five times the reference");
+    await expect(send(instance, raw)).to.be.rejectedWith("L1 data-fee regime exceeds the configured per-byte rate ceiling");
     expect(provider.broadcasts).to.equal(0);
   });
 

@@ -64,5 +64,11 @@
     "tokenName": "DogeForex Naira",
     "tokenSymbol": "K9NGN",
     "leadratePPM": 204061
+  },
+  {
+    "code": "CHF",
+    "tokenName": "DogeForex Swiss Franc",
+    "tokenSymbol": "K9CHF",
+    "leadratePPM": 19950
   }
 ]

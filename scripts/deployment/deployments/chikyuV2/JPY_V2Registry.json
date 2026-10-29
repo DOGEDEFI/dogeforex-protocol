@@ -1,0 +1,123 @@
+{
+  "address": "0x7aD992a532019dD4A6Bd83e3c5D1aE4f5ACBfC1b",
+  "abi": [],
+  "transactionHash": "0x31c26cee78ead7d76d75b10de9e3c5e4ceda0eb56da2b531cb5be9d41e3b0542",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "JPY",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "JPY",
+      "instrument": "Japan Ministry of Finance JGB 1-year yield",
+      "series": "JGB yield curve, 1-year",
+      "tenor": "1 year",
+      "observationDate": "2026-10-22",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://www.mof.go.jp/jgbs/reference/interest_rate/jgbcm.csv",
+      "sourceType": "official",
+      "originalYieldPercent": "1.6600",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Published annual JGB benchmark yield; confirm date and quote convention again at production freeze",
+      "normalizationFormula": "identity; published annual benchmark yield",
+      "normalizedAnnualYieldPercent": "1.6600",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 31600,
+      "reviewStatus": "implementation-reviewed / production-refresh-required"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Yen",
+        "K9JPY"
+      ],
+      "Equity": [
+        "0x7ad992a532019dd4a6bd83e3c5d1ae4f5acbfc1b",
+        "DogeForex Yen",
+        "K9JPY"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0x7ad992a532019dd4a6bd83e3c5d1ae4f5acbfc1b"
+      ],
+      "Savings": [
+        "0x7ad992a532019dd4a6bd83e3c5d1ae4f5acbfc1b",
+        "31600"
+      ],
+      "MintingHub": [
+        "0x7ad992a532019dd4a6bd83e3c5d1ae4f5acbfc1b",
+        "0x0d89474e5c3161600f3e548ce59fc4ad7496a6ec",
+        "0xb15e811a852bb7ab041c5bc4d1c208e949ba4294",
+        "0xb5b3a5be3c2308b5f3be2fc68770d85d5eb90aed"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0x7ad992a532019dd4a6bd83e3c5d1ae4f5acbfc1b",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0x7aD992a532019dD4A6Bd83e3c5D1aE4f5ACBfC1b",
+      "Equity": "0x652f6c55441387a8247C5FabdC0e12017b1bd213",
+      "PositionFactory": "0xB5b3a5Be3c2308b5F3be2FC68770D85D5eB90AED",
+      "PositionRoller": "0xB15e811A852bB7aB041C5bc4D1C208e949ba4294",
+      "Savings": "0x0d89474e5c3161600F3E548ce59fc4AD7496A6EC",
+      "MintingHub": "0x486bfd24B82037d83fD3ce611a8ca030e2f90531",
+      "Bridge": "0xac2Cbf7f96D88e85Be249b558758Ab4BAD427B60"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x27524425b3a5171d751a5c55f47efe9edabc3bad158275d1187452b66b44e169",
+        "Equity": "0x27524425b3a5171d751a5c55f47efe9edabc3bad158275d1187452b66b44e169",
+        "PositionFactory": "0x9cd3a50c0516deab880c9a6404a79189e09d722445d9bf966e495c7baa6b2383",
+        "PositionRoller": "0xfa2e04a28a432d4970924a184a3c6eaf9a6be6e451321e0c208d90275ae3fca6",
+        "Savings": "0x114ec9af5cbd4a107f6638888b86a7bf0c28b198607b73c7756b0d24e55ffabb",
+        "MintingHub": "0xd11f2803621a1db125304086b22f7cfa8cace77033240a7bd70db80e93657631",
+        "Bridge": "0xd9d0b2a39920c6c6068f506b9aa0272252dea65e8f221f1f45e1d5ae49a165cf"
+      },
+      "initialize": {
+        "Savings": "0x9cb73aff3275c18f8d4673d291c15772359b184db32bc747910e5d4f1cb29b28",
+        "PositionFactory": "0x85f0ddf91c451d3b2a4c8faefb54102fe7551c7877997c3a7f088137a8d8106d",
+        "PositionRoller": "0xec5640e3e4f99d2912716284ce1c9577ae7399a32c1efbb2567db3746a3ac067",
+        "MintingHub": "0x6ab1c3e7c47fec610a1363fc9b4d0e1ff250d68c9cc08d181ebebf38658a41f1",
+        "Bridge": "0xd59eec70fe8a72d2c6bfca10e6fb36311d5e292d87bdd507fa5d384f92d7eb83"
+      },
+      "sourceFunding": "0xfed72e09f211f61bcb718cd5fe0a62667a0f765c6343f0a20784e15dfd378f26",
+      "sourceApproval": "0x7173c3afeff79acf9534f1d3a37fa477e5a896fc3605e0d52abf42c8f088a5f7",
+      "bridgeMint": "0xe668b9469b9e715d07932b69da155baf9c5d3dacdf757a07e6b98ebe4d65f91f",
+      "equityInvestment": "0x31c26cee78ead7d76d75b10de9e3c5e4ceda0eb56da2b531cb5be9d41e3b0542"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "31600"
+    }
+  }
+}

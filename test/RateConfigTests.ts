@@ -20,14 +20,15 @@ const EXPECTED_RATES: Record<string, bigint> = {
   BDT: 102400n,
   INR: 79891n,
   NGN: 204061n,
+  CHF: 19950n,
 };
 
 describe("V2 initial-rate and network configuration", () => {
-  it("validates all 11 instances against their dated evidence", () => {
+  it("validates all 12 instances against their dated evidence", () => {
     const instances = loadInstances();
     const manifest = validateInstances(instances);
     expect(manifest.reviewStatus).to.equal(IMPLEMENTATION_REVIEW_STATUS);
-    expect(manifest.rates).to.have.length(11);
+    expect(manifest.rates).to.have.length(12);
     for (const evidence of manifest.rates) {
       expect(evidence.leadratePPM).to.equal(Number(EXPECTED_RATES[evidence.code]));
       expect(
@@ -49,6 +50,7 @@ describe("V2 initial-rate and network configuration", () => {
     expect(leadrateFromNormalized("12.4999", 15000, "PKR")).to.equal(139999n);
     expect(leadrateFromNormalized("8.7400", 15000, "BDT")).to.equal(102400n);
     expect(leadrateFromNormalized("6.4891", 15000, "INR")).to.equal(79891n);
+    expect(leadrateFromNormalized("0.4950", 15000, "CHF")).to.equal(19950n);
   });
 
   it("rounds half up and rejects invalid, negative, excessive-precision, and overflowing inputs", () => {
@@ -66,7 +68,7 @@ describe("V2 initial-rate and network configuration", () => {
 
   it("rejects missing, duplicate, and mismatched instance configuration", () => {
     const instances = loadInstances();
-    expect(() => validateInstances(instances.slice(1))).to.throw("Exactly 11");
+    expect(() => validateInstances(instances.slice(1))).to.throw("Exactly 12");
     expect(() => validateInstances([...instances, instances[0]])).to.throw();
     const wrongRate = instances.map((instance) =>
       instance.code === "USD" ? { ...instance, leadratePPM: instance.leadratePPM + 1 } : instance
@@ -107,5 +109,16 @@ describe("V2 initial-rate and network configuration", () => {
     const ngn = manifest.rates.find((rate) => rate.code === "NGN");
     expect(ngn.originalUnit).to.contain("discount");
     expect(ngn.normalizationFormula).to.contain("100 - 15.9000");
+  });
+
+  it("keeps the CHF ten-year testnet exception explicit", () => {
+    const manifest = loadAndValidateRateManifest(loadInstances());
+    const chf = manifest.rates.find((rate) => rate.code === "CHF");
+    expect(chf.tenor).to.equal("10 years");
+    expect(chf.observationDate).to.equal("2026-10-28");
+    expect(chf.retrievalDate).to.equal("2026-10-29");
+    expect(chf.evidenceStatus).to.contain("testnet-only ten-year exception");
+    expect(chf.normalizedAnnualYieldPercent).to.equal("0.4950");
+    expect(chf.leadratePPM).to.equal(19950);
   });
 });

@@ -1,0 +1,129 @@
+{
+  "address": "0x6D61Ad71589697c3fA89C7851d21C9deBC6E2D98",
+  "abi": [],
+  "transactionHash": "0x81d4ba57d299c34212a25fc6e0ac22e62a8addf717e46c32687f64e411dc8a02",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "AUD",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "AUD",
+      "instrument": "Australia 52-week bill yield",
+      "series": "Trading Economics Australia 52 Week Bill Yield",
+      "tenor": "52 weeks",
+      "observationDate": "2026-10-23",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://tradingeconomics.com/australia/52-week-bill-yield",
+      "sourceType": "secondary",
+      "evidenceStatus": "secondary-source / exact-benchmark-review-pending",
+      "originalYieldPercent": "4.9500",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Published annual 52-week bill quote from a secondary source; illustrative pending exact benchmark approval",
+      "normalizationFormula": "identity for this planning snapshot; obtain and approve an exact primary one-year benchmark before production",
+      "normalizedAnnualYieldPercent": "4.9500",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 64500,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "relatedOfficialEvidence": {
+        "observationDate": "2026-10-21",
+        "description": "RBA nearby roughly 1.08-year bond yielded 4.942 percent; not an exact one-year point",
+        "sourceUrl": "https://www.rba.gov.au/statistics/tables/csv/f16-data.csv"
+      }
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Aussie",
+        "K9AUD"
+      ],
+      "Equity": [
+        "0x6d61ad71589697c3fa89c7851d21c9debc6e2d98",
+        "DogeForex Aussie",
+        "K9AUD"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0x6d61ad71589697c3fa89c7851d21c9debc6e2d98"
+      ],
+      "Savings": [
+        "0x6d61ad71589697c3fa89c7851d21c9debc6e2d98",
+        "64500"
+      ],
+      "MintingHub": [
+        "0x6d61ad71589697c3fa89c7851d21c9debc6e2d98",
+        "0xefde2508743c469f678faae6fd48e33b69b65166",
+        "0xb1e47d799d63511b5819860d659565407045e409",
+        "0xcb1b538cce1d9db82f0a949a219040f897f870ed"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0x6d61ad71589697c3fa89c7851d21c9debc6e2d98",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0x6D61Ad71589697c3fA89C7851d21C9deBC6E2D98",
+      "Equity": "0x344548CF6ab3da78C5a2E4F359eeCFc874B51e32",
+      "PositionFactory": "0xcb1b538cce1D9dB82F0a949a219040F897f870ed",
+      "PositionRoller": "0xB1e47D799D63511b5819860d659565407045E409",
+      "Savings": "0xefDE2508743c469F678fAaE6fD48E33b69B65166",
+      "MintingHub": "0x141cEc1Da0A6089f11A159A6f6Aa870Ea3C14BD8",
+      "Bridge": "0x8419b4e4fc2608ccbAC1e0cd8EA7F0293dd11984"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x9d297e51723a05bc27329c8d96f6cad5cbf70d1d3274092ceabb08cd89a64c2f",
+        "Equity": "0x9d297e51723a05bc27329c8d96f6cad5cbf70d1d3274092ceabb08cd89a64c2f",
+        "PositionFactory": "0x9f6e2e99065460d9b7cda26f16020d654618e2191bd8da17df3531d0ebafe7b0",
+        "PositionRoller": "0x00aacce5503e87a26e9e230dd632bf04b8fe9d8c8833fbe2698d0d7f881babce",
+        "Savings": "0xf5e276596260242fb2abbfd6b5802ed19b4f2abfe9d0241f0a584be427202ee0",
+        "MintingHub": "0x756bb231e20020e19e7aea3b3097d76e53d4913077503c1cf714e1b1cfa86c19",
+        "Bridge": "0xf5a31a8cd4b60df669ed659978c376c82612ce5dc077f9c65c362233a17844fc"
+      },
+      "initialize": {
+        "Savings": "0x6ff26d3935eafc0ec73d12567751c69f4dd02777a88cd6f4162deb0f55de16fc",
+        "PositionFactory": "0xc4117c6b974a7993b7a208a727a0a1ef7b4c8f325bc40a2426d0287f539e045b",
+        "PositionRoller": "0x28fbd54a3cd2759ec6e38c3150cc5e993daf9204d416cf035ba8d86043e04424",
+        "MintingHub": "0xa4b300e6784a134c4b02b9b904facfb4123e26128c8516df8e49982e4be791fa",
+        "Bridge": "0xbfc103bdb0e4e644c252b35abec5ca12ad28e88d7c3f6fab2ae28369dfae1460"
+      },
+      "sourceFunding": "0xba705062243e7d77c6dcdd2e9f73b570fc8d3696a52a18bb3cb776570063bdba",
+      "sourceApproval": "0x52a0c74a81fbd31764ea8fc11bae76822c69f6691ca3b296bf190ff8f19754a9",
+      "bridgeMint": "0x0e01b74f36938863684c03f05b60eb384a7ae54e4af906fab842f06398122b3b",
+      "equityInvestment": "0x81d4ba57d299c34212a25fc6e0ac22e62a8addf717e46c32687f64e411dc8a02"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "64500"
+    }
+  }
+}

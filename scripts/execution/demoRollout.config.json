@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "network": "chikyuV2",
+  "chainId": "6281971",
+  "owner": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+  "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+  "sourceDecimals": 6,
+  "demoDecimals": 18,
+  "feeCapTDOGE": "500",
+  "transactionFeeCapTDOGE": "20",
+  "maxL1FeePerByteTDOGE": "0.000497",
+  "newCurrencies": ["EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"],
+  "allCurrencies": ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"],
+  "bridgeTargetSource": "50000000000",
+  "bridgeTargetLocal": "50000000000000000000000",
+  "demoInitialSupply": "1000000",
+  "barkswap": {
+    "factory": "0xF3961157f56C983316657f0267B4C04460beE43f",
+    "positionManager": "0xf596329a6c7E03F0708199cB5435f86783DB4302",
+    "tickLower": -887220,
+    "tickUpper": 887220,
+    "minOutputBips": 9900,
+    "deadlineSeconds": 1800
+  },
+  "demoTokens": [
+    { "symbol": "DEMO01", "name": "Demo Collateral 01", "priceNumerator": "1", "priceDenominator": "4", "poolSourceRaw": "1000000000", "poolDemo": "4000" },
+    { "symbol": "DEMO02", "name": "Demo Collateral 02", "priceNumerator": "1", "priceDenominator": "2", "poolSourceRaw": "1000000000", "poolDemo": "2000" },
+    { "symbol": "DEMO03", "name": "Demo Collateral 03", "priceNumerator": "1", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "1000" },
+    { "symbol": "DEMO04", "name": "Demo Collateral 04", "priceNumerator": "2", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "500" },
+    { "symbol": "DEMO05", "name": "Demo Collateral 05", "priceNumerator": "5", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "200" },
+    { "symbol": "DEMO06", "name": "Demo Collateral 06", "priceNumerator": "10", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "100" },
+    { "symbol": "DEMO07", "name": "Demo Collateral 07", "priceNumerator": "25", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "40" },
+    { "symbol": "DEMO08", "name": "Demo Collateral 08", "priceNumerator": "50", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "20" },
+    { "symbol": "DEMO09", "name": "Demo Collateral 09", "priceNumerator": "100", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "10" },
+    { "symbol": "DEMO10", "name": "Demo Collateral 10", "priceNumerator": "250", "priceDenominator": "1", "poolSourceRaw": "1000000000", "poolDemo": "4" }
+  ],
+  "positions": [
+    { "symbol": "DEMO03", "price": "1", "ratioPercent": 110, "initialCollateral": "11000" },
+    { "symbol": "DEMO06", "price": "10", "ratioPercent": 150, "initialCollateral": "1500" },
+    { "symbol": "DEMO09", "price": "100", "ratioPercent": 200, "initialCollateral": "200" }
+  ],
+  "positionTerms": {
+    "capLocal": "10000",
+    "initPeriodSeconds": 259200,
+    "durationSeconds": 31536000,
+    "challengePeriodSeconds": 86400,
+    "riskPremiumPPM": 20000,
+    "reservePPM": 200000
+  },
+  "equityInvestments": {
+    "USD": "250",
+    "EUR": "500",
+    "JPY": "750",
+    "GBP": "1000",
+    "AUD": "1250",
+    "CNY": "1500",
+    "BRL": "2000",
+    "PKR": "2500",
+    "BDT": "3000",
+    "INR": "4000",
+    "NGN": "5000",
+    "CHF": "6000"
+  }
+}

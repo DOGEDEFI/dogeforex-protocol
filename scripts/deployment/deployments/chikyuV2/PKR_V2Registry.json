@@ -1,0 +1,123 @@
+{
+  "address": "0xC4C1fDf42f3B6A85588A8E55E7Eed3f7c5c6bA9e",
+  "abi": [],
+  "transactionHash": "0x370d68b0f39a10a0d7c1f551354587550188ee1a5253964dff0b09620d5bcf6c",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "PKR",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "PKR",
+      "instrument": "Pakistan 12-month/364-day Market Treasury Bill auction cutoff",
+      "series": "SBP 364-day MTB auction result",
+      "tenor": "364 days",
+      "observationDate": "2026-10-14",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://www.sbp.org.pk/assets/document/market-treasury-bills-auction-bid-report-14-oct-26.pdf",
+      "sourceType": "official auction snapshot",
+      "originalYieldPercent": "12.4999",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Auction cutoff yield, not weighted-average yield; refresh for later auctions",
+      "normalizationFormula": "identity; published annual auction cutoff yield",
+      "normalizedAnnualYieldPercent": "12.4999",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 139999,
+      "reviewStatus": "implementation-reviewed / production-refresh-required"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Pakistani Rupee",
+        "K9PKR"
+      ],
+      "Equity": [
+        "0xc4c1fdf42f3b6a85588a8e55e7eed3f7c5c6ba9e",
+        "DogeForex Pakistani Rupee",
+        "K9PKR"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0xc4c1fdf42f3b6a85588a8e55e7eed3f7c5c6ba9e"
+      ],
+      "Savings": [
+        "0xc4c1fdf42f3b6a85588a8e55e7eed3f7c5c6ba9e",
+        "139999"
+      ],
+      "MintingHub": [
+        "0xc4c1fdf42f3b6a85588a8e55e7eed3f7c5c6ba9e",
+        "0x1cc18f06c1ca070fef8f89eadd118c3e2a75996b",
+        "0x14796ccb41b70e39f96f52cd8e5a5298ad8d2264",
+        "0x04f07054227d0d1c22d472a6c8d6e889b7164314"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0xc4c1fdf42f3b6a85588a8e55e7eed3f7c5c6ba9e",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0xC4C1fDf42f3B6A85588A8E55E7Eed3f7c5c6bA9e",
+      "Equity": "0xe6a217B1851b950b504F215aB301e744128b795C",
+      "PositionFactory": "0x04f07054227D0D1C22d472a6C8D6E889b7164314",
+      "PositionRoller": "0x14796ccb41B70e39f96f52Cd8E5a5298AD8D2264",
+      "Savings": "0x1Cc18F06c1ca070fEF8F89EaDD118C3e2A75996B",
+      "MintingHub": "0x85c5B7BA2B3B230233f3b91d9Ce2294774Da166c",
+      "Bridge": "0x1D8d3825ffa20A8c8FB1511A7f969A4Af6a2EBA3"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x225fb334581163f61903398040408fdf5f2a4f8ac92f3e78e9e4fb6f6abe76bb",
+        "Equity": "0x225fb334581163f61903398040408fdf5f2a4f8ac92f3e78e9e4fb6f6abe76bb",
+        "PositionFactory": "0xe0cdbaacb80bee56d4b37d186a32acc4015d141573d136b2ae490ad82d0b538e",
+        "PositionRoller": "0x5fe6d90461109e83c31e57a9a646618ebc8906a6aacc62b6a5127bf4b74766a8",
+        "Savings": "0x292ef24ac024980813a3a92390a10725e8aa13fed18fa1ec00085d47af64e351",
+        "MintingHub": "0xab4dec72608d80411f2504758faa275625278f1bf626bc17a2704eec37fe7859",
+        "Bridge": "0x37bb8d0907233ef47a390f563bee0f73c31aba78e94dd93a0f28ec40ff112652"
+      },
+      "initialize": {
+        "Savings": "0x53612194f780fcad51bf1f8b8fc6fa89d287888ebde54f386074b8830f9b3b76",
+        "PositionFactory": "0x154adeec0e4ca5af2d4df4add64cf762266720762f9565d216a2a03b66cb03a7",
+        "PositionRoller": "0xe97a6231f34492f21f414340d9bb67abc8789a59eb7b3e472f7d239bbe1e8c6d",
+        "MintingHub": "0x51eda93ea2ff5b892815fd2328f0729d7f620c3f3ef20eef099efa66a3c1b55b",
+        "Bridge": "0x5c6da6acf45f98747924ffd572d4bf3cb5e0132d75b0a0d30bccb1a77fc6acae"
+      },
+      "sourceFunding": "0x6b2c0033125c99132439de1181d8dcbb13c5874b97fd7ef78be435210c23a948",
+      "sourceApproval": "0x5f3fc8fb100a28fa87e8b94c33efb5a6b906b988fb04ade76e40dff1536b4fee",
+      "bridgeMint": "0x2cc6bd80b970d8075b6450e9e4bf007856455c16d5cad7305eee5e739c4affe1",
+      "equityInvestment": "0x370d68b0f39a10a0d7c1f551354587550188ee1a5253964dff0b09620d5bcf6c"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "139999"
+    }
+  }
+}

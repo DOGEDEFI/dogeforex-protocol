@@ -1,0 +1,123 @@
+{
+  "address": "0x9773224c459fEE9f16B3666f2DB7D4cfA1D2C4B2",
+  "abi": [],
+  "transactionHash": "0xa1fcd20f10ea279ee4afb26eb7ddf76ba3ed213522737408966aad388328d3f3",
+  "numDeployments": 14,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "EUR",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "EUR",
+      "instrument": "ECB euro-area AAA 1-year spot rate",
+      "series": "YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_1Y",
+      "tenor": "1 year",
+      "observationDate": "2026-10-22",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://data-api.ecb.europa.eu/service/data/YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_1Y?format=csvdata&lastNObservations=1",
+      "sourceType": "official currency-level credit-screened composite; approved exception to national benchmarks",
+      "originalYieldPercent": "2.8697336",
+      "originalUnit": "continuously compounded percent per year",
+      "quoteConvention": "Continuously compounded model curve; not a national bond and not an already effective annual yield",
+      "normalizationFormula": "100 * (exp(2.8697336 / 100) - 1), rounded half up to 10 decimal places = 2.9113071855; then apply the spread and ppm rounding rule",
+      "normalizedAnnualYieldPercent": "2.9113071855",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 44113,
+      "reviewStatus": "implementation-reviewed / production-refresh-required"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Euro",
+        "K9EUR"
+      ],
+      "Equity": [
+        "0x9773224c459fee9f16b3666f2db7d4cfa1d2c4b2",
+        "DogeForex Euro",
+        "K9EUR"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0x9773224c459fee9f16b3666f2db7d4cfa1d2c4b2"
+      ],
+      "Savings": [
+        "0x9773224c459fee9f16b3666f2db7d4cfa1d2c4b2",
+        "44113"
+      ],
+      "MintingHub": [
+        "0x9773224c459fee9f16b3666f2db7d4cfa1d2c4b2",
+        "0x25524327d733f79c4772b95c268836937f9f7075",
+        "0x992db7bdf7f2ea9698046c603334d99b0a91b149",
+        "0x013cb782f950769660d35be1c4031c7df1a51cb8"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0x9773224c459fee9f16b3666f2db7d4cfa1d2c4b2",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0x9773224c459fEE9f16B3666f2DB7D4cfA1D2C4B2",
+      "Equity": "0x24794818097bE3F99B55B70A1167608a7E888208",
+      "PositionFactory": "0x013CB782F950769660D35Be1C4031C7df1A51Cb8",
+      "PositionRoller": "0x992db7bdF7F2ea9698046c603334D99b0a91b149",
+      "Savings": "0x25524327d733f79c4772B95c268836937f9f7075",
+      "MintingHub": "0x92ecfdC999617Cbe6f3D342d2b0C49890790bCdC",
+      "Bridge": "0x0d71EA37281a0cc39535eD2F10D43DcC5909F4Bf"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x3904037bc79970c5d82b60a8bd88e9339fff47d84020d3e546ce89643cb7e118",
+        "Equity": "0x3904037bc79970c5d82b60a8bd88e9339fff47d84020d3e546ce89643cb7e118",
+        "PositionFactory": "0x9a9ff9faf7a074257db49dc80ebe5b28c0dc704f4f5683cba8db9c5e7a0c4c94",
+        "PositionRoller": "0xc4d0a21c95c800e6a6c2f10cb0772aae6d4fe87ee981985452a54648f2732b19",
+        "Savings": "0xf647e09f2de772642743326518da5a9e15a9c985ed74a637b3c1f5fef1bfca53",
+        "MintingHub": "0x0c6cae2a53c966931b4ba18fd5d4913e4baaea5abcadcb7b5eedaf759758cbec",
+        "Bridge": "0x2a938d56c533aca2887449c4891391ffe7a75290486e34d41b73d37bcaedb8c7"
+      },
+      "initialize": {
+        "Savings": "0xd6aa60dc611a41ee3f15be354702cbcf973a6e7eed2553df5240f25a265647fa",
+        "PositionFactory": "0x45270f21bdf6f0a5cb9d54aac8604326b9d1ce4e0b4118d6c91c7c920328bbd3",
+        "PositionRoller": "0x890cc25e7c88e36f823f75e850416ef6fd6739e52dc9d4ce7c022fc515324622",
+        "MintingHub": "0x14d95e692d36ea4c6e96806393cba25d4d0008305e7bfa5a267c0c8b808d837f",
+        "Bridge": "0xfe469c12943edc77232e64c0f1611634ca41762fb6862ea03fd29a59275fae81"
+      },
+      "sourceFunding": "0x1700d93f8c36f1cdbb6ff7fd8bb36b6dc9589df29f9941313e39300a5025aebc",
+      "sourceApproval": "0x85b1526367eb8d669621a4970b4e00fbf3cfaf85da6305fcb87eaa6bf5c9cbfc",
+      "bridgeMint": "0xc81177b01536fc5f593139db80ba9fb9b8803a6559267aca55bee074caa6db95",
+      "equityInvestment": "0xa1fcd20f10ea279ee4afb26eb7ddf76ba3ed213522737408966aad388328d3f3"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "44113"
+    }
+  }
+}

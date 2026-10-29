@@ -12,6 +12,11 @@ export const DEFAULT_DEPLOYMENT_BUDGET = parseEther("50");
 export const DEFAULT_TRANSACTION_LIMIT = parseEther("15");
 export const DEFAULT_MAX_GAS_PRICE = 50_000_000n;
 
+function environmentFee(name: string, scope: string, fallback: bigint): bigint {
+  const value = scope === "DEMO_ROLLOUT" ? process.env[name] : undefined;
+  return value === undefined ? fallback : parseEther(value);
+}
+
 const ORACLE_ABI = ["function getL1Fee(bytes) view returns (uint256)"];
 const coder = AbiCoder.defaultAbiCoder();
 
@@ -42,6 +47,7 @@ interface FeeGuardOptions {
   stateFile?: string | null;
   maxTotalFee?: bigint;
   maxTransactionFee?: bigint;
+  maxL1FeePerByte?: bigint;
   maxGasPrice?: bigint;
   oracleAddress?: string;
 }
@@ -81,6 +87,7 @@ export class TotalFeeGuard extends EventEmitter implements EIP1193Provider {
   readonly chainId: bigint;
   readonly maxTotalFee: bigint;
   readonly maxTransactionFee: bigint;
+  readonly maxL1FeePerByte: bigint;
   readonly maxGasPrice: bigint;
   readonly oracleAddress: string;
   private readonly wrapped: EIP1193Provider;
@@ -108,8 +115,9 @@ export class TotalFeeGuard extends EventEmitter implements EIP1193Provider {
     this.chainId = options.chainId;
     this.deployer = options.deployer ? getAddress(options.deployer) : undefined;
     this.scope = options.scope ?? "";
-    this.maxTotalFee = options.maxTotalFee ?? DEFAULT_DEPLOYMENT_BUDGET;
-    this.maxTransactionFee = options.maxTransactionFee ?? DEFAULT_TRANSACTION_LIMIT;
+    this.maxTotalFee = options.maxTotalFee ?? environmentFee("IMF_V2_MAX_TOTAL_FEE", this.scope, DEFAULT_DEPLOYMENT_BUDGET);
+    this.maxTransactionFee = options.maxTransactionFee ?? environmentFee("IMF_V2_MAX_TX_FEE", this.scope, DEFAULT_TRANSACTION_LIMIT);
+    this.maxL1FeePerByte = options.maxL1FeePerByte ?? environmentFee("IMF_V2_MAX_L1_FEE_PER_BYTE", this.scope, MAX_L1_FEE_PER_BYTE);
     this.maxGasPrice = options.maxGasPrice ?? DEFAULT_MAX_GAS_PRICE;
     this.oracleAddress = getAddress(options.oracleAddress ?? CHIKYU_L1_FEE_ORACLE);
     this.stateFile =
@@ -274,8 +282,8 @@ export class TotalFeeGuard extends EventEmitter implements EIP1193Provider {
   async quoteSerialized(serialized: string): Promise<TransactionFeeQuote> {
     const tx = Transaction.from(serialized);
     if (tx.chainId !== this.chainId) throw new Error("Signed transaction has the wrong Chikyu chain ID");
-    if (!this.deployer || this.scope !== "USD" || tx.from !== this.deployer) {
-      throw new Error("Signed transaction is outside the authorized USD deployer scope");
+    if (!this.deployer || !["USD", "DEMO_ROLLOUT"].includes(this.scope) || tx.from !== this.deployer) {
+      throw new Error("Signed transaction is outside the authorized USD or demo rollout deployer scope");
     }
     if (!tx.hash || !tx.from || tx.gasLimit <= 0n || tx.value !== 0n) throw new Error("Invalid guarded deployment transaction");
     if (Object.values(this.state.transactions).some((previous) => previous.nonce === tx.nonce.toString())) {
@@ -287,8 +295,8 @@ export class TotalFeeGuard extends EventEmitter implements EIP1193Provider {
     }
     const rawBytes = BigInt((serialized.length - 2) / 2);
     const l1Fee = await this.quoteL1(serialized);
-    if (l1Fee > MAX_L1_FEE_PER_BYTE * rawBytes) {
-      throw new Error("L1 data-fee regime exceeds five times the reference per-byte rate");
+    if (l1Fee > this.maxL1FeePerByte * rawBytes) {
+      throw new Error("L1 data-fee regime exceeds the configured per-byte rate ceiling");
     }
     const maxL2Fee = tx.gasLimit * gasPrice;
     const reservedFee = maxL2Fee + l1Fee * 2n;

@@ -1,0 +1,124 @@
+{
+  "address": "0xe1a95490D46b6f3C5F78f9521068e35d3d79707E",
+  "abi": [],
+  "transactionHash": "0xa47de42d0f46005a6c80041c0bd560254f14dfb77445a11e3f6a5cecbffa6e22",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "GBP",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "GBP",
+      "instrument": "Bank of England nominal gilt 1-year spot rate",
+      "series": "UK nominal gilt yield curve, 1-year",
+      "tenor": "1 year",
+      "observationDate": "2026-10-22",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/latest-yield-curve-data.zip",
+      "sourceType": "official",
+      "originalYieldPercent": "4.4142885",
+      "originalUnit": "continuously compounded percent per year",
+      "quoteConvention": "Continuously compounded fitted nominal curve; not an already effective annual yield",
+      "normalizationFormula": "100 * (exp(4.4142885 / 100) - 1), rounded half up to 10 decimal places = 4.5131677860; then apply the spread and ppm rounding rule",
+      "normalizedAnnualYieldPercent": "4.5131677860",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 60132,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "methodologyUrl": "https://www.bankofengland.co.uk/statistics/yield-curves"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Pound",
+        "K9GBP"
+      ],
+      "Equity": [
+        "0xe1a95490d46b6f3c5f78f9521068e35d3d79707e",
+        "DogeForex Pound",
+        "K9GBP"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0xe1a95490d46b6f3c5f78f9521068e35d3d79707e"
+      ],
+      "Savings": [
+        "0xe1a95490d46b6f3c5f78f9521068e35d3d79707e",
+        "60132"
+      ],
+      "MintingHub": [
+        "0xe1a95490d46b6f3c5f78f9521068e35d3d79707e",
+        "0x961454e81145f03a9a30d345d88714cdd48efc62",
+        "0xf39fd2b6f5575f8c6dede9c28995085375f62971",
+        "0x023fbd9d391dbe1dde6c98aac684f08d54be9bc5"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0xe1a95490d46b6f3c5f78f9521068e35d3d79707e",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0xe1a95490D46b6f3C5F78f9521068e35d3d79707E",
+      "Equity": "0x9df2d1Aa94549A6e23806D02B1AC3679D08C0ccB",
+      "PositionFactory": "0x023FbD9d391dBE1ddE6C98AAc684f08d54BE9bc5",
+      "PositionRoller": "0xF39FD2B6f5575f8c6Dede9c28995085375F62971",
+      "Savings": "0x961454e81145F03A9A30D345d88714cdD48eFC62",
+      "MintingHub": "0x689eFE8251D3499D0dD8b9ED11D71A9e47848808",
+      "Bridge": "0xBA688142DcB916d53065671D46f351903BDCE34C"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x08705f97cf687357b892bf9417b446be4485a4f07c32d2752bf16f4788ec662a",
+        "Equity": "0x08705f97cf687357b892bf9417b446be4485a4f07c32d2752bf16f4788ec662a",
+        "PositionFactory": "0xb7c535928587cb7b3565ce366c432291ab502f66ab77aca7902f24026ada8e67",
+        "PositionRoller": "0x4d4c58b8d0106147a6a384c744f01d9dd2e75e563f23f2955a70ac7099f05872",
+        "Savings": "0x4cdd3da7a8d1f40d5dc2109fc493f99fc012df5339eb02ec7cf47422b1cf9c96",
+        "MintingHub": "0x7126049dbf7aeca5c07f304c67227d5c667a388f9d675a64c7f1092b9293f651",
+        "Bridge": "0x6c606adfe8ad2aa3090bdb319b1b32c07df4b811fb17a41cf96cae04dd011d59"
+      },
+      "initialize": {
+        "Savings": "0x23de0e8fd927471a2866d44b94f8552777c886032c972f4adfa3f8e3234696d1",
+        "PositionFactory": "0xd8b41bf871cc49b92fe2d1adc5ee7b620cda330746fbbb920d7c818e98f19758",
+        "PositionRoller": "0xa20ed58de62f1a74df3e6106b7449d5badc6f2d5bc26f3253632a091a1d82a55",
+        "MintingHub": "0x5173cd818e71549fda7ec1dfb59efc96154bb15f48643d1c7da8a4cbd2367855",
+        "Bridge": "0x8494f02a10ea9e8b7876abf32f58f5d62c06850c94fdd7487c9dcd793e8bb3a6"
+      },
+      "sourceFunding": "0x4b1ba7765523685e3e911ee877b90429f1ddcc06a60f0a3e8fd536fea15aa50c",
+      "sourceApproval": "0xafb4dc0c1822a61f61ab8af9e957fc393fff452c6060db313832e45891689608",
+      "bridgeMint": "0xe6d253b4e24c4dacb50b07ecfd20c5116ba4447d0cc01a09220c6df67640b36d",
+      "equityInvestment": "0xa47de42d0f46005a6c80041c0bd560254f14dfb77445a11e3f6a5cecbffa6e22"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "60132"
+    }
+  }
+}

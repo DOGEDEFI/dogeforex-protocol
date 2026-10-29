@@ -234,6 +234,27 @@
       "leadratePPM": 204061,
       "reviewStatus": "implementation-reviewed / production-refresh-required",
       "approvalCaveat": "Validate against an official true-yield observation or formally approve this discount-to-investment-yield formula before production"
+    },
+    {
+      "code": "CHF",
+      "instrument": "Swiss Confederation bond spot yield, ten-year testnet exception",
+      "series": "Spot interest rates on Swiss Confederation bond issues for selected maturities",
+      "tenor": "10 years",
+      "observationDate": "2026-10-28",
+      "retrievalDate": "2026-10-29",
+      "sourceUrl": "https://www.snb.ch/en/the-snb/mandates-goals/statistics/statistics-pub/current_interest_exchange_rates",
+      "sourceType": "official",
+      "evidenceStatus": "testnet-only ten-year exception / one-year-series-stale-and-negative",
+      "originalYieldPercent": "0.4950",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Official SNB ten-year spot yield used only because the available one-year series is stale and negative; this is not a one-year benchmark or production approval",
+      "normalizationFormula": "identity; published annual ten-year spot yield with an explicit testnet tenor exception",
+      "normalizedAnnualYieldPercent": "0.4950",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 19950,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "approvalCaveat": "Replace with a refreshed reviewed production benchmark; do not present this ten-year testnet exception as a one-year rate or production approval"
     }
   ]
 }

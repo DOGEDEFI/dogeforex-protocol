@@ -7,7 +7,7 @@ export const REQUIRED_SPREAD_PPM = 15000;
 const UINT24_MAX = 16_777_215n;
 const PPM_SCALE = 10n ** 14n;
 const PPM_ROUNDING_HALF = 5n * 10n ** 13n;
-const EXPECTED_CODES = ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN"];
+const EXPECTED_CODES = ["USD", "EUR", "JPY", "GBP", "AUD", "CNY", "BRL", "PKR", "BDT", "INR", "NGN", "CHF"];
 
 export interface RateInstance {
   code: string;

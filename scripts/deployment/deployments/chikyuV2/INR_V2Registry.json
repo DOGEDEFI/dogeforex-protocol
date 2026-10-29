@@ -1,0 +1,130 @@
+{
+  "address": "0xf37BB786BAb9f28Db850d951725756207A94e23F",
+  "abi": [],
+  "transactionHash": "0xea9542e7f64e43ce8273beca70a353acdef3a9ff383396b73444d6c14f77ee07",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "INR",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "INR",
+      "instrument": "India 364-day Treasury bill cutoff YTM, last successful auction",
+      "series": "RBI 364-day Treasury bill auction result",
+      "tenor": "364 days",
+      "observationDate": "2026-10-14",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63804",
+      "sourceType": "official last-successful-auction snapshot",
+      "evidenceStatus": "last-successful-auction / newer-auction-nil",
+      "originalYieldPercent": "6.4891",
+      "originalUnit": "percent per year",
+      "quoteConvention": "Cutoff yield to maturity from the last successful auction found",
+      "normalizationFormula": "identity; published cutoff YTM, using last successful auction when the newer auction accepted NIL",
+      "normalizedAnnualYieldPercent": "6.4891",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 79891,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "fallbackRule": "Use the last successful auction cutoff YTM when a newer auction accepts NIL; refresh and reassess staleness before production",
+      "newerAuction": {
+        "observationDate": "2026-10-21",
+        "status": "NIL accepted; no newer accepted yield",
+        "sourceUrl": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63837"
+      }
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Indian Rupee",
+        "K9INR"
+      ],
+      "Equity": [
+        "0xf37bb786bab9f28db850d951725756207a94e23f",
+        "DogeForex Indian Rupee",
+        "K9INR"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0xf37bb786bab9f28db850d951725756207a94e23f"
+      ],
+      "Savings": [
+        "0xf37bb786bab9f28db850d951725756207a94e23f",
+        "79891"
+      ],
+      "MintingHub": [
+        "0xf37bb786bab9f28db850d951725756207a94e23f",
+        "0x9dba820c7392b73b144b829ca2a0a3b19dcfb241",
+        "0x839446851a96976f199bca0894589804ef266410",
+        "0xe423ea96d202c8b34eb28d3ddb6c268ef5ed6d70"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0xf37bb786bab9f28db850d951725756207a94e23f",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0xf37BB786BAb9f28Db850d951725756207A94e23F",
+      "Equity": "0x77118D449EC7E81635098A338e6F6422a48E30b3",
+      "PositionFactory": "0xe423EA96d202C8B34EB28d3DDB6c268ef5ED6d70",
+      "PositionRoller": "0x839446851a96976f199bCa0894589804ef266410",
+      "Savings": "0x9dBA820C7392b73b144B829ca2a0a3b19DcFB241",
+      "MintingHub": "0xf87b98f66ad6fB96F7C2cD3Ce8AD470b2F2582e7",
+      "Bridge": "0x2366104d0ea0381DcCa13e0253D91D10E6AF4696"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0x086512adda79b5e06065931ae380964b1cecaab30c3611de3788fb5b058b0150",
+        "Equity": "0x086512adda79b5e06065931ae380964b1cecaab30c3611de3788fb5b058b0150",
+        "PositionFactory": "0x7ad0bbb49ffbf289268fce044b795a422d6be71b09945199225e221f24fc865e",
+        "PositionRoller": "0x1096d40b52fe574ef4173932d58e22fb1ad433524ae10f94f6b41169b74e295a",
+        "Savings": "0x67d43d307dee80564e83c68433adf7c9f9fd7860e737a91c01715fbaa17f1dde",
+        "MintingHub": "0x058f8052f7fee4ecbc5385d2c25dd4eb650bb10d6b61689a0065daf74fc99629",
+        "Bridge": "0xa407d0b4ddd90ee403c2856d967d9cf2919e851717da9d444ffb26fa6ae25f70"
+      },
+      "initialize": {
+        "Savings": "0xa23b6b9d1cdab6eac0b2d8b4b07b7336b240c28c5ee050da5db32961e74562e5",
+        "PositionFactory": "0xa854f7c763e110d2f6eeb20bfee882359e302b31f6cb7f7000baa3c06ee83cd6",
+        "PositionRoller": "0x66188ff119c3d0eae1a9bb30f4c6273c99671206881cab6fe00552b3ef22210a",
+        "MintingHub": "0x06fb89af2f9ae11505c821251ce02599f127c892a31aa484382e6757bafcbaf8",
+        "Bridge": "0x6b04909caba06b0dc6db52dc70dbc321e12eba5daded0678e383b4f39c3bf547"
+      },
+      "sourceFunding": "0xe8c4e6dc8651e149b4668e6bd80aee59cab1af2e7684aef0b1e6f9d944f14b3e",
+      "sourceApproval": "0xfaea5685fc6178af8f0504d31d74d031383b7481cd02771429a6f295600f1b19",
+      "bridgeMint": "0x6a1c257474e5fe4920f930b6035aeba21d67162906f942b5453a4cc4cb1388ee",
+      "equityInvestment": "0xea9542e7f64e43ce8273beca70a353acdef3a9ff383396b73444d6c14f77ee07"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "79891"
+    }
+  }
+}

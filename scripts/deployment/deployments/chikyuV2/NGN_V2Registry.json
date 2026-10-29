@@ -1,0 +1,125 @@
+{
+  "address": "0x55485BbcF8A9c37EcA474e130E9B8cf43ECf5d7a",
+  "abi": [],
+  "transactionHash": "0x5100ea8334ffbb985d4e945af0b0c0a5136af20a0a82280fe2c4be836fad191a",
+  "numDeployments": 12,
+  "linkedData": {
+    "schemaVersion": "2.0",
+    "network": "chikyuV2",
+    "chainId": "6281971",
+    "code": "NGN",
+    "sourceEvidence": {
+      "kind": "test-usdc",
+      "decimals": 6,
+      "symbol": "tUSDC",
+      "address": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "onchainDecimals": "6",
+      "decimalMultiplier": "1000000000000",
+      "bytecodeValidated": true,
+      "fundingMode": "deployer-only test faucet"
+    },
+    "rateEvidence": {
+      "code": "NGN",
+      "instrument": "Nigeria 365-day NTB marginal discount rate",
+      "series": "CBN Nigerian Treasury Bills primary market records",
+      "tenor": "365 days",
+      "observationDate": "2026-10-14",
+      "retrievalDate": "2026-10-24",
+      "sourceUrl": "https://www.cbn.gov.ng/api/GetAllSecuritiesNTB",
+      "sourceType": "official discount-rate input with derived investment yield",
+      "evidenceStatus": "derived / not-directly-published-true-yield",
+      "originalYieldPercent": "15.9000",
+      "originalUnit": "discount percent for the 365-day bill",
+      "quoteConvention": "Marginal discount rate, not a directly published CBN true-yield field",
+      "normalizationFormula": "100 * 15.9000 / (100 - 15.9000) = 18.906064209274673008... using the simple 365-day illustration, rounded half up to 10 decimal places = 18.9060642093; then apply the spread and ppm rounding rule",
+      "normalizedAnnualYieldPercent": "18.9060642093",
+      "spreadPPM": 15000,
+      "roundingRule": "Round the nonnegative normalized annual yield half up to the nearest ppm, then add spreadPPM; reject uint24 overflow and never clamp",
+      "leadratePPM": 204061,
+      "reviewStatus": "implementation-reviewed / production-refresh-required",
+      "approvalCaveat": "Validate against an official true-yield observation or formally approve this discount-to-investment-yield formula before production"
+    },
+    "constructorArgs": {
+      "TestUSDC": [],
+      "Token": [
+        "900",
+        "DogeForex Naira",
+        "K9NGN"
+      ],
+      "Equity": [
+        "0x55485bbcf8a9c37eca474e130e9b8cf43ecf5d7a",
+        "DogeForex Naira",
+        "K9NGN"
+      ],
+      "PositionFactory": [],
+      "PositionRoller": [
+        "0x55485bbcf8a9c37eca474e130e9b8cf43ecf5d7a"
+      ],
+      "Savings": [
+        "0x55485bbcf8a9c37eca474e130e9b8cf43ecf5d7a",
+        "204061"
+      ],
+      "MintingHub": [
+        "0x55485bbcf8a9c37eca474e130e9b8cf43ecf5d7a",
+        "0x80c478feae960748861ba0a3b3cda072c41a5d48",
+        "0x7bcc17255ff7f0d1f876db4489226ab8256e0a22",
+        "0x535ceac8df48cc736acc029a24834316ab8c71a5"
+      ],
+      "Bridge": [
+        "0xaefc8bed04f65ca1be38ce76183f2b23e7f4165a",
+        "0x55485bbcf8a9c37eca474e130e9b8cf43ecf5d7a",
+        "1000000000000000000000000"
+      ]
+    },
+    "addresses": {
+      "deployer": "0x8666f1d19e04c7831EA23066a4b14c0260fC2B50",
+      "source": "0xAEFc8beD04F65cA1be38Ce76183f2b23E7f4165a",
+      "Token": "0x55485BbcF8A9c37EcA474e130E9B8cf43ECf5d7a",
+      "Equity": "0xA6f24f9d2597f08d45285569FDFf36f91F747430",
+      "PositionFactory": "0x535ceAC8Df48cC736Acc029A24834316ab8c71a5",
+      "PositionRoller": "0x7BCc17255ff7F0D1F876DB4489226Ab8256E0A22",
+      "Savings": "0x80C478fEae960748861ba0A3b3cDA072c41a5D48",
+      "MintingHub": "0x95d684fE8a132B60bb86568Fe11C0Ceca977EEF5",
+      "Bridge": "0x0287C4632d17A7C10ba67aa90C8d80810117B9b9"
+    },
+    "transactions": {
+      "deployments": {
+        "TestUSDC": "0xdce8ceaf9c520fe39d9ef6724373cd7ab1695d325e65f3b17c2376d0cf25b314",
+        "Token": "0xb2cf07732e110f55757ab5610d06243cbb4151caa1e6d4211e93941ce5870e70",
+        "Equity": "0xb2cf07732e110f55757ab5610d06243cbb4151caa1e6d4211e93941ce5870e70",
+        "PositionFactory": "0x2aa1367b03a3b943427a4214101d3873d3292b882fe0684b422e7da563d2214f",
+        "PositionRoller": "0x3f77026a5748f07632c29a315243c5eea2a2d1cf0bfdac1acb3d84a9957805fd",
+        "Savings": "0xdc02f2c00ebd4b81beafba66c2237f1f091f4d1ae43ccc7022706f9aa65f589f",
+        "MintingHub": "0xd63c961748654560e9bb057824b46f2062721d921e7d58904aa090065b3f1a1b",
+        "Bridge": "0x34706db8dd876fdbc74cc7c02ebda815cb89d2d7d88b937efaa773d9e27d2704"
+      },
+      "initialize": {
+        "Savings": "0x3fb03067dd9ae0b79d9f4ced810e2eef93922605de64db7309cf0ce07ed38595",
+        "PositionFactory": "0xc3de250572b9047ed1f32d3f0568891075c4180837296c795bf1b4ca59434b83",
+        "PositionRoller": "0xda33bcf03d67f0fbc96faa68ed7383cf75ee90956cb258035898d5091fb2d2c1",
+        "MintingHub": "0xd8efda919f750e2d52d5da6648f5cc3af3405e0c2549b5d297e9d7cec1f68a41",
+        "Bridge": "0x854f3e9512fc6239dd5b9c9b69420226ea94819ad690da14cea9564d9036288c"
+      },
+      "sourceFunding": "0x47c9b8d53f121ee03fdc18b260ef1e8e33efe2266f4a200b5cd035d5b476e538",
+      "sourceApproval": "0xa4952a8ac392898cbfbf6ed19969350aa1701ce68801d3582b91f5d29ead9fb0",
+      "bridgeMint": "0xf0b57986f91ea1d38720d4920e4f1344dc935cd1dc3c8234bc040e4c978ecdc5",
+      "equityInvestment": "0x5100ea8334ffbb985d4e945af0b0c0a5136af20a0a82280fe2c4be836fad191a"
+    },
+    "postconditions": {
+      "complete": true,
+      "sourceLockedRaw": "100000000",
+      "localMinted": "100000000000000000000",
+      "bridgeMintedLocal": "100000000000000000000",
+      "zeroSharesBeforeInvestment": true,
+      "exactlyFiveGenesisMinters": true,
+      "localTokenSupply": "100000000000000000000",
+      "initialShares": "1000000000000000000000",
+      "deployerInitialShares": "1000000000000000000000",
+      "equityTokenBalance": "100000000000000000000",
+      "minterReserve": "0",
+      "equity": "100000000000000000000",
+      "price": "300000000000000000",
+      "initialLeadratePPM": "204061"
+    }
+  }
+}
